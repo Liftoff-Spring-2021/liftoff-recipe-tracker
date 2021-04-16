@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org/">
-<head>
-	<meta charset="UTF-8"/>
-	<title>Liftoff Recipe Tracker</title>
-</head>
-<body>
-<h1>The LRT</h1>
-<p>Hello, World!</p>
+<head th:replace="fragments :: head"></head>
+<body class="text-center">
+<nav th:replace="fragments :: navigation"></nav>
+<div class="container-fluid">
+	<h3>Welcome to the LRT!</h3>
+	<p>The Liftoff Recipe Tracker is a recipe app that allows the user to search, save, and modify their favorite recipes.</p>
+	<div class="container">
+		<div class="row align-items-start">
+			<div class="col">
+				<h4>How to Use</h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at ullamcorper mauris. Maecenas id purus libero. Pellentesque faucibus eu est sed auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer bibendum, lorem at placerat dapibus, velit nibh vehicula magna, id aliquam ex justo et purus. Proin semper nisi tincidunt suscipit venenatis. Duis rutrum tellus eu risus dapibus dictum. Sed a ullamcorper urna. Curabitur mauris nunc, iaculis in convallis nec, elementum sed sapien. Aenean a neque in purus varius viverra vel at lectus. Aenean bibendum dui sit amet libero lobortis, in sodales erat tristique. Fusce sit amet tortor ultricies nisi maximus condimentum. Sed tincidunt, diam sit amet molestie rutrum, lacus ex consequat nunc, in convallis erat diam a lacus. Nulla.</p>
+			</div>
+			<div class="col">
+				<h4>Upcoming Features</h4>
+				<ul class="list-group">
+					<li class="list-group-item">Log in/log out</li>
+					<li class="list-group-item">Search by keyword, pantry items, or category</li>
+					<li class="list-group-item">Create, read, update, and delete recipes</li>
+					<li class="list-group-item">Generate a recipe list</li>
+					<li class="list-group-item">Scale number of servings for a recipe</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+<footer th:replace="fragments :: footer"></footer>
+</div>
 </body>
 </html>
