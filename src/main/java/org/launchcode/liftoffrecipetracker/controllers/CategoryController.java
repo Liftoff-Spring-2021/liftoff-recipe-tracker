@@ -17,7 +17,7 @@ private CategoryRepository categoryRepository;
     @GetMapping
     public String displayAllCategories(Model model) {
         model.addAttribute("title", "All Categories");
-        //model.addAttribute("category", CategoryRepository.findAll());
+        model.addAttribute("category", categoryRepository.findAll());
         return "category/index";
     }
 }
