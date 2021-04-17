@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Recipe Categories</th>
+    </tr>
+    </thead>
+    <tr th:each="category : ${category}">
+        <td><a th:text="${category.name}"></a></td>
+    </tr>
+
+</table>
+
+</body>
+</html>
+
