@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-
-<head></head>
+<head ></head>
 <body class="container">
 
-<table class="table table-striped">
+<header>
+    <H1>All Categories</H1>
+</header>
+
+
+
+<table>
     <thead>
     <tr>
-        <th>Recipe Categories</th>
+        <th>Category Name</th>
     </tr>
     </thead>
     <tr th:each="category : ${category}">

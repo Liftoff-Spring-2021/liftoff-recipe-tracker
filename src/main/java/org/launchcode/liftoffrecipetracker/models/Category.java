@@ -11,8 +11,8 @@ public class Category  {
     @Id
     private int id;
     // do we want to specify size for category names?
-    // @Size(min = 4, max = 25, message = 'Category name must be between 4 and 25 characters long')
-    // @NotBlank
+    //@Size(min = 4, max = 25, message = 'Category name must be between 4 and 25 characters long')
+    //@NotBlank
     private String name;
 
 //    Add this after Recipe class is completed/extended
