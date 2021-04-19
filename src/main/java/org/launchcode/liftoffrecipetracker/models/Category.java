@@ -1,6 +1,7 @@
 package org.launchcode.liftoffrecipetracker.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 public class Category  {
 
     //Class Variables
+    @GeneratedValue
     @Id
     private int id;
     // do we want to specify size for category names?

@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-// I copied this import statement
-//import javax.validation.Valid;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("category")
@@ -36,10 +35,8 @@ private CategoryRepository categoryRepository;
     }
 
     @PostMapping("create")
-//    public String processCreateCategoryForm(@Valid @ModelAttribute Category category,
-//                                                 Errors errors, Model model) {
-    public String processCreateCategoryForm(@ModelAttribute Category category,
-                                            Errors errors, Model model) {
+    public String processCreateCategoryForm(@Valid @ModelAttribute Category category,
+                                                 Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Category");
@@ -47,7 +44,7 @@ private CategoryRepository categoryRepository;
             return "category/create";
         }
 
-        //CategoryRepository.save(category);
+        categoryRepository.save(category);
         return "redirect:";
     }
 }

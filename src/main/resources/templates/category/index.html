@@ -16,7 +16,7 @@
     </tr>
     </thead>
     <tr th:each="category : ${category}">
-        <td><a th:text="${category.name}"></a></td>
+        <td><a th:text="${category.name}" th:value = "${category.id}"></a></td>
     </tr>
 
 </table>
