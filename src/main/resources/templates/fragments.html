@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org/">
+<head th:fragment="head">
+	<meta charset="UTF-8"/>
+	<title>Liftoff Recipe Tracker</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+	<link rel="stylesheet" th:href="@{/styles.css}"/>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar-header" th:fragment="navigation">
+	<h1 th:text="${title}">LRT</h1>
+	<ul class="nav navbar-nav">
+		<li class="nav-item">
+			<a class="nav-link" href="/home">Home</a>
+		</li>
+	</ul>
+
+</nav>
+<footer th:fragment="footer" class="fixed-bottom">
+	<p>Created for Liftoff</p>
+</footer>
+</body>
+</html>
