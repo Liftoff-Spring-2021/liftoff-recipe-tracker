@@ -11,6 +11,9 @@ public class User {
     private String email;
     private HashMap Recipe = new HashMap();
 
+    public User(){
+
+    }
 
     public User(String username, String password, String email, HashMap recipe) {
         this.username = username;
