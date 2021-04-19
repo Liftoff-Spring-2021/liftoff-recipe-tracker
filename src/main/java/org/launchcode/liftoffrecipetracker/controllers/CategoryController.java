@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("category")
+@RequestMapping("categories")
 public class CategoryController {
 
 @Autowired
@@ -23,12 +23,12 @@ private CategoryRepository categoryRepository;
     @GetMapping
     public String displayAllCategories(Model model) {
         model.addAttribute("title", "All Categories");
-        model.addAttribute("category", categoryRepository.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "category/index";
     }
 
     @GetMapping("create")
-    public String renderCreateCategoryForm(Model model) {
+    public String displayCreateCategoryForm(Model model) {
         model.addAttribute("title", "Create Category");
         model.addAttribute(new Category());
         return "category/create";
