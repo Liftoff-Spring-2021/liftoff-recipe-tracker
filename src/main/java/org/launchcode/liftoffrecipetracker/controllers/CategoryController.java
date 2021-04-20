@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
+// categories is the URL path
 @RequestMapping("categories")
 public class CategoryController {
 
@@ -24,13 +25,16 @@ private CategoryRepository categoryRepository;
     public String displayAllCategories(Model model) {
         model.addAttribute("title", "All Categories");
         model.addAttribute("categories", categoryRepository.findAll());
+        // category/index is the file path in the project structure
         return "category/index";
     }
 
+    // create is the URL path categories/create
     @GetMapping("create")
     public String displayCreateCategoryForm(Model model) {
         model.addAttribute("title", "Create Category");
         model.addAttribute(new Category());
+        // category/create is the file path in the project structure
         return "category/create";
     }
 
@@ -41,10 +45,12 @@ private CategoryRepository categoryRepository;
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Category");
             model.addAttribute(new Category());
+            // category/create is the file path in the project structure
             return "category/create";
         }
 
         categoryRepository.save(category);
+        // redirect: is the URL path from RequestMapping (The main mapping from the controller)
         return "redirect:";
     }
 }
