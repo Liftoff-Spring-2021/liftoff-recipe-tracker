@@ -1,6 +1,7 @@
 package org.launchcode.liftoffrecipetracker.Models;
 
 import javax.persistence.Entity;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Entity
@@ -9,17 +10,17 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private HashMap Recipe = new HashMap();
+    private ArrayList recipe = new ArrayList();
 
     public User(){
 
     }
 
-    public User(String username, String password, String email, HashMap recipe) {
+    public User(String username, String password, String email, ArrayList recipe) {
         this.username = username;
         this.password = password;
         this.email = email;
-        Recipe = recipe;
+       this.recipe = recipe;
     }
 
     public String getUsername() {
@@ -46,11 +47,11 @@ public class User {
         this.email = email;
     }
 
-    public HashMap getRecipe() {
-        return Recipe;
+    public ArrayList getRecipe() {
+        return recipe;
     }
 
-    public void setRecipe(HashMap recipe) {
-        Recipe = recipe;
+    public void setRecipe(ArrayList recipe) {
+        this.recipe = recipe;
     }
 }
