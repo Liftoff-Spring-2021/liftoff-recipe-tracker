@@ -9,13 +9,9 @@ import java.util.HashMap;
 
 
 @Entity
-public class Recipe {
+public class Recipe extends AbstractEntity {
 
-	@GeneratedValue
-	@Id
-	private int id;
-
-	private HashMap<String, String> ingredients;
+	private HashMap<String, String> ingredient;
 
 	private String name;
 	private int servings;
@@ -26,8 +22,8 @@ public class Recipe {
 	//@ManyToMany
 	private ArrayList<Recipe> recipes;
 
-	public Recipe(HashMap<String, String> ingredients, String name) {
-		this.ingredients = ingredients;
+	public Recipe(HashMap<String, String> ingredient, String name) {
+		this.ingredient = ingredient;
 		this.name = name;
 	}
 
@@ -42,10 +38,6 @@ public class Recipe {
 		this.images = images;
 	}
 
-	public int getId() {
-		return id;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -54,12 +46,12 @@ public class Recipe {
 		this.name = name;
 	}
 
-	public HashMap<String, String> getIngredients() {
-		return ingredients;
+	public HashMap<String, String> getIngredient() {
+		return ingredient;
 	}
 
-	public void setIngredients(HashMap<String, String> ingredients) {
-		this.ingredients = ingredients;
+	public void setIngredient(HashMap<String, String> ingredient) {
+		this.ingredient = ingredient;
 	}
 
 	public int getServings() {
@@ -93,5 +85,6 @@ public class Recipe {
 	public void setRecipes(ArrayList<Recipe> recipes) {
 		this.recipes = recipes;
 	}
+
 }
 
