@@ -2,10 +2,9 @@ package org.launchcode.liftoffrecipetracker.Models;
 
 import javax.persistence.Entity;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @Entity
-public class User {
+public class User extends org.launchcode.liftoffrecipetracker.models.AbstractEntity {
 
     private String username;
     private String password;
