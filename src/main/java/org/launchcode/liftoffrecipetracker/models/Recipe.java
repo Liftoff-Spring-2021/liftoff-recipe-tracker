@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 @Entity
@@ -14,20 +15,32 @@ public class Recipe {
 	@Id
 	private int id;
 
+	private HashMap<String, String> ingredients;
+
 	private String name;
-	private String ingredients;
 	private int servings;
 	private int cookTime;
 	private int prepTime;
+	private String images;
 
 	//@ManyToMany
 	private ArrayList<Recipe> recipes;
 
-	public Recipe(String name,String ingredients) {
-		this.name = name;
+	public Recipe(HashMap<String, String> ingredients, String name) {
 		this.ingredients = ingredients;
+		this.name = name;
 	}
+
+
 	public Recipe(){}
+
+	public String getImages() {
+		return images;
+	}
+
+	public void setImages(String images) {
+		this.images = images;
+	}
 
 	public int getId() {
 		return id;
@@ -41,11 +54,11 @@ public class Recipe {
 		this.name = name;
 	}
 
-	public String getIngredients() {
+	public HashMap<String, String> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(String ingredients) {
+	public void setIngredients(HashMap<String, String> ingredients) {
 		this.ingredients = ingredients;
 	}
 
@@ -71,6 +84,14 @@ public class Recipe {
 
 	public void setPrepTime(int prepTime) {
 		this.prepTime = prepTime;
+	}
+
+	public ArrayList<Recipe> getRecipes() {
+		return recipes;
+	}
+
+	public void setRecipes(ArrayList<Recipe> recipes) {
+		this.recipes = recipes;
 	}
 }
 
