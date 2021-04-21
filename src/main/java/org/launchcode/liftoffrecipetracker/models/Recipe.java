@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 @Entity
 public class Recipe extends AbstractEntity {
-
+	//properties
 	private HashMap<String, String> ingredients;
 
 	@NotBlank(message = "Recipe name required.")
@@ -31,23 +31,21 @@ public class Recipe extends AbstractEntity {
 	private int prepTime;
 	private String image;
 
-	public Recipe(HashMap<String, String> ingredients, String name, String directions) {
+	//constructors
+	public Recipe(HashMap<String, String> ingredients,
+	              @NotBlank(message = "Recipe name required.") @NotNull @Size(min = 2, max = 50, message = "Recipe name must be between 2 and 50 characters long.") String name,
+	              @NotNull @NotBlank @Size(min = 4, max = 1000, message = "Directions are required.") String directions,
+	              @NotBlank @Min(value = 1, message = "Must be at least one serving.") int servings) {
 		this.ingredients = ingredients;
 		this.name = name;
-		this.directions= directions;
+		this.directions = directions;
+		this.servings = servings;
 	}
 
 	public Recipe() {
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
+//	getters & setter
 	public String getName() {
 		return name;
 	}
@@ -60,7 +58,7 @@ public class Recipe extends AbstractEntity {
 		return ingredients;
 	}
 
-	public void setIngredients(HashMap<String, String> ingredient) {
+	public void setIngredients(HashMap<String, String> ingredients) {
 		this.ingredients = ingredients;
 	}
 
@@ -80,6 +78,14 @@ public class Recipe extends AbstractEntity {
 		this.servings = servings;
 	}
 
+	public int getPrepTime() {
+		return prepTime;
+	}
+
+	public void setPrepTime(int prepTime) {
+		this.prepTime = prepTime;
+	}
+
 	public int getCookTime() {
 		return cookTime;
 	}
@@ -88,13 +94,14 @@ public class Recipe extends AbstractEntity {
 		this.cookTime = cookTime;
 	}
 
-	public int getPrepTime() {
-		return prepTime;
+	public String getImage() {
+		return image;
 	}
 
-	public void setPrepTime(int prepTime) {
-		this.prepTime = prepTime;
+	public void setImage(String image) {
+		this.image = image;
 	}
+
 }
 
 

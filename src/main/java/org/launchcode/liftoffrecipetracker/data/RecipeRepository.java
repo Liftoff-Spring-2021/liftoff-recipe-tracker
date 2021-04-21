@@ -1,4 +1,4 @@
-package org.launchcode.liftoffrecipetracker.models.data;
+package org.launchcode.liftoffrecipetracker.data;
 
 
 import org.launchcode.liftoffrecipetracker.models.Recipe;
