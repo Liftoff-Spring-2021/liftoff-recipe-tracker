@@ -1,6 +1,6 @@
 package org.launchcode.liftoffrecipetracker.Data;
 
-import org.launchcode.liftoffrecipetracker.Models.User;
+import org.launchcode.liftoffrecipetracker.models.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

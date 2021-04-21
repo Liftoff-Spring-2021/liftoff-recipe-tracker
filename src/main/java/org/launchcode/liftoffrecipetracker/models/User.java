@@ -1,25 +1,26 @@
-package org.launchcode.liftoffrecipetracker.Models;
+package org.launchcode.liftoffrecipetracker.models;
 
 import javax.persistence.Entity;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class User extends org.launchcode.liftoffrecipetracker.models.AbstractEntity {
+public class User extends AbstractEntity {
 
     private String username;
     private String password;
     private String email;
-    private ArrayList recipe = new ArrayList();
+    private List<String> recipe = new ArrayList<String>();
 
     public User(){
 
     }
 
-    public User(String username, String password, String email, ArrayList recipe) {
+    public User(String username, String password, String email, List<String> recipe) {
         this.username = username;
         this.password = password;
         this.email = email;
-       this.recipe = recipe;
+        this.recipe = recipe;
     }
 
     public String getUsername() {
@@ -46,11 +47,11 @@ public class User extends org.launchcode.liftoffrecipetracker.models.AbstractEnt
         this.email = email;
     }
 
-    public ArrayList getRecipe() {
+    public List<String> getRecipe() {
         return recipe;
     }
 
-    public void setRecipe(ArrayList recipe) {
+    public void setRecipe(List<String> recipe) {
         this.recipe = recipe;
     }
 }
