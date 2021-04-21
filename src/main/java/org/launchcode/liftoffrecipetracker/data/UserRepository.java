@@ -1,4 +1,4 @@
-package org.launchcode.liftoffrecipetracker.Data;
+package org.launchcode.liftoffrecipetracker.data;
 
 import org.launchcode.liftoffrecipetracker.models.User;
 import org.springframework.data.repository.CrudRepository;
