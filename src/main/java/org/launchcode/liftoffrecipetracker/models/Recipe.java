@@ -1,5 +1,8 @@
 package org.launchcode.liftoffrecipetracker.models;
 
+import org.launchcode.liftoffrecipetracker.data.RecipeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -20,26 +23,30 @@ public class Recipe extends AbstractEntity {
 
 	@NotNull
 	@NotBlank
-	@Size(min=4, max=1000, message = "Directions are required.")
+	@Size(min=4, message = "Directions are required.")
 	private String directions;
 
 	@NotBlank
 	@Min(value = 1, message = "Must be at least one serving.")
 	private int servings;
 
+	@NotBlank
+	@Min(value = 1)
 	private int cookTime;
+
+	@Min(value = 1)
 	private int prepTime;
+
 	private String image;
 
 	//constructors
-	public Recipe(HashMap<String, String> ingredients,
-	              @NotBlank(message = "Recipe name required.") @NotNull @Size(min = 2, max = 50, message = "Recipe name must be between 2 and 50 characters long.") String name,
-	              @NotNull @NotBlank @Size(min = 4, max = 1000, message = "Directions are required.") String directions,
-	              @NotBlank @Min(value = 1, message = "Must be at least one serving.") int servings) {
+	public Recipe(HashMap<String, String> ingredients, String name, String directions,int servings, int cookTime, int prepTime){
 		this.ingredients = ingredients;
 		this.name = name;
 		this.directions = directions;
 		this.servings = servings;
+		this.cookTime = cookTime;
+		this.prepTime = prepTime;
 	}
 
 	public Recipe() {
