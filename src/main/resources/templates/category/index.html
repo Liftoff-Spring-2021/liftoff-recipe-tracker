@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container text-center">
+<body class="text-center">
 <nav th:replace="fragments :: navigation"></nav>
-<table>
-    <thead>
-    <tr>
-        <th>Category Name</th>
-    </tr>
-    </thead>
-    <tr th:each="category : ${categories}">
-        <td><a th:text="${category.name}" th:value = "${category.id}"></a></td>
-    </tr>
-
-</table>
+<div class="container-fluid">
+	<table>
+        <thead>
+        <tr>
+            <th>Category Name</th>
+        </tr>
+        </thead>
+        <tr th:each="category : ${categories}">
+            <td><a th:text="${category.name}" th:value = "${category.id}"></a></td>
+        </tr>
+	</table>
+</div>
 <footer th:replace="fragments :: footer"></footer>
 </body>
 </html>
