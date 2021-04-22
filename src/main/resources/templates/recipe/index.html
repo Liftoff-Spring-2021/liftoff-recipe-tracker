@@ -4,14 +4,20 @@
 <body class="text-center">
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid">
-    <table>
+    <table class="table table-striped">
         <thead>
         <tr>
             <th>Recipe Name</th>
+	        <th>Prep Time</th>
+	        <th>Cook Time</th>
+	        <th>Servings</th>
         </tr>
         </thead>
         <tr th:each="recipe : ${recipes}">
-            <td><a th:text="${recipe.name}" th:value = "${recipe.id}"></a></td>
+            <td><a th:text="${recipe.name}"></a></td>
+	        <td><a th:text="${recipe.prepTime}"></a></td>
+	        <td><a th:text="${recipe.cookTime}"></a></td>
+	        <td><a th:text="${recipe.servings}"></a></td>
         </tr>
     </table>
 </div>
