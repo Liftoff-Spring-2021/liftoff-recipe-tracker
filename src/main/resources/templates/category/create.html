@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head></head>
-<body class="container">
-
-<header> <h1 th:text="${title}">Recipe Tracker</h1></header>
-
+<head th:replace="fragments :: head"></head>
+<body class="container text-center">
+<nav th:replace="fragments :: navigation"></nav>
 <form method="post">
     <div class="form-group">
         <label>Name
@@ -14,6 +12,6 @@
     </div>
     <input type="submit" value="Create" class="btn btn-primary">
 </form>
-
+<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>

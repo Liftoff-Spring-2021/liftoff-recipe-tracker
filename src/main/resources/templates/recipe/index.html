@@ -4,8 +4,6 @@
 <body class="text-center">
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid">
-
-
     <table>
         <thead>
         <tr>
@@ -15,7 +13,6 @@
         <tr th:each="recipe : ${recipes}">
             <td><a th:text="${recipe.name}" th:value = "${recipe.id}"></a></td>
         </tr>
-
     </table>
 </div>
 </body>
