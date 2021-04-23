@@ -14,7 +14,10 @@ import java.util.HashMap;
 @Entity
 public class Recipe extends AbstractEntity {
 	//properties
-	private HashMap<String, String> ingredients;
+	@NotBlank
+	@NotNull
+	@Size(min=5, message = "Ingredients are required.")
+	private String ingredients;
 
 	@NotBlank(message = "Recipe name required.")
 	@NotNull
@@ -23,24 +26,25 @@ public class Recipe extends AbstractEntity {
 
 	@NotNull
 	@NotBlank
-	@Size(min=4, message = "Directions are required.")
+	@Size(min=5, message = "Directions are required.")
 	private String directions;
 
-	@NotBlank
+	@NotNull
 	@Min(value = 1, message = "Must be at least one serving.")
 	private int servings;
 
-	@NotBlank
-	@Min(value = 1)
+	@NotNull
+	@Min(value = 1, message = "Cook time must be a positive value greater than 1.")
 	private int cookTime;
 
-	@Min(value = 1)
+	@NotNull
+	@Min(value = 1, message = "Cook time must be a positive value greater than 1.")
 	private int prepTime;
 
 	private String image;
 
 	//constructors
-	public Recipe(HashMap<String, String> ingredients, String name, String directions,int servings, int cookTime, int prepTime){
+	public Recipe(String ingredients, String name, String directions,int servings, int cookTime, int prepTime){
 		this.ingredients = ingredients;
 		this.name = name;
 		this.directions = directions;
@@ -61,11 +65,11 @@ public class Recipe extends AbstractEntity {
 		this.name = name;
 	}
 
-	public HashMap<String, String> getIngredients() {
+	public String getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(HashMap<String, String> ingredients) {
+	public void setIngredients(String ingredients) {
 		this.ingredients = ingredients;
 	}
 
