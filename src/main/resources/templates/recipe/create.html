@@ -30,13 +30,13 @@
 			<span th:errors="${recipe.servings}" class="error"></span>
 		</div>
 		<div class="form-group">
-			<label>Cook Time
+			<label>Cook Time (in minutes)
 				<input th:field="${recipe.cookTime}" th:value="${recipe.cookTime}" class="form-control">
 			</label>
 			<span th:errors="${recipe.cookTime}" class="error"></span>
 		</div>
 		<div class="form-group">
-			<label>Prep Time
+			<label>Prep Time (in minutes)
 				<input th:field="${recipe.prepTime}" th:value="${recipe.prepTime}" class="form-control">
 			</label>
 			<span th:errors="${recipe.prepTime}" class="error"></span>
