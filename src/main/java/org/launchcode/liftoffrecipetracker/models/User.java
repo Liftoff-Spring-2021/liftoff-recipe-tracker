@@ -10,17 +10,16 @@ public class User extends AbstractEntity {
     private String username;
     private String password;
     private String email;
-    private List<String> recipe = new ArrayList<String>();
+//    private List<String> recipe = new ArrayList<String>();
 
     public User(){
 
     }
 
-    public User(String username, String password, String email, List<String> recipe) {
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.recipe = recipe;
     }
 
     public String getUsername() {
@@ -47,11 +46,11 @@ public class User extends AbstractEntity {
         this.email = email;
     }
 
-    public List<String> getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(List<String> recipe) {
-        this.recipe = recipe;
-    }
+//    public List<String> getRecipe() {
+//        return recipe;
+//    }
+//
+//    public void setRecipe(List<String> recipe) {
+//        this.recipe = recipe;
+//    }
 }
