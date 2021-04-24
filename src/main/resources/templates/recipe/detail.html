@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="text-center">
+<nav th:replace="fragments :: navigation"></nav>
+<div class="container-fluid">
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th>Recipe Name:</th>
+			<td th:text="${recipe.name}">Default Text</td>
+		</tr>
+		<tr>
+			<th>Recipe Ingredients:</th>
+			<td th:text="${recipe.ingredients}">Default Text</td>
+		</tr>
+		<tr>
+			<th>Recipe Servings:</th>
+			<td th:text="${recipe.servings}">Default Text</td>
+		</tr>
+		<tr>
+			<th>Recipe Prep Time (in minutes):</th>
+			<td th:text="${recipe.prepTime}">Default Text</td>
+		</tr>
+		<tr>
+			<th>Recipe Cook Time (in minutes):</th>
+			<td th:text="${recipe.cookTime}">Default Text</td>
+		</tr>
+		<tr>
+			<th>Recipe Directions:</th>
+			<td th:text="${recipe.directions}">Default Text</td>
+		</tr>
+		<tr>
+			<th>Recipe Image:</th>
+			<td><img class="img-fluid img-thumbnail" th:src="${recipe.image}"/></td>
+		</tr>
+		</thead>
+	</table>
+</div>
+</body>
+</html>

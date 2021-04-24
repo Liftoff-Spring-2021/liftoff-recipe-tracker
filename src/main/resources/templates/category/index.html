@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head ></head>
-<body class="container">
-
-<header>
-    <H1>All Categories</H1>
-</header>
-
-
-
-<table>
-    <thead>
-    <tr>
-        <th>Category Name</th>
-    </tr>
-    </thead>
-    <tr th:each="category : ${categories}">
-        <td><a th:text="${category.name}" th:value = "${category.id}"></a></td>
-    </tr>
-
-</table>
-
+<head th:replace="fragments :: head"></head>
+<body class="text-center">
+<nav th:replace="fragments :: navigation"></nav>
+<div class="container-fluid">
+	<table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Category Name</th>
+        </tr>
+        </thead>
+        <tr th:each="category : ${categories}">
+            <td><a th:text="${category.name}" th:value = "${category.id}"></a></td>
+        </tr>
+	</table>
+</div>
+<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>
 
