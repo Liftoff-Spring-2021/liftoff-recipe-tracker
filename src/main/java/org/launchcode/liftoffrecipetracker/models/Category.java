@@ -10,11 +10,9 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-@Indexed
 public class Category extends AbstractEntity  {
 
     //Class Variables
-    @KeywordField
     @Size(min = 4, max = 25, message = "Category name must be between 4 and 25 characters long")
     @NotBlank
     @NotNull
