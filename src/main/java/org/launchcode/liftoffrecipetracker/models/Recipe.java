@@ -22,6 +22,7 @@ public class Recipe extends AbstractEntity {
 	@Size(min=5, message = "Ingredients are required.")
 	private String ingredients;
 
+	//@FullTextField annotation creates an index of this property that is full-text searchable
 	@NotBlank(message = "Recipe name required.")
 	@NotNull
 	@Size(min=2,max=50, message = "Recipe name must be between 2 and 50 characters long.")

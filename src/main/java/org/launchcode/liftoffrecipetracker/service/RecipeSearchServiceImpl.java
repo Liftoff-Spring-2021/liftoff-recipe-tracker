@@ -12,13 +12,16 @@ import java.util.List;
 
 public class RecipeSearchServiceImpl implements RecipeSearchService {
 
+	//entity manager manages the persistence and indexing of our database
 	private final EntityManager entityManager;
 
+	//creates an instance of the entity manager to use within the service implementation
 	@Autowired
 	public RecipeSearchServiceImpl(final EntityManagerFactory entityManagerFactory) {
 		this.entityManager = entityManagerFactory.createEntityManager();
 	}
 
+	//This creates an index of our already existing data after the constructor runs
 	@PostConstruct
 	public void initializeRecipeSearchIndex() {
 		try {
@@ -29,6 +32,9 @@ public class RecipeSearchServiceImpl implements RecipeSearchService {
 		}
 	}
 
+	//A basic search function which searches the name field in our recipe class and provides fuzzy matches
+	//fuzzy matches allows for some variation in our search terms ex. ht -> hot or appel -> apple
+	//we can further update this and our RecipeSearchService interface to build out search functions as necessary
 	@Override
 	public List<Recipe> recipeSearch(String searchTerm) {
 		return Search.session(entityManager).search(Recipe.class)
