@@ -44,11 +44,12 @@ public class RecipeController {
 	@PostMapping("create")
 	public String processCreateRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
 	                                      Errors errors, Model model,
-	                                      @RequestParam List<Integer> categories) {
+	                                      @RequestParam(required = false) List<Integer> categories) {
 		if (errors.hasErrors()) {
 			model.addAttribute("title", "Create a Recipe");
+			model.addAttribute("categories", categoryRepository.findAll());
 			return "recipe/create";
-		} else {
+		} else if (categories != null){
 			List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
 			newRecipe.addCategories(categoryObjects);
 		}

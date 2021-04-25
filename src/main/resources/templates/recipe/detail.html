@@ -11,6 +11,14 @@
 			<td th:text="${recipe.name}">Default Text</td>
 		</tr>
 		<tr>
+			<th>Recipe Categories:</th>
+			<td>
+				<th:block th:each="category : ${recipe.categories}">
+					<p th:text="${category.name}"></p>
+				</th:block>
+			</td>
+		</tr>
+		<tr>
 			<th>Recipe Ingredients:</th>
 			<td th:text="${recipe.ingredients}">Default Text</td>
 		</tr>
