@@ -1,6 +1,8 @@
 package org.launchcode.liftoffrecipetracker.controllers;
 
 
+import org.launchcode.liftoffrecipetracker.data.CategoryRepository;
+import org.launchcode.liftoffrecipetracker.models.Category;
 import org.launchcode.liftoffrecipetracker.models.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -19,6 +22,9 @@ public class RecipeController {
 
 	@Autowired
 	private RecipeRepository recipeRepository;
+
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	@GetMapping
 	public String displayAllRecipes(Model model) {
@@ -30,20 +36,24 @@ public class RecipeController {
 	@GetMapping("create")
 	public String displayCreateRecipeForm(Model model) {
 		model.addAttribute("title", "Create a Recipe");
+		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute(new Recipe());
 		return "recipe/create";
 	}
 
 	@PostMapping("create")
-	public String processCreateRecipeForm(@ModelAttribute @Valid Recipe recipe,
-	                                      Errors errors,
-	                                      Model model) {
+	public String processCreateRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
+	                                      Errors errors, Model model,
+	                                      @RequestParam List<Integer> categories) {
 		if (errors.hasErrors()) {
 			model.addAttribute("title", "Create a Recipe");
 			return "recipe/create";
+		} else {
+			List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
+			newRecipe.addCategories(categoryObjects);
 		}
 
-		recipeRepository.save(recipe);
+		recipeRepository.save(newRecipe);
 		return "redirect:";
 	}
 
