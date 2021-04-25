@@ -1,5 +1,7 @@
 package org.launchcode.liftoffrecipetracker.models;
 
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.launchcode.liftoffrecipetracker.data.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,8 +12,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashMap;
 
-
+//@Indexed creates an index of the schema for searching purposes. Only entities with @Indexed with be indexed.
 @Entity
+@Indexed
 public class Recipe extends AbstractEntity {
 	//properties
 	@NotBlank
@@ -19,9 +22,11 @@ public class Recipe extends AbstractEntity {
 	@Size(min=5, message = "Ingredients are required.")
 	private String ingredients;
 
+	//@FullTextField annotation creates an index of this property that is full-text searchable
 	@NotBlank(message = "Recipe name required.")
 	@NotNull
 	@Size(min=2,max=50, message = "Recipe name must be between 2 and 50 characters long.")
+	@FullTextField
 	private String name;
 
 	@NotNull

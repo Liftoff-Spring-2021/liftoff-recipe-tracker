@@ -19,6 +19,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'mysql:mysql-connector-java'
 	implementation 'org.springframework.security:spring-security-crypto'
+	implementation group: 'org.hibernate.search', name: 'hibernate-search-mapper-orm', version: '6.0.3.Final'
+	implementation group: 'org.hibernate.search', name: 'hibernate-search-backend-lucene', version: '6.0.3.Final'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
