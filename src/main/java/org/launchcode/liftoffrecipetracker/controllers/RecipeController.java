@@ -61,4 +61,22 @@ public class RecipeController {
 		}
 		return "recipe/detail";
 	}
+	@GetMapping("delete")
+	public String displayDeleteRecipeForm(Model model){
+		model.addAttribute("title", "Delete Recipe");
+		model.addAttribute("recipes", recipeRepository.findAll());
+		return"recipe/delete";
+	}
+
+	@PostMapping("delete")
+	public String processDeleteRecipeForm( @RequestParam(required = false)
+													   int[] recipeId){
+
+		if(recipeId != null){
+			for(int id : recipeId){
+				recipeRepository.deleteById(id);
+			}
+		}
+		return "redirect:";
+	}
 }

@@ -30,7 +30,6 @@ public class User extends AbstractEntity {
         this.username = username;
         this.passwordHash = encoder.encode(password);
         this.email = email;
-//        this.recipe = recipe;
     }
 
     public String getUsername() {
