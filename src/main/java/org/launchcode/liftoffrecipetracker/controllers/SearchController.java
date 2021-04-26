@@ -21,9 +21,9 @@ public class SearchController {
 	public String displaySearchResults(Model model,
 	                                   @RequestParam String searchTerm) {
 		Iterable<Recipe> recipes;
-		recipes = recipeSearchService.recipeSearchByName(searchTerm);
+		recipes = recipeSearchService.recipeSearchByNameOrCategory(searchTerm);
 
-		model.addAttribute("title", "Recipe Results");
+		model.addAttribute("title", "Recipe Search Results");
 		model.addAttribute("recipes", recipes);
 
 		return "search/results";

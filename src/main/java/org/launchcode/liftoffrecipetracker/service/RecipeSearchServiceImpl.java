@@ -36,7 +36,7 @@ public class RecipeSearchServiceImpl implements RecipeSearchService {
 	//fuzzy matches allows for some variation in our search terms ex. ht -> hot or appel -> apple
 	//we can further update this and our RecipeSearchService interface to build out search functions as necessary
 	@Override
-	public List<Recipe> recipeSearchByName(String searchTerm) {
+	public List<Recipe> recipeSearchByNameOrCategory(String searchTerm) {
 		return Search.session(entityManager).search(Recipe.class)
 				.where(f -> f.match().field("name").field("categories.name").matching(searchTerm).fuzzy()).fetchAllHits();
 	}
