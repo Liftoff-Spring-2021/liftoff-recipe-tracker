@@ -37,7 +37,10 @@ public class RecipeSearchServiceImpl implements RecipeSearchService {
 	//we can further update this and our RecipeSearchService interface to build out search functions as necessary
 	@Override
 	public List<Recipe> recipeSearchByNameOrCategory(String searchTerm) {
-		return Search.session(entityManager).search(Recipe.class)
-				.where(f -> f.match().field("name").field("categories.name").matching(searchTerm).fuzzy()).fetchAllHits();
+		return Search.session(entityManager)
+				.search(Recipe.class)
+				.where(f -> f.match().field("name").field("categories.name")
+						.matching(searchTerm).fuzzy())
+				.fetchAllHits();
 	}
 }

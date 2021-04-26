@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-//@Indexed creates an index of the schema for searching purposes. Only entities with @Indexed with be indexed.
+//@Indexed creates an index of the schema for searching purposes. Only entities with @Indexed will be indexed.
 @Entity
 @Indexed
 public class Recipe extends AbstractEntity {
@@ -52,7 +52,7 @@ public class Recipe extends AbstractEntity {
 
 	private String image;
 
-
+	//@IndexedEmbedded allows for related classes to be indexed without using @Indexed on the embedded class
 	@ManyToMany
 	@IndexedEmbedded
 	private List<Category> categories = new ArrayList<>();
@@ -72,7 +72,7 @@ public class Recipe extends AbstractEntity {
 	public Recipe() {
 	}
 
-//	getters & setter
+	//getters & setters
 	public String getName() {
 		return name;
 	}

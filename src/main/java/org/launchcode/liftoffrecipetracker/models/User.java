@@ -20,7 +20,7 @@ public class User extends AbstractEntity {
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-//    private List<String> recipe = new ArrayList<String>();
+    //private List<String> recipe = new ArrayList<String>();
 
     public User(){
 

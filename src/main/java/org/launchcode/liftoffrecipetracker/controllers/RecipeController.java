@@ -83,6 +83,7 @@ public class RecipeController {
 		}
 		return "recipe/detail";
 	}
+
 	@GetMapping("delete")
 	public String displayDeleteRecipeForm(Model model){
 		model.addAttribute("title", "Delete Recipe");

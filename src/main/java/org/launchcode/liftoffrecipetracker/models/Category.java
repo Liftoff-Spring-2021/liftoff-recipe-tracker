@@ -10,7 +10,6 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
 public class Category extends AbstractEntity  {
 
@@ -32,7 +31,6 @@ public class Category extends AbstractEntity  {
 
     public Category() {}
 
-    //Methods
     //Getters and Setters
     public String getName() {
         return name;
