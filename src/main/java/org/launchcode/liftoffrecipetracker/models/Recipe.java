@@ -2,17 +2,21 @@ package org.launchcode.liftoffrecipetracker.models;
 
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 import org.launchcode.liftoffrecipetracker.data.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-//@Indexed creates an index of the schema for searching purposes. Only entities with @Indexed with be indexed.
+//@Indexed creates an index of the schema for searching purposes. Only entities with @Indexed will be indexed.
 @Entity
 @Indexed
 public class Recipe extends AbstractEntity {
@@ -48,20 +52,27 @@ public class Recipe extends AbstractEntity {
 
 	private String image;
 
+	//@IndexedEmbedded allows for related classes to be indexed without using @Indexed on the embedded class
+	@ManyToMany
+	@IndexedEmbedded
+	private List<Category> categories = new ArrayList<>();
+
 	//constructors
-	public Recipe(String ingredients, String name, String directions,int servings, int cookTime, int prepTime){
+	public Recipe(String ingredients, String name, String directions,int servings, int cookTime, int prepTime,
+	              List<Category> categories){
 		this.ingredients = ingredients;
 		this.name = name;
 		this.directions = directions;
 		this.servings = servings;
 		this.cookTime = cookTime;
 		this.prepTime = prepTime;
+		this.categories = categories;
 	}
 
 	public Recipe() {
 	}
 
-//	getters & setter
+	//getters & setters
 	public String getName() {
 		return name;
 	}
@@ -116,6 +127,12 @@ public class Recipe extends AbstractEntity {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public List<Category> getCategories() { return categories; }
+
+	public void addCategories(List<Category> categories) {
+		this.categories.addAll(categories);
 	}
 
 }

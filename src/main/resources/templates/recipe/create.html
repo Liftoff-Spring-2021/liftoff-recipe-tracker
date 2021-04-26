@@ -47,7 +47,14 @@
 			</label>
 			<span th:errors="${recipe.image}" class="error"></span>
 		</div>
-		<input type="submit" value="Create" class="btn btn-primary">
+		<div class="form-group">
+			<label th:for="categories">Categories</label>
+			<th:block th:each="category : ${categories}">
+				<input type="checkbox" name="categories" th:value="${category.id}">
+				<label th:text="${category.name}"></label>
+			</th:block>
+		</div>
+		<input type="submit" value="Create Recipe" class="btn btn-primary">
 	</form>
 </div>
 <footer th:replace="fragments :: footer"></footer>
