@@ -70,8 +70,8 @@ public class RecipeController {
 	}
 
 	@GetMapping("detail")
-	public String displayEventDetails(@RequestParam int recipeId,
-	                                  Model model) {
+	public String displayRecipeDetails(@RequestParam int recipeId,
+	                                   Model model) {
 		Optional<Recipe> result = recipeRepository.findById(recipeId);
 
 		if (result.isEmpty()) {
