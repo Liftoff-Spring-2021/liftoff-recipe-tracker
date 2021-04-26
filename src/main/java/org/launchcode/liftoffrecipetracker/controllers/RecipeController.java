@@ -27,9 +27,21 @@ public class RecipeController {
 	private CategoryRepository categoryRepository;
 
 	@GetMapping
-	public String displayAllRecipes(Model model) {
-		model.addAttribute("title", "All Recipes");
-		model.addAttribute("recipes", recipeRepository.findAll());
+	public String displayRecipes(@RequestParam(required = false) Integer categoryId,
+	                             Model model) {
+		if (categoryId == null) {
+			model.addAttribute("title", "All Recipes");
+			model.addAttribute("recipes", recipeRepository.findAll());
+		} else {
+			Optional<Category> result = categoryRepository.findById(categoryId);
+			if (result.isEmpty()) {
+				model.addAttribute("title", "Invalid Category ID: " + categoryId);
+			} else {
+				Category category = result.get();
+				model.addAttribute("title", "Recipes in Category: " + category.getName());
+				model.addAttribute("recipes", category.getRecipes());
+			}
+		}
 		return "recipe/index";
 	}
 
