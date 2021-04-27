@@ -4,7 +4,9 @@
 <body class="text-center">
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid">
-	<table class="table table-striped">
+	<h2 th:unless="${recipes} and ${recipes.size()}">We're sorry, there are currently no results for this search! Feel free to
+		<a th:href="@{/recipes/create}">create a recipe now</a></h2>
+	<table class="table table-striped" th:if="${recipes} and ${recipes.size()} > 0">
 		<thead>
 		<tr>
 			<th>Recipe Name</th>
