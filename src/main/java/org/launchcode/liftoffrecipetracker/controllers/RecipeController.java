@@ -33,10 +33,10 @@ public class RecipeController {
 	@GetMapping
 	public String displayRecipes(@RequestParam(required = false) Integer categoryId,@RequestParam(required = false) Integer beverageId,
 	                             Model model) {
-		if (categoryId == null){
+		if ((categoryId == null) && (beverageId == null)) {
 			model.addAttribute("title", "All Recipes");
 			model.addAttribute("recipes", recipeRepository.findAll());
-		} else {
+		} else if (beverageId == null){
 			Optional<Category> result = categoryRepository.findById(categoryId);
 			if (result.isEmpty()) {
 				model.addAttribute("title", "Invalid Category ID: " + categoryId);
@@ -44,6 +44,15 @@ public class RecipeController {
 				Category category = result.get();
 				model.addAttribute("title", "Recipes in Category: " + category.getName());
 				model.addAttribute("recipes", category.getRecipes());
+			}
+		} else if (categoryId == null) {
+			Optional<Beverage> result = beverageRepository.findById(beverageId);
+			if (result.isEmpty()) {
+				model.addAttribute("title", "Invalid Beverage ID: " + beverageId);
+			} else {
+				Beverage beverage = result.get();
+				model.addAttribute("title", "Recipes with Beverage: " + beverage.getName());
+				model.addAttribute("recipes", beverage.getRecipes());
 			}
 		}
 		return "recipe/index";
@@ -75,10 +84,9 @@ public class RecipeController {
 		}else if (categories != null) {
 				List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
 				newRecipe.addCategories(categoryObjects);
-			} else {
+			} else if (beverages !=null){
 			List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
-			newRecipe.addBeverages(beverageObjects);
-		}
+			newRecipe.addBeverages(beverageObjects);}
 
 		recipeRepository.save(newRecipe);
 		return "redirect:";
