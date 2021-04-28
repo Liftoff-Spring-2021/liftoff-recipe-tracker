@@ -39,6 +39,14 @@
 			<td th:text="${recipe.directions}">Default Text</td>
 		</tr>
 		<tr>
+			<th>Sommelier Suggestions:</th>
+			<td>
+				<th:block th:each="beverage : ${recipe.beverages}">
+					<p th:text="${beverage.name}"></p>
+				</th:block>
+			</td>
+		</tr>
+		<tr>
 			<th>Recipe Image:</th>
 			<td><img class="img-fluid img-thumbnail" th:src="${recipe.image}"/></td>
 		</tr>

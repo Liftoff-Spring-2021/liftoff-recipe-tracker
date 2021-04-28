@@ -57,9 +57,13 @@ public class Recipe extends AbstractEntity {
 	@IndexedEmbedded
 	private List<Category> categories = new ArrayList<>();
 
+	@ManyToMany
+	@IndexedEmbedded
+	private List<Beverage> beverages = new ArrayList<>();
+
 	//constructors
 	public Recipe(String ingredients, String name, String directions,int servings, int cookTime, int prepTime,
-	              List<Category> categories){
+	              List<Category> categories, List<Beverage> beverages){
 		this.ingredients = ingredients;
 		this.name = name;
 		this.directions = directions;
@@ -67,6 +71,7 @@ public class Recipe extends AbstractEntity {
 		this.cookTime = cookTime;
 		this.prepTime = prepTime;
 		this.categories = categories;
+		this.beverages = beverages;
 	}
 
 	public Recipe() {
@@ -135,6 +140,12 @@ public class Recipe extends AbstractEntity {
 		this.categories.addAll(categories);
 	}
 
+	public List<Beverage> getBeverages() {
+		return beverages;
+	}
+	public void addBeverages(List<Beverage> beverages) {
+		this.beverages.addAll(beverages);
+	}
 }
 
 

@@ -11,34 +11,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Category extends AbstractEntity  {
+public class Category extends AbstractRecommendations{
+//public class Category extends AbstractEntity  {
 
     //Class Variables
-    @Size(min = 4, max = 25, message = "Category name must be between 4 and 25 characters long")
-    @NotBlank
-    @NotNull
-    @FullTextField
-    private String name;
+//    @Size(min = 4, max = 25, message = "Category name must be between 4 and 25 characters long")
+//    @NotBlank
+//    @NotNull
+//    @FullTextField
+//    private String name;
+
 
     @ManyToMany(mappedBy = "categories")
     private final List<Recipe> recipes = new ArrayList<>();
 
     //Constructors
 
-    public Category(String name) {
-        this.name = name;
-    }
+//    public Category(String name) {
+//        this.name = name;
+//    }
 
     public Category() {}
 
     //Getters and Setters
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public List<Recipe> getRecipes() {
         return recipes;
