@@ -11,6 +11,15 @@
 			<td th:text="${recipe.name}">Default Text</td>
 		</tr>
 		<tr>
+			<th>Recipe Categories:</th>
+			<td>
+				<th:block th:if="${recipe.categories.size() > 0}" th:each="category : ${recipe.categories}">
+					<p th:text="${category.name}"></p>
+				</th:block>
+				<p th:unless="${recipe.categories.size()}">No Categories</p>
+			</td>
+		</tr>
+		<tr>
 			<th>Recipe Ingredients:</th>
 			<td th:text="${recipe.ingredients}">Default Text</td>
 		</tr>
@@ -30,13 +39,14 @@
 			<th>Recipe Directions:</th>
 			<td th:text="${recipe.directions}">Default Text</td>
 		</tr>
-		<tr>
+		<tr th:if="${recipe.image != ''}">
 			<th>Recipe Image:</th>
 			<td><img class="img-fluid img-thumbnail" th:src="${recipe.image}"/></td>
 		</tr>
 		</thead>
 	</table>
 </div>
+<footer th:replace="fragments :: footer"></footer>
 <div th:replace="fragments :: bootstrap-javascript"></div>
 </body>
 </html>
