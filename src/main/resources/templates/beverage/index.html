@@ -4,7 +4,9 @@
 <body class="text-center">
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid">
-    <table class="table table-striped">
+	<h2 th:unless="${beverages} and ${beverages.size()}">We're sorry, there are currently no beverages! Feel free to
+		<a th:href="@{/beverages/create}">create a beverage now</a></h2>
+	<table class="table table-striped" th:if="${beverages} and ${beverages.size()} > 0">
         <thead>
         <tr>
             <th>Beverage Name</th>
@@ -16,5 +18,6 @@
     </table>
 </div>
 <footer th:replace="fragments :: footer"></footer>
+<div th:replace="fragments :: bootstrap-javascript"></div>
 </body>
 </html>
