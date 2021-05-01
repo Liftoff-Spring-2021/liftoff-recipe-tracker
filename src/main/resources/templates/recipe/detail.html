@@ -39,7 +39,7 @@
 			<td th:text="${recipe.directions}">Default Text</td>
 		</tr>
 		<tr>
-			<th>Beverage Suggestions:</th>
+			<th>Sommelier Suggestions:</th>
 			<td>
 				<th:block th:each="beverage : ${recipe.beverages}">
 					<p th:text="${beverage.name}"></p>
