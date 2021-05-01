@@ -17,7 +17,6 @@ public class Category extends AbstractRecommendations{
 
     public Category() {}
 
-    //Methods
     // Getters and Setters
 
     public List<Recipe> getRecipes() {

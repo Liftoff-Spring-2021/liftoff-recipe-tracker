@@ -18,7 +18,6 @@ import java.util.List;
         public Beverage() {
         }
 
-        //Methods
         //Getters and Setters
 
     public List<Recipe> getRecipes() {
