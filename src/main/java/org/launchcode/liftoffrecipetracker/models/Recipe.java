@@ -19,19 +19,12 @@ import java.util.List;
 //@Indexed creates an index of the schema for searching purposes. Only entities with @Indexed will be indexed.
 @Entity
 @Indexed
-public class Recipe extends AbstractEntity {
+public class Recipe extends AbstractRecommendations {
 	//properties
 	@NotBlank
 	@NotNull
 	@Size(min=5, message = "Ingredients are required.")
 	private String ingredients;
-
-	//@FullTextField annotation creates an index of this property that is full-text searchable
-	@NotBlank(message = "Recipe name required.")
-	@NotNull
-	@Size(min=2,max=50, message = "Recipe name must be between 2 and 50 characters long.")
-	@FullTextField
-	private String name;
 
 	@NotNull
 	@NotBlank
@@ -65,7 +58,6 @@ public class Recipe extends AbstractEntity {
 	public Recipe(String ingredients, String name, String directions,int servings, int cookTime, int prepTime,
 	              List<Category> categories, List<Beverage> beverages){
 		this.ingredients = ingredients;
-		this.name = name;
 		this.directions = directions;
 		this.servings = servings;
 		this.cookTime = cookTime;
@@ -78,13 +70,6 @@ public class Recipe extends AbstractEntity {
 	}
 
 	//getters & setters
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public String getIngredients() {
 		return ingredients;

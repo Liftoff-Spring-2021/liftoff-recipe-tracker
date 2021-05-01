@@ -16,8 +16,9 @@ public abstract class AbstractRecommendations extends AbstractEntity {
 
     // Class Variables
     @Size(min = 4, max = 50, message = "Name must be between 4 and 50 characters long")
-    @NotBlank
+    @NotBlank(message = "name required")
     @NotNull
+    //@FullTextField annotation creates an index of this property that is full-text searchable
     @FullTextField
     private String name;
 
