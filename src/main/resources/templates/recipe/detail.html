@@ -39,7 +39,8 @@
 			<th>Recipe Directions:</th>
 			<td th:text="${recipe.directions}">Default Text</td>
 		</tr>
-		</tr>
+
+
 		<tr>
 			<th>Sommelier Suggestions:</th>
 			<td>
@@ -48,6 +49,8 @@
 				</th:block>
 			</td>
 		</tr>
+		</tr>
+
 		<tr th:if="${recipe.image != ''}">
 			<th>Recipe Image:</th>
 			<td><img class="img-fluid img-thumbnail" th:src="${recipe.image}"/></td>
