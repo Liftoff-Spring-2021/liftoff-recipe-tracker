@@ -4,7 +4,9 @@
 <body class="text-center">
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid">
-	<table class="table table-striped">
+	<h2 th:unless="${categories} and ${categories.size()}">We're sorry, there are currently no categories! Feel free to
+	<a th:href="@{/categories/create}">create one now</a></h2>
+	<table class="table table-striped" th:if="${categories} and ${categories.size()} > 0">
         <thead>
         <tr>
             <th>Category Name</th>
