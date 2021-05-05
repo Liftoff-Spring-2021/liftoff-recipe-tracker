@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
 
 @Controller
 // categories is the URL path
@@ -53,4 +51,25 @@ private CategoryRepository categoryRepository;
         // redirect: is the URL path from RequestMapping (The main mapping from the controller)
         return "redirect:";
     }
+
+    @GetMapping("delete")
+    public String displayDeleteCategoryForm(Model model){
+        model.addAttribute("title", "Delete Category");
+        model.addAttribute("categories", categoryRepository.findAll());
+        return"category/delete";
+    }
+
+    @PostMapping("delete")
+    public String processDeleteCategoryForm( @RequestParam(required = false)
+                                                   int[] categoryId){
+
+        if(categoryId != null){
+            for(int id : categoryId){
+                categoryRepository.deleteById(id);
+            }
+        }
+        return "redirect:";
+    }
+
+
 }
