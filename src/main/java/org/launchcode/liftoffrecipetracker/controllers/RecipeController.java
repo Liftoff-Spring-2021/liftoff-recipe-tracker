@@ -90,7 +90,7 @@ public class RecipeController {
 		public String processCreateRecipeForm (@ModelAttribute @Valid Recipe newRecipe,
 				Errors errors, Model model,
 				@RequestParam(required = false) List < Integer > categories,
-				@RequestParam(required = false) List < Integer > beverages, List<Integer> users){
+				@RequestParam(required = false) List < Integer > beverages, Integer userId){
 
 
 			if (errors.hasErrors()) {
@@ -110,12 +110,15 @@ public class RecipeController {
 				List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
 				newRecipe.addBeverages(beverageObjects);
 			}
-			else if (users != null) {
+			else if (userId != null) {
 //				Integer userObjects = (User) userRepository.findAllById(Collections.singleton(users));
 //				newRecipe.addUsers(userObjects);
 
-				List<User> userObjects = (List<User>) userRepository.findAllById(users);
-				newRecipe.addUsers(userObjects);
+				Optional<User> optUser = userRepository.findById(userId);
+				if (optUser.isPresent()) {
+					User user = optUser.get();
+					newRecipe.setUser(user);
+				}
 			}
 
 			recipeRepository.save(newRecipe);

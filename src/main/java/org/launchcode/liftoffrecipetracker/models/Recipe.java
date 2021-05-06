@@ -3,11 +3,8 @@ package org.launchcode.liftoffrecipetracker.models;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
-import org.launchcode.liftoffrecipetracker.data.RecipeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
@@ -15,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 //@Indexed creates an index of the schema for searching purposes. Only entities with @Indexed will be indexed.
@@ -64,8 +60,7 @@ public class Recipe extends AbstractEntity {
 	private List<Beverage> beverages = new ArrayList<>();
 
 	@ManyToOne
-
-	private List<User> users = new ArrayList<>();
+	private User user;
 
 	//constructors
 	public Recipe(String ingredients, String name, String directions,int servings, int cookTime, int prepTime,
@@ -155,12 +150,12 @@ public class Recipe extends AbstractEntity {
 		this.categories.addAll(categories);
 	}
 
-	public List<User> getUsers() {
-		return users;
+	public User getUser() {
+		return user;
 	}
 
-	public void addUsers(List<User> users) {
-		this.users = users;
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
 
