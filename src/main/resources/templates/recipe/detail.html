@@ -43,6 +43,16 @@
 			<th>Recipe Image:</th>
 			<td><img class="img-fluid img-thumbnail" th:src="${recipe.image}"/></td>
 		</tr>
+
+		<tr>
+			<th> Created By:</th>
+			<td>
+				<th:block th:if="${recipe.owners.size() > 0}" th:each="owner : ${recipe.owners}">
+					<p th:text="${owner.name}"></p>
+				</th:block>
+				<p th:unless="${recipe.owners.size()}"> No Owner</p>
+			</td>
+		</tr>
 		</thead>
 	</table>
 </div>

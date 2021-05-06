@@ -2,8 +2,10 @@ package org.launchcode.liftoffrecipetracker.controllers;
 
 
 import org.launchcode.liftoffrecipetracker.data.CategoryRepository;
+import org.launchcode.liftoffrecipetracker.data.UserRepository;
 import org.launchcode.liftoffrecipetracker.models.Category;
 import org.launchcode.liftoffrecipetracker.models.Recipe;
+import org.launchcode.liftoffrecipetracker.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.launchcode.liftoffrecipetracker.data.RecipeRepository;
@@ -25,9 +27,27 @@ public class RecipeController {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
+
+	@Autowired
+	private UserRepository userRepository;
+
 	@GetMapping
 	public String displayRecipes(@RequestParam(required = false) Integer categoryId,
+								 @RequestParam (required = false) Integer userId,
 	                             Model model) {
+		if (userId == null){
+			model.addAttribute("title", "All Recipes");
+		} else {
+			Optional<User> result = userRepository.findById(userId);
+			if (result.isEmpty()) {
+				model.addAttribute("title", "Invalid Owner ID: " + userId);
+			} else {
+				User user = result.get();
+				model.addAttribute("title", "'owner.getName()' Recipes");
+				model.addAttribute("recipes", user.getRecipes());
+			}
+		}
+
 		if (categoryId == null) {
 			model.addAttribute("title", "All Recipes");
 			model.addAttribute("recipes", recipeRepository.findAll());
@@ -48,27 +68,32 @@ public class RecipeController {
 	public String displayCreateRecipeForm(Model model) {
 		model.addAttribute("title", "Create a Recipe");
 		model.addAttribute("categories", categoryRepository.findAll());
+		model.addAttribute("users", userRepository.findAll());
 		model.addAttribute(new Recipe());
 		return "recipe/create";
 	}
 
 	@PostMapping("create")
-	public String processCreateRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
+	public String processCreateRecipeForm(@ModelAttribute @Valid Recipe newRecipe, Recipe userRecipe,
 	                                      Errors errors, Model model,
-	                                      @RequestParam(required = false) List<Integer> categories) {
+	                                      @RequestParam(required = false) List<Integer> categories,
+										  @RequestParam(required = false) User users) {
 		if (errors.hasErrors()) {
 			model.addAttribute("title", "Create a Recipe");
 			model.addAttribute("categories", categoryRepository.findAll());
+			model.addAttribute("users", userRepository.findAll());
 			return "recipe/create";
-		} else if (categories != null){
+		} else if (categories != null) {
 			List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
 			newRecipe.addCategories(categoryObjects);
+		} else if (users != null) {
+			User userObjects = (List<User>) userRepository.findAllById(users);
+			userRecipe.addUsers(userObjects);
 		}
-
-		recipeRepository.save(newRecipe);
-		return "redirect:";
-	}
-
+			recipeRepository.save(newRecipe);
+			recipeRepository.save(userRecipe);
+			return "redirect:";
+		}
 	@GetMapping("detail")
 	public String displayRecipeDetails(@RequestParam int recipeId,
 	                                   Model model) {

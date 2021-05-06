@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="text-center">
+<nav th:replace="fragments :: navigation"></nav>
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Owners Name</th>
+        </tr>
+        </thead>
+        <tr th:each="user : ${users}">
+            <td><a th:text="${user.name}" value="${user.name}" th:href="'/recipes?userId=' + ${user.id}"></a></td>
+        </tr>
+    </table>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+<div th:replace="fragments :: bootstrap-javascript"></div>
+</body>
+</html>

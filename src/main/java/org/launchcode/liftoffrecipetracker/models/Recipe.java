@@ -6,14 +6,12 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmb
 import org.launchcode.liftoffrecipetracker.data.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 //@Indexed creates an index of the schema for searching purposes. Only entities with @Indexed will be indexed.
@@ -57,9 +55,13 @@ public class Recipe extends AbstractEntity {
 	@IndexedEmbedded
 	private List<Category> categories = new ArrayList<>();
 
+	@ManyToOne
+	@IndexedEmbedded
+	private  Integer users;
+
 	//constructors
 	public Recipe(String ingredients, String name, String directions,int servings, int cookTime, int prepTime,
-	              List<Category> categories){
+	              List<Category> categories, Integer users){
 		this.ingredients = ingredients;
 		this.name = name;
 		this.directions = directions;
@@ -67,6 +69,7 @@ public class Recipe extends AbstractEntity {
 		this.cookTime = cookTime;
 		this.prepTime = prepTime;
 		this.categories = categories;
+		this.users = users;
 	}
 
 	public Recipe() {
@@ -135,6 +138,13 @@ public class Recipe extends AbstractEntity {
 		this.categories.addAll(categories);
 	}
 
+	public Integer getUsers() {
+		return users;
+	}
+
+	public void addUsers(Integer owners) {
+		this.users= users;
+	}
 }
 
 

@@ -3,6 +3,7 @@ package org.launchcode.liftoffrecipetracker.models;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +20,18 @@ public class User extends AbstractEntity {
     private String passwordHash;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-    //private List<String> recipe = new ArrayList<String>();
+    @OneToMany
+    private List<Recipe> recipes = new ArrayList<>();
 
     public User(){
 
     }
 
-    public User(String username, String password, String email) {
+    public User(String username, String password, String email, List<Recipe> recipes) {
         this.username = username;
         this.passwordHash = encoder.encode(password);
         this.email = email;
+        this.recipes=recipes;
     }
 
     public String getUsername() {
@@ -52,11 +54,11 @@ public class User extends AbstractEntity {
         return encoder.matches(password, passwordHash);
     }
 
-//    public List<String> getRecipe() {
-//        return recipe;
-//    }
-//
-//    public void setRecipe(List<String> recipe) {
-//        this.recipe = recipe;
-//    }
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
+    }
 }
