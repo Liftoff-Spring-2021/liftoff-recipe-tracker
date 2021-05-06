@@ -38,6 +38,13 @@
 		<tr>
 			<th>Recipe Directions:</th>
 			<td th:text="${recipe.directions}">Default Text</td>
+		<tr>
+			<th>Sommelier Suggestions:</th>
+			<td>
+				<th:block th:each="beverage : ${recipe.beverages}">
+					<p th:text="${beverage.name}"></p>
+				</th:block>
+			</td>
 		</tr>
 		<tr th:if="${recipe.image != ''}">
 			<th>Recipe Image:</th>

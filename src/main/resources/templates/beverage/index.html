@@ -3,6 +3,7 @@
 <head th:replace="fragments :: head"></head>
 <body class="text-center">
 <nav th:replace="fragments :: navigation"></nav>
+<img class = "sam" src = "https://docs.google.com/drawings/d/e/2PACX-1vRn_7yHWBEvtlOdRRo_qu2kcUVZoXeRpWpd1B2fBwq9NdHbjOq64m902PXtDWkBbaqqXkeuYL-FTQdi/pub?w=960&h=720">
 <div class="container-fluid">
 	<h2 th:unless="${beverages} and ${beverages.size()}">We're sorry, there are currently no beverages! Feel free to
 		<a th:href="@{/beverages/create}">create a beverage now</a></h2>
@@ -13,7 +14,7 @@
         </tr>
         </thead>
         <tr th:each="beverage : ${beverages}">
-            <td><a th:text="${beverage.name}" th:value = "${beverage.id}"></a></td>
+            <td><a th:text="${beverage.name}" th:value = "${beverage.id}"th:href="'/recipes?beverageId=' + ${beverage.id}"></a></td>
         </tr>
     </table>
 </div>

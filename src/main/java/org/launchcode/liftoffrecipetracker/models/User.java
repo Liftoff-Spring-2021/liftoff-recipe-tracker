@@ -20,18 +20,19 @@ public class User extends AbstractEntity {
     private String passwordHash;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-    @OneToMany
+
+    @OneToMany(mappedBy = "users")
     private List<Recipe> recipes = new ArrayList<>();
 
     public User(){
 
     }
 
-    public User(String username, String password, String email, List<Recipe> recipes) {
+    public User(String username, String password, String email) {
         this.username = username;
         this.passwordHash = encoder.encode(password);
         this.email = email;
-        this.recipes=recipes;
+//        this.recipes=recipes;
     }
 
     public String getUsername() {

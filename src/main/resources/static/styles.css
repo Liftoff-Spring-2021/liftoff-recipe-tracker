@@ -5,3 +5,8 @@
 body, html {
   min-height: 100vh;
 }
+
+.sam {
+    float: center;
+    width: 15%;
+}
