@@ -5,6 +5,7 @@
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid">
 	<form method="post">
+        <input type = "hidden" th:field="*{id}"/>
         <div class="form-group">
             <label>Name
                 <input th:field="${category.name}" class="form-control">

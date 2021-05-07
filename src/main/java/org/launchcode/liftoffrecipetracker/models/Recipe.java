@@ -70,6 +70,9 @@ public class Recipe extends AbstractRecommendations {
 
 	public Recipe() {
 	}
+	public void removeCategory(Category category) {
+		this.categories.remove(category);
+	}
 
 	//getters & setters
 
