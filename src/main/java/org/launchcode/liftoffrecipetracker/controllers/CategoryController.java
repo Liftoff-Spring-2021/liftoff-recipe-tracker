@@ -94,21 +94,22 @@ public class CategoryController {
 
     @GetMapping("edit/{categoryId}")
     public String displayEditCategoryForm(@PathVariable int categoryId, Model model) {
-        model.addAttribute("title", "Edit Category");
-        model.addAttribute("category", categoryRepository.findById(categoryId));
+//        model.addAttribute("title", "Edit Category");
+//        model.addAttribute("category", categoryRepository.findById(categoryId));
+//        return "category/edit";
+//    }
+        Optional<Category> result = categoryRepository.findById(categoryId);
+
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Category ID: " + categoryId);
+        } else {
+            Category category = result.get();
+            model.addAttribute("title", "Edit Category" + category.getName());
+            model.addAttribute("category", category);
+        }
+
         return "category/edit";
     }
-//        Optional<Category> result = categoryRepository.findById(categoryId);
-//
-//        if (result.isEmpty()) {
-//            model.addAttribute("title", "Invalid Category ID: " + categoryId);
-//        } else {
-//            Category category = result.get();
-//            model.addAttribute("title", "Edit Category" + category.getName());
-//            model.addAttribute("category", category);
-//        }
-
-   // return "category/edit";
 
 ////////here we are!
     @PostMapping("edit")
