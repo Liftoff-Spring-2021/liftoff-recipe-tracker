@@ -6,10 +6,10 @@
 <form method="post">
     <th:block th:each="category : ${categories}">
         <div class="form-group">
-            <lable>
+            <label>
                 <span th:text="${category.name}"></span>
                 <input type="checkbox" name="categoryId" th:value="${category.id}" class="form-control">
-            </lable>
+            </label>
         </div>
     </th:block>
     <input type="submit" value="Delete" class="btn btn-danger">

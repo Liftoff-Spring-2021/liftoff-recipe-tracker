@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="text-center ">
+<body class="text-center">
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid">
-	<form method="post">
+    <form method="post" th:action="@{/categories/edit}">
+        <!--input type="hidden" th:value="${category.id}" name="categoryId"/-->
         <div class="form-group">
             <label>Name
                 <input th:field="${category.name}" class="form-control">
             </label>
             <span th:errors="${category.name}" class="error"></span>
         </div>
-        <input type="submit" value="Create" class="btn btn-primary">
-	</form>
+        <input type="submit" value="Edit" class="btn btn-primary">
+    </form>
 </div>
 <footer th:replace="fragments :: footer"></footer>
 <div th:replace="fragments :: bootstrap-javascript"></div>
