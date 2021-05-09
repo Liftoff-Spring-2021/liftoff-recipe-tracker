@@ -55,6 +55,7 @@ public class CategoryController {
         return "redirect:";
     }
 
+    //delete category
     @GetMapping("delete")
     public String displayDeleteCategoryForm(Model model) {
         model.addAttribute("title", "Delete Category");
@@ -84,22 +85,9 @@ public class CategoryController {
     }
 
 //update category
-//
-//    @GetMapping("edit")
-//    public String displayEditCategoryForm(Model model) {
-//        model.addAttribute("title", "Edit Category");
-//        model.addAttribute("categories", categoryRepository.findAll());
-//        return "category/edit";
-//    }
-
     @GetMapping("edit/{categoryId}")
     public String displayEditCategoryForm(@PathVariable int categoryId, Model model) {
-//        model.addAttribute("title", "Edit Category");
-//        model.addAttribute("category", categoryRepository.findById(categoryId));
-//        return "category/edit";
-//    }
         Optional<Category> result = categoryRepository.findById(categoryId);
-
         if (result.isEmpty()) {
             model.addAttribute("title", "Invalid Category ID: " + categoryId);
         } else {
@@ -107,11 +95,9 @@ public class CategoryController {
             model.addAttribute("title", "Edit Category" + category.getName());
             model.addAttribute("category", category);
         }
-
         return "category/edit";
     }
 
-////////here we are!
     @PostMapping("edit")
     public String processEditCategoryForm(int categoryId, String name) {
         Category category = categoryRepository.findById(categoryId).get();
@@ -119,36 +105,4 @@ public class CategoryController {
         categoryRepository.save(category);
         return "redirect:";
     }
-
-//commented all this stuff out
-//    public String processEditCategoryForm(@Valid @ModelAttribute Category category,
-//                                           Errors errors, Model model) {
-//
-//        if (errors.hasErrors()) {
-//            model.addAttribute("title", "Edit process Category");
-//            //model.addAttribute(new Category());
-//            // category/edit is the file path in the project structure
-//            return "category/edit";
-//        }
-//       // category.setName(name);
-//        categoryRepository.save(category);
-//        // redirect: is the URL path from RequestMapping (The main mapping from the controller)
-//        return "redirect:";
-//    }
-
-
-//@GetMapping("create/{categoryId}")
-//public String displayUpdateCategoryForm(@RequestParam int categoryId, Model model) {
-//
-//        Optional<Category> result = categoryRepository.findById(categoryId);
-//
-//        if (result.isEmpty()) {
-//            model.addAttribute("title", "Invalid Category ID: " + categoryId);
-//        } else {
-//            Category category = result.get();
-//            model.addAttribute("title", "Category Details: " + category.getName());
-//            model.addAttribute("category", category);
-//        }
-//        return "create";
-//    }
 }

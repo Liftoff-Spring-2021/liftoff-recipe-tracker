@@ -3,6 +3,7 @@
 <head th:replace="fragments :: head"></head>
 <body class="text-center">
 <nav th:replace="fragments :: navigation"></nav>
+<img class = "sam" src = https://docs.google.com/drawings/d/e/2PACX-1vSbD2p5bki6zEVALeTf7UsVrZgTfyBV0tjyhsdOE-3iEMxNXCziZoO0ZKMTaZ-1R6kTlOESPXt53YBa/pub?w=366&h=360>
 <div class="container-fluid">
 	<h2 th:unless="${categories} and ${categories.size()}">We're sorry, there are currently no categories! Feel free to
 	<a th:href="@{/categories/create}">create one now</a></h2>
@@ -14,6 +15,7 @@
         </thead>
         <tr th:each="category : ${categories}">
             <td><a th:text="${category.name}" th:value = "${category.id}" th:href="'/recipes?categoryId=' + ${category.id}"></a></td>
+            <td><a th:text="Edit" th:value = "${category.id}" th:href="'categories/edit/' + ${category.id}"></a></td>
         </tr>
 	</table>
 </div>
