@@ -74,6 +74,10 @@ public class Recipe extends AbstractRecommendations {
 		this.categories.remove(category);
 	}
 
+	public void removeBeverage(Beverage beverage) {
+		this.beverages.remove(beverage);
+	}
+
 	//getters & setters
 
 	public String getIngredients() {

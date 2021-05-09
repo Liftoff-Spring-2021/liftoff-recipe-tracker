@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="text-center">
+<nav th:replace="fragments :: navigation"></nav>
+<img class = "sam" src = "https://docs.google.com/drawings/d/e/2PACX-1vRn_7yHWBEvtlOdRRo_qu2kcUVZoXeRpWpd1B2fBwq9NdHbjOq64m902PXtDWkBbaqqXkeuYL-FTQdi/pub?w=960&h=720">
+<form method="post">
+    <th:block th:each="beverage : ${beverages}">
+        <div class="form-group">
+            <label>
+                <span th:text="${beverage.name}"></span>
+                <input type="checkbox" name="beverageId" th:value="${beverage.id}" class="form-control">
+            </label>
+        </div>
+    </th:block>
+    <input type="submit" value="Delete" class="btn btn-danger">
+</form>
+
+<footer th:replace="fragments :: footer"></footer>
+<div th:replace="fragments :: bootstrap-javascript"></div>
+</body>
+</html>

@@ -26,16 +26,17 @@
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" id="navbarDropdownTwo" role="button" data-toggle="dropdown">Categories</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" th:href="@{/categories}">View All</a>
+					<a class="dropdown-item" th:href="@{/categories}">View All / Edit</a>
 					<a class="dropdown-item" th:href="@{/categories/create}">Create a Category</a>
-					<a class="dropdown-item" th:href="@{/categories/delete}">Delete a Category</a>
+					<a class="dropdown-item" th:href="@{/beverages/create}">Create a Beverage</a>
 				</div>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" id="navbarDropdownThree" role="button" data-toggle="dropdown">Beverages</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" th:href="@{/beverages}">View All</a>
+					<a class="dropdown-item" th:href="@{/beverages}">View All / Edit</a>
 					<a class="dropdown-item" th:href="@{/beverages/create}">Create a Beverage</a>
+					<a class="dropdown-item" th:href="@{/beverages/delete}">Delete a Beverage</a>
 				</div>
 			</li>
 		</ul>
@@ -67,6 +68,15 @@
 			<input th:field="${category.name}" class="form-control">
 		</label>
 		<span th:errors="${category.name}" class="error"></span>
+	</div>
+</div>
+
+<div th:fragment="beverage-form-group">
+	<div class="form-group">
+		<label>Name
+			<input th:field="${beverage.name}" class="form-control">
+		</label>
+		<span th:errors="${beverage.name}" class="error"></span>
 	</div>
 </div>
 </body>
