@@ -52,7 +52,7 @@ public class CategoryController {
 
         categoryRepository.save(category);
         // redirect: is the URL path from RequestMapping (The main mapping from the controller)
-        return "redirect:";
+        return "redirect:/categories";
     }
 
     //delete category
@@ -103,6 +103,6 @@ public class CategoryController {
         Category category = categoryRepository.findById(categoryId).get();
         category.setName(name);
         categoryRepository.save(category);
-        return "redirect:";
+        return "redirect:/categories";
     }
 }
