@@ -1,6 +1,5 @@
 package org.launchcode.liftoffrecipetracker.controllers;
 
-
 import org.launchcode.liftoffrecipetracker.data.BeverageRepository;
 import org.launchcode.liftoffrecipetracker.data.CategoryRepository;
 import org.launchcode.liftoffrecipetracker.data.UserRepository;
@@ -15,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
@@ -36,9 +36,12 @@ public class RecipeController {
 	@Autowired
 	UserRepository userRepository;
 
+	@Autowired
+	AuthenticationController authenticationController;
+
 	@GetMapping
 	public String displayRecipes(@RequestParam(required = false) Integer categoryId,
-								 @RequestParam(required = false) Integer beverageId, Integer userId,
+								 @RequestParam(required = false) Integer beverageId, HttpSession userSession,
 	                             Model model) {
 		if ((categoryId == null) && (beverageId == null)) {
 			model.addAttribute("title", "All Recipes");
@@ -62,26 +65,26 @@ public class RecipeController {
 				model.addAttribute("recipes", beverage.getRecipes());
 			}
 
-		} else if (userId == null) {
-			Optional<User> result = userRepository.findById(userId);
-			if (result.isEmpty()) {
-				model.addAttribute("title", "Invalid User ID: " + userId);
-			} else {
-				User user = result.get();
+		} else if (userSession == null) {
+			User user = authenticationController.getUserFromSession(userSession);
+//			if (result.isEmpty()) {
+//				model.addAttribute("title", "Invalid User ID: " + userSession);
+//			} else {
+//				User user = result.get();
 				model.addAttribute("title", "Recipes with Owners: " + user.getUsername());
 				model.addAttribute("recipes", user.getRecipes());
 			}
 
-		}
+
 		return "recipe/index";
 	}
 
 		@GetMapping("create")
-		public String displayCreateRecipeForm (Model model){
+		public String displayCreateRecipeForm (Model model, HttpSession userSession){
 			model.addAttribute("title", "Create a Recipe");
 			model.addAttribute("categories", categoryRepository.findAll());
 			model.addAttribute("beverages", beverageRepository.findAll());
-			model.addAttribute("users", userRepository.findAll());
+			model.addAttribute("users", authenticationController.getUserFromSession(userSession));
 			model.addAttribute(new Recipe());
 			return "recipe/create";
 		}
@@ -90,7 +93,7 @@ public class RecipeController {
 		public String processCreateRecipeForm (@ModelAttribute @Valid Recipe newRecipe,
 				Errors errors, Model model,
 				@RequestParam(required = false) List < Integer > categories,
-				@RequestParam(required = false) List < Integer > beverages, Integer userId){
+				@RequestParam(required = false) List < Integer > beverages, HttpSession userSession){
 
 
 			if (errors.hasErrors()) {
@@ -110,16 +113,16 @@ public class RecipeController {
 				List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
 				newRecipe.addBeverages(beverageObjects);
 			}
-			else if (userId != null) {
+			else if (userSession != null) {
 //				Integer userObjects = (User) userRepository.findAllById(Collections.singleton(users));
 //				newRecipe.addUsers(userObjects);
 
-				Optional<User> optUser = userRepository.findById(userId);
-				if (optUser.isPresent()) {
-					User user = optUser.get();
+				User user = authenticationController.getUserFromSession(userSession);
+//				if (optUser.isPresent()) {
+//					User user = optUser.get();
 					newRecipe.setUser(user);
 				}
-			}
+
 
 			recipeRepository.save(newRecipe);
 			return "redirect:";
