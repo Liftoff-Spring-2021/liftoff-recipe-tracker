@@ -2,7 +2,6 @@ package org.launchcode.liftoffrecipetracker.controllers;
 
 import org.launchcode.liftoffrecipetracker.data.BeverageRepository;
 import org.launchcode.liftoffrecipetracker.data.CategoryRepository;
-import org.launchcode.liftoffrecipetracker.data.UserRepository;
 import org.launchcode.liftoffrecipetracker.models.Beverage;
 import org.launchcode.liftoffrecipetracker.models.Category;
 import org.launchcode.liftoffrecipetracker.models.Recipe;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,9 +30,6 @@ public class RecipeController {
 
 	@Autowired
 	BeverageRepository beverageRepository;
-
-	@Autowired
-	UserRepository userRepository;
 
 	@Autowired
 	AuthenticationController authenticationController;
@@ -67,14 +62,9 @@ public class RecipeController {
 
 		} else if (userSession == null) {
 			User user = authenticationController.getUserFromSession(userSession);
-//			if (result.isEmpty()) {
-//				model.addAttribute("title", "Invalid User ID: " + userSession);
-//			} else {
-//				User user = result.get();
 				model.addAttribute("title", "Recipes with Owners: " + user.getUsername());
 				model.addAttribute("recipes", user.getRecipes());
 			}
-
 
 		return "recipe/index";
 	}
@@ -100,6 +90,7 @@ public class RecipeController {
 				model.addAttribute("title", "Create a Recipe");
 				model.addAttribute("categories", categoryRepository.findAll());
 				model.addAttribute("beverages", beverageRepository.findAll());
+				model.addAttribute("users", authenticationController.getUserFromSession(userSession));
 				return "recipe/create";
 			} else if ((categories != null) && (beverages != null)) {
 				List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
@@ -114,15 +105,9 @@ public class RecipeController {
 				newRecipe.addBeverages(beverageObjects);
 			}
 			else if (userSession != null) {
-//				Integer userObjects = (User) userRepository.findAllById(Collections.singleton(users));
-//				newRecipe.addUsers(userObjects);
-
 				User user = authenticationController.getUserFromSession(userSession);
-//				if (optUser.isPresent()) {
-//					User user = optUser.get();
 					newRecipe.setUser(user);
 				}
-
 
 			recipeRepository.save(newRecipe);
 			return "redirect:";
@@ -131,7 +116,7 @@ public class RecipeController {
 
 	@GetMapping("detail")
 	public String displayRecipeDetails(@RequestParam int recipeId,
-	                                   Model model) {
+	                                   Model model, HttpSession userSession) {
 		Optional<Recipe> result = recipeRepository.findById(recipeId);
 
 		if (result.isEmpty()) {
@@ -139,6 +124,8 @@ public class RecipeController {
 		} else {
 			Recipe recipe = result.get();
 			model.addAttribute("title", "Recipe Details: " + recipe.getName());
+			// gets user form userSession
+			model.addAttribute("users", authenticationController.getUserFromSession(userSession));
 			model.addAttribute("recipe", recipe);
 		}
 		return "recipe/detail";
