@@ -107,4 +107,21 @@ import java.util.Optional;
         beverageRepository.save(beverage);
         return "redirect:/beverages";
     }
+
+    // Uses the edit form to create a customizable copy
+    @PostMapping("copy")
+    public String processCopyBeverageForm(@Valid @ModelAttribute Beverage beverage,
+                                          Errors errors, Model model) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit Beverage");
+            model.addAttribute(new Beverage());
+            // beverage/edit is the file path in the project structure
+            return "beverage/edit";
+        }
+
+        beverageRepository.save(beverage);
+        // redirect: is the URL path from RequestMapping (The main mapping from the controller)
+        return "redirect:/beverages";
+    }
 }

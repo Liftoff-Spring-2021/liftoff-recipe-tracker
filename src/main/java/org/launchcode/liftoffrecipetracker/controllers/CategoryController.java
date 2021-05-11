@@ -105,4 +105,21 @@ public class CategoryController {
         categoryRepository.save(category);
         return "redirect:/categories";
     }
+// Uses the edit form to create a customizable copy
+    @PostMapping("copy")
+    public String processCopyCategoryForm(@Valid @ModelAttribute Category category,
+                Errors errors, Model model) {
+
+            if (errors.hasErrors()) {
+                model.addAttribute("title", "Edit Category");
+                model.addAttribute(new Category());
+                // category/edit is the file path in the project structure
+                return "category/edit";
+            }
+
+            categoryRepository.save(category);
+            // redirect: is the URL path from RequestMapping (The main mapping from the controller)
+            return "redirect:/categories";
+    }
+
 }

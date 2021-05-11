@@ -11,7 +11,8 @@ public class Category extends AbstractRecommendations{
 
     //Class Variables
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories"
+    )
     private final List<Recipe> recipes = new ArrayList<>();
 
     //Constructors
