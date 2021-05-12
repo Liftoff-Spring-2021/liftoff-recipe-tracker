@@ -143,7 +143,7 @@ public class Recipe extends AbstractEntity {
 	}
 
 	public void addBeverages(List<Beverage> beverages) {
-		this.beverages = beverages;
+		this.beverages.addAll(beverages);
 	}
 
 	public void addCategories(List<Category> categories) {

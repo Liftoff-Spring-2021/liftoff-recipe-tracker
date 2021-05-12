@@ -74,7 +74,7 @@ public class RecipeController {
 			model.addAttribute("title", "Create a Recipe");
 			model.addAttribute("categories", categoryRepository.findAll());
 			model.addAttribute("beverages", beverageRepository.findAll());
-			model.addAttribute("users", authenticationController.getUserFromSession(userSession));
+			model.addAttribute("user", authenticationController.getUserFromSession(userSession));
 			model.addAttribute(new Recipe());
 			return "recipe/create";
 		}
@@ -90,7 +90,7 @@ public class RecipeController {
 				model.addAttribute("title", "Create a Recipe");
 				model.addAttribute("categories", categoryRepository.findAll());
 				model.addAttribute("beverages", beverageRepository.findAll());
-				model.addAttribute("users", authenticationController.getUserFromSession(userSession));
+				model.addAttribute("user", authenticationController.getUserFromSession(userSession));
 				return "recipe/create";
 			} else if ((categories != null) && (beverages != null)) {
 				List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
@@ -124,8 +124,8 @@ public class RecipeController {
 		} else {
 			Recipe recipe = result.get();
 			model.addAttribute("title", "Recipe Details: " + recipe.getName());
-			// gets user form userSession
-			model.addAttribute("users", authenticationController.getUserFromSession(userSession));
+			// gets user from userSession
+			model.addAttribute("user", authenticationController.getUserFromSession(userSession));
 			model.addAttribute("recipe", recipe);
 		}
 		return "recipe/detail";
