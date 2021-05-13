@@ -109,6 +109,20 @@ import java.util.Optional;
     }
 
     // Uses the edit form to create a customizable copy
+
+    @GetMapping("copy/{beverageId}")
+    public String displayCopyBeverageForm(@PathVariable int beverageId, Model model) {
+        Optional<Beverage> result = beverageRepository.findById(beverageId);
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Beverage ID: " + beverageId);
+        } else {
+            Beverage beverage = result.get();
+            model.addAttribute("title", "Copy Beverage" + beverage.getName());
+            model.addAttribute("beverage", beverage);
+        }
+        return "beverage/copy";
+    }
+
     @PostMapping("copy")
     public String processCopyBeverageForm(@Valid @ModelAttribute Beverage beverage,
                                           Errors errors, Model model) {

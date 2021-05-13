@@ -10,12 +10,13 @@
 	<table class="table table-striped" th:if="${beverages} and ${beverages.size()} > 0">
         <thead>
         <tr>
-            <th>Beverage Name</th>
+            <th>Beverage Name<td>Edit</td><td>Copy</td></th>
         </tr>
         </thead>
         <tr th:each="beverage : ${beverages}">
             <td><a th:text="${beverage.name}" th:value = "${beverage.id}"th:href="'/recipes?beverageId=' + ${beverage.id}"></a></td>
             <td><a th:text="Edit" th:value = "${beverage.id}" th:href="'beverages/edit/' + ${beverage.id}"></a></td>
+            <td><a th:text="Copy" th:value = "${beverage.id}" th:href="'beverages/copy/' + ${beverage.id}"></a></td>
         </tr>
     </table>
 </div>

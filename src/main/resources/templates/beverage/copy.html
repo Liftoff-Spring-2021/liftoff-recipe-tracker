@@ -5,10 +5,10 @@
 <nav th:replace="fragments :: navigation"></nav>
 <img class = "sam" src = "https://docs.google.com/drawings/d/e/2PACX-1vRn_7yHWBEvtlOdRRo_qu2kcUVZoXeRpWpd1B2fBwq9NdHbjOq64m902PXtDWkBbaqqXkeuYL-FTQdi/pub?w=960&h=720">
 <div class="container-fluid">
-    <form method="post" th:action="@{/beverages/edit}">
+    <form method="post" th:action="@{/beverages/copy}">
         <input type="hidden" th:value="${beverage.id}" name="beverageId">
         <div th:replace="fragments :: beverage-form-group"></div>
-        <input type="submit" value="Edit" class="btn btn-primary">
+        <input type="submit" value="Copy" th:formaction="@{/beverages/copy}" class="btn btn-info">
     </form>
 </div>
 <footer th:replace="fragments :: footer"></footer>
