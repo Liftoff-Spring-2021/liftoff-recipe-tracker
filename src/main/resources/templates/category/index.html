@@ -10,12 +10,13 @@
 	<table class="table table-striped" th:if="${categories} and ${categories.size()} > 0">
         <thead>
         <tr>
-            <th>Category Name<td>Edit and Copy</td></th>
+            <th>Category Name<td>Edit</td><td>Copy</td></th>
         </tr>
         </thead>
         <tr th:each="category : ${categories}">
-            <td><a th:text="${category.name}" th:value = "${category.id}" th:href="'/recipes?categoryId=' + ${category.id}"></a></td>
+            <td><a th:text="${category.name}" th:value = "${category.id}"th:href="'/recipes?categoryId=' + ${category.id}"></a></td>
             <td><a th:text="Edit" th:value = "${category.id}" th:href="'categories/edit/' + ${category.id}"></a></td>
+            <td><a th:text="Copy" th:value = "${category.id}" th:href="'categories/copy/' + ${category.id}"></a></td>
         </tr>
 	</table>
 </div>

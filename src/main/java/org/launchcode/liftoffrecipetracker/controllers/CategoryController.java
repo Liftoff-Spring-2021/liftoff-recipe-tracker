@@ -1,6 +1,7 @@
 package org.launchcode.liftoffrecipetracker.controllers;
 
 import org.launchcode.liftoffrecipetracker.data.CategoryRepository;
+import org.launchcode.liftoffrecipetracker.models.Beverage;
 import org.launchcode.liftoffrecipetracker.models.Category;
 import org.launchcode.liftoffrecipetracker.models.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,20 +107,33 @@ public class CategoryController {
         return "redirect:/categories";
     }
 // Uses the edit form to create a customizable copy
+@GetMapping("copy/{categoryId}")
+public String displayCopyCategoryForm(@PathVariable int categoryId, Model model) {
+    Optional<Category> result = categoryRepository.findById(categoryId);
+    if (result.isEmpty()) {
+        model.addAttribute("title", "Invalid Category ID: " + categoryId);
+    } else {
+        Category category = result.get();
+        model.addAttribute("title", "Copy Category" + category.getName());
+        model.addAttribute("category", category);
+    }
+    return "category/copy";
+}
+
     @PostMapping("copy")
     public String processCopyCategoryForm(@Valid @ModelAttribute Category category,
-                Errors errors, Model model) {
+                                          Errors errors, Model model) {
 
-            if (errors.hasErrors()) {
-                model.addAttribute("title", "Edit Category");
-                model.addAttribute(new Category());
-                // category/edit is the file path in the project structure
-                return "category/edit";
-            }
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit Category");
+            model.addAttribute(new Category());
+            // category/edit is the file path in the project structure
+            return "category/edit";
+        }
 
-            categoryRepository.save(category);
-            // redirect: is the URL path from RequestMapping (The main mapping from the controller)
-            return "redirect:/categories";
+        categoryRepository.save(category);
+        // redirect: is the URL path from RequestMapping (The main mapping from the controller)
+        return "redirect:/categories";
     }
 
 }
