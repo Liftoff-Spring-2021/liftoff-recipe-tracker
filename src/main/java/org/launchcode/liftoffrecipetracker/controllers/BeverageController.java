@@ -2,7 +2,6 @@ package org.launchcode.liftoffrecipetracker.controllers;
 
 import org.launchcode.liftoffrecipetracker.data.BeverageRepository;
 import org.launchcode.liftoffrecipetracker.models.Beverage;
-import org.launchcode.liftoffrecipetracker.models.Category;
 import org.launchcode.liftoffrecipetracker.models.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,7 +54,7 @@ import java.util.Optional;
             return "redirect:/beverages";
         }
 
-        //delete and edit beverages
+
     //delete beverage
 
     @GetMapping("delete")
@@ -86,7 +85,7 @@ import java.util.Optional;
         return "redirect:";
     }
 
-    //update beverage
+    //edit beverage
     @GetMapping("edit/{beverageId}")
     public String displayEditBeverageForm(@PathVariable int beverageId, Model model) {
         Optional<Beverage> result = beverageRepository.findById(beverageId);
@@ -108,7 +107,7 @@ import java.util.Optional;
         return "redirect:/beverages";
     }
 
-    // Uses the edit form to create a customizable copy
+    // create a customizable copy
 
     @GetMapping("copy/{beverageId}")
     public String displayCopyBeverageForm(@PathVariable int beverageId, Model model) {

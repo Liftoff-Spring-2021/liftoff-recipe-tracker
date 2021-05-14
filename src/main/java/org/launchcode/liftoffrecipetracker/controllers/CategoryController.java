@@ -1,7 +1,6 @@
 package org.launchcode.liftoffrecipetracker.controllers;
 
 import org.launchcode.liftoffrecipetracker.data.CategoryRepository;
-import org.launchcode.liftoffrecipetracker.models.Beverage;
 import org.launchcode.liftoffrecipetracker.models.Category;
 import org.launchcode.liftoffrecipetracker.models.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-
 
 @Controller
 // categories is the URL path
@@ -85,7 +83,7 @@ public class CategoryController {
         return "redirect:";
     }
 
-//update category
+    //edit category
     @GetMapping("edit/{categoryId}")
     public String displayEditCategoryForm(@PathVariable int categoryId, Model model) {
         Optional<Category> result = categoryRepository.findById(categoryId);
@@ -106,19 +104,19 @@ public class CategoryController {
         categoryRepository.save(category);
         return "redirect:/categories";
     }
-// Uses the edit form to create a customizable copy
-@GetMapping("copy/{categoryId}")
-public String displayCopyCategoryForm(@PathVariable int categoryId, Model model) {
-    Optional<Category> result = categoryRepository.findById(categoryId);
-    if (result.isEmpty()) {
-        model.addAttribute("title", "Invalid Category ID: " + categoryId);
-    } else {
-        Category category = result.get();
-        model.addAttribute("title", "Copy Category" + category.getName());
-        model.addAttribute("category", category);
+    // create a customizable copy
+    @GetMapping("copy/{categoryId}")
+    public String displayCopyCategoryForm(@PathVariable int categoryId, Model model) {
+        Optional<Category> result = categoryRepository.findById(categoryId);
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Category ID: " + categoryId);
+        } else {
+            Category category = result.get();
+            model.addAttribute("title", "Copy Category" + category.getName());
+            model.addAttribute("category", category);
+        }
+        return "category/copy";
     }
-    return "category/copy";
-}
 
     @PostMapping("copy")
     public String processCopyCategoryForm(@Valid @ModelAttribute Category category,
