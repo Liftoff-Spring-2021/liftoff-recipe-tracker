@@ -104,6 +104,7 @@ public class CategoryController {
         categoryRepository.save(category);
         return "redirect:/categories";
     }
+
     // create a customizable copy
     @GetMapping("copy/{categoryId}")
     public String displayCopyCategoryForm(@PathVariable int categoryId, Model model) {
@@ -123,15 +124,14 @@ public class CategoryController {
                                           Errors errors, Model model) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Edit Category");
+            model.addAttribute("title", "Copy Category");
             model.addAttribute(new Category());
-            // category/edit is the file path in the project structure
-            return "category/edit";
+            // category/copy is the file path in the project structure
+            return "category/copy";
         }
 
         categoryRepository.save(category);
         // redirect: is the URL path from RequestMapping (The main mapping from the controller)
         return "redirect:/categories";
     }
-
 }

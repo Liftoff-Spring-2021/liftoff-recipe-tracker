@@ -3,7 +3,6 @@ package org.launchcode.liftoffrecipetracker.models;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -44,7 +43,6 @@ public class Recipe extends AbstractRecommendations {
 	private String image;
 
 	//@IndexedEmbedded allows for related classes to be indexed without using @Indexed on the embedded class
-	//@ManyToMany(cascade = CascadeType.ALL)
 	@ManyToMany
 	@IndexedEmbedded
 	private List<Category> categories = new ArrayList<>();

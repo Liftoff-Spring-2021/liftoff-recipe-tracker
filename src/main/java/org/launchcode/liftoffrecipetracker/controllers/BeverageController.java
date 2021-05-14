@@ -54,9 +54,7 @@ import java.util.Optional;
             return "redirect:/beverages";
         }
 
-
     //delete beverage
-
     @GetMapping("delete")
     public String displayDeleteBeverageForm(Model model) {
         model.addAttribute("title", "Delete Beverage");
@@ -108,7 +106,6 @@ import java.util.Optional;
     }
 
     // create a customizable copy
-
     @GetMapping("copy/{beverageId}")
     public String displayCopyBeverageForm(@PathVariable int beverageId, Model model) {
         Optional<Beverage> result = beverageRepository.findById(beverageId);
