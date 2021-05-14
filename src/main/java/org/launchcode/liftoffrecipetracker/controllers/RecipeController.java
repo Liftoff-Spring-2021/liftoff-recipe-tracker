@@ -59,12 +59,7 @@ public class RecipeController {
 				model.addAttribute("title", "Recipes with Beverage: " + beverage.getName());
 				model.addAttribute("recipes", beverage.getRecipes());
 			}
-
-		} else if (userSession == null) {
-			User user = authenticationController.getUserFromSession(userSession);
-				model.addAttribute("title", "Recipes with Owners: " + user.getUsername());
-				model.addAttribute("recipes", user.getRecipes());
-			}
+		}
 
 		return "recipe/index";
 	}
@@ -74,7 +69,6 @@ public class RecipeController {
 			model.addAttribute("title", "Create a Recipe");
 			model.addAttribute("categories", categoryRepository.findAll());
 			model.addAttribute("beverages", beverageRepository.findAll());
-			model.addAttribute("user", authenticationController.getUserFromSession(userSession));
 			model.addAttribute(new Recipe());
 			return "recipe/create";
 		}
@@ -90,7 +84,6 @@ public class RecipeController {
 				model.addAttribute("title", "Create a Recipe");
 				model.addAttribute("categories", categoryRepository.findAll());
 				model.addAttribute("beverages", beverageRepository.findAll());
-				model.addAttribute("user", authenticationController.getUserFromSession(userSession));
 				return "recipe/create";
 			} else if ((categories != null) && (beverages != null)) {
 				List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
@@ -104,10 +97,9 @@ public class RecipeController {
 				List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
 				newRecipe.addBeverages(beverageObjects);
 			}
-			else if (userSession != null) {
-				User user = authenticationController.getUserFromSession(userSession);
-					newRecipe.setUser(user);
-				}
+
+			User user = authenticationController.getUserFromSession(userSession);
+			newRecipe.setUser(user);
 
 			recipeRepository.save(newRecipe);
 			return "redirect:";
@@ -124,8 +116,6 @@ public class RecipeController {
 		} else {
 			Recipe recipe = result.get();
 			model.addAttribute("title", "Recipe Details: " + recipe.getName());
-			// gets user from userSession
-			model.addAttribute("user", authenticationController.getUserFromSession(userSession));
 			model.addAttribute("recipe", recipe);
 		}
 		return "recipe/detail";
