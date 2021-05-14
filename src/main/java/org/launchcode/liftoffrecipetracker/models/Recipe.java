@@ -1,19 +1,16 @@
 package org.launchcode.liftoffrecipetracker.models;
 
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
-import org.launchcode.liftoffrecipetracker.data.RecipeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 //@Indexed creates an index of the schema for searching purposes. Only entities with @Indexed will be indexed.
@@ -54,9 +51,12 @@ public class Recipe extends AbstractRecommendations {
 	@IndexedEmbedded
 	private List<Beverage> beverages = new ArrayList<>();
 
+	@ManyToOne
+	private User user;
+
 	//constructors
-	public Recipe(String ingredients, String name, String directions,int servings, int cookTime, int prepTime,
-	              List<Category> categories, List<Beverage> beverages){
+	public Recipe(String ingredients, String directions,int servings, int cookTime, int prepTime,
+	              List<Category> categories, List<Beverage> beverages, User user){
 		this.ingredients = ingredients;
 		this.directions = directions;
 		this.servings = servings;
@@ -64,12 +64,11 @@ public class Recipe extends AbstractRecommendations {
 		this.prepTime = prepTime;
 		this.categories = categories;
 		this.beverages = beverages;
+		this.user = user;
 	}
 
 	public Recipe() {
 	}
-
-	//getters & setters
 
 	public String getIngredients() {
 		return ingredients;
@@ -121,15 +120,24 @@ public class Recipe extends AbstractRecommendations {
 
 	public List<Category> getCategories() { return categories; }
 
+	public List<Beverage> getBeverages() {
+		return beverages;
+	}
+
+	public void addBeverages(List<Beverage> beverages) {
+		this.beverages.addAll(beverages);
+	}
+
 	public void addCategories(List<Category> categories) {
 		this.categories.addAll(categories);
 	}
 
-	public List<Beverage> getBeverages() {
-		return beverages;
+	public User getUser() {
+		return user;
 	}
-	public void addBeverages(List<Beverage> beverages) {
-		this.beverages.addAll(beverages);
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
 
