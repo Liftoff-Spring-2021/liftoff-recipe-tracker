@@ -124,10 +124,10 @@ import java.util.Optional;
                                           Errors errors, Model model) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Edit Beverage");
+            model.addAttribute("title", "Copy Beverage");
             model.addAttribute(new Beverage());
             // beverage/edit is the file path in the project structure
-            return "beverage/edit";
+            return "beverage/copy";
         }
 
         beverageRepository.save(beverage);
