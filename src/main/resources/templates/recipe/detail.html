@@ -50,6 +50,11 @@
 			<th>Recipe Image:</th>
 			<td><img class="img-fluid img-thumbnail" th:src="${recipe.image}"/></td>
 		</tr>
+
+		<tr>
+			<th>Created By:</th>
+			<td th:text="${recipe.user.username}">Default Text</td>
+		<tr>
 		</thead>
 	</table>
 </div>
