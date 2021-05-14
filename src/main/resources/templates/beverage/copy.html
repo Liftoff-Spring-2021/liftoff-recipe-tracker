@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="text-center ">
+<body class="text-center">
 <nav th:replace="fragments :: navigation"></nav>
 <img class = "sam" src = "https://docs.google.com/drawings/d/e/2PACX-1vRn_7yHWBEvtlOdRRo_qu2kcUVZoXeRpWpd1B2fBwq9NdHbjOq64m902PXtDWkBbaqqXkeuYL-FTQdi/pub?w=960&h=720">
 <div class="container-fluid">
-    <form method="post">
+    <form method="post" th:action="@{/beverages/copy}">
+        <input type="hidden" th:value="${beverage.id}" name="beverageId">
         <div th:replace="fragments :: beverage-form-group"></div>
-        <input type="submit" value="Create" class="btn btn-primary">
+        <input type="submit" value="Copy" th:formaction="@{/beverages/copy}" class="btn btn-info">
     </form>
-  </div>
+</div>
 <footer th:replace="fragments :: footer"></footer>
 <div th:replace="fragments :: bootstrap-javascript"></div>
 </body>

@@ -2,14 +2,10 @@ package org.launchcode.liftoffrecipetracker.models;
 
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 
-import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 @MappedSuperclass
 public abstract class AbstractRecommendations extends AbstractEntity {
@@ -22,7 +18,6 @@ public abstract class AbstractRecommendations extends AbstractEntity {
     @FullTextField
     private String name;
 
-    //Methods
     //Getters & Setters
 
     public String getName() {

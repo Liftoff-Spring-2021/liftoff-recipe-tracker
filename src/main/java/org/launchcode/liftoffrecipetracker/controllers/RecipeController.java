@@ -37,7 +37,7 @@ public class RecipeController {
 	@GetMapping
 	public String displayRecipes(@RequestParam(required = false) Integer categoryId,
 								 @RequestParam(required = false) Integer beverageId, HttpSession userSession,
-	                             Model model) {
+								 Model model) {
 		if ((categoryId == null) && (beverageId == null)) {
 			model.addAttribute("title", "All Recipes");
 			model.addAttribute("recipes", recipeRepository.findAll());
@@ -64,51 +64,51 @@ public class RecipeController {
 		return "recipe/index";
 	}
 
-		@GetMapping("create")
-		public String displayCreateRecipeForm (Model model, HttpSession userSession){
+	@GetMapping("create")
+	public String displayCreateRecipeForm(Model model, HttpSession userSession) {
+		model.addAttribute("title", "Create a Recipe");
+		model.addAttribute("categories", categoryRepository.findAll());
+		model.addAttribute("beverages", beverageRepository.findAll());
+		model.addAttribute(new Recipe());
+		return "recipe/create";
+	}
+
+	@PostMapping("create")
+	public String processCreateRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
+										  Errors errors, Model model,
+										  @RequestParam(required = false) List<Integer> categories,
+										  @RequestParam(required = false) List<Integer> beverages, HttpSession userSession) {
+
+
+		if (errors.hasErrors()) {
 			model.addAttribute("title", "Create a Recipe");
 			model.addAttribute("categories", categoryRepository.findAll());
 			model.addAttribute("beverages", beverageRepository.findAll());
-			model.addAttribute(new Recipe());
 			return "recipe/create";
+		} else if ((categories != null) && (beverages != null)) {
+			List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
+			newRecipe.addCategories(categoryObjects);
+			List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
+			newRecipe.addBeverages(beverageObjects);
+		} else if (categories != null) {
+			List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
+			newRecipe.addCategories(categoryObjects);
+		} else if (beverages != null) {
+			List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
+			newRecipe.addBeverages(beverageObjects);
 		}
 
-		@PostMapping("create")
-		public String processCreateRecipeForm (@ModelAttribute @Valid Recipe newRecipe,
-				Errors errors, Model model,
-				@RequestParam(required = false) List < Integer > categories,
-				@RequestParam(required = false) List < Integer > beverages, HttpSession userSession){
+		User user = authenticationController.getUserFromSession(userSession);
+		newRecipe.setUser(user);
 
-
-			if (errors.hasErrors()) {
-				model.addAttribute("title", "Create a Recipe");
-				model.addAttribute("categories", categoryRepository.findAll());
-				model.addAttribute("beverages", beverageRepository.findAll());
-				return "recipe/create";
-			} else if ((categories != null) && (beverages != null)) {
-				List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
-				newRecipe.addCategories(categoryObjects);
-				List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
-				newRecipe.addBeverages(beverageObjects);
-			} else if (categories != null) {
-				List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
-				newRecipe.addCategories(categoryObjects);
-			} else if (beverages != null) {
-				List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
-				newRecipe.addBeverages(beverageObjects);
-			}
-
-			User user = authenticationController.getUserFromSession(userSession);
-			newRecipe.setUser(user);
-
-			recipeRepository.save(newRecipe);
-			return "redirect:";
-		}
+		recipeRepository.save(newRecipe);
+		return "redirect:";
+	}
 
 
 	@GetMapping("detail")
 	public String displayRecipeDetails(@RequestParam int recipeId,
-	                                   Model model, HttpSession userSession) {
+									   Model model, HttpSession userSession) {
 		Optional<Recipe> result = recipeRepository.findById(recipeId);
 
 		if (result.isEmpty()) {
@@ -122,21 +122,22 @@ public class RecipeController {
 	}
 
 	@GetMapping("delete")
-	public String displayDeleteRecipeForm(Model model){
+	public String displayDeleteRecipeForm(Model model) {
 		model.addAttribute("title", "Delete Recipe");
 		model.addAttribute("recipes", recipeRepository.findAll());
-		return"recipe/delete";
+		return "recipe/delete";
 	}
 
 	@PostMapping("delete")
-	public String processDeleteRecipeForm( @RequestParam(required = false)
-													   int[] recipeId){
+	public String processDeleteRecipeForm(@RequestParam(required = false)
+												  int[] recipeId) {
 
-		if(recipeId != null){
-			for(int id : recipeId){
+		if (recipeId != null) {
+			for (int id : recipeId) {
 				recipeRepository.deleteById(id);
 			}
 		}
 		return "redirect:";
 	}
 }
+

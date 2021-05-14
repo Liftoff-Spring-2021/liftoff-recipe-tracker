@@ -8,17 +8,17 @@ import java.util.List;
 @Entity
     public class Beverage extends AbstractRecommendations{
 
-        //Class Variables
+    //Class Variables
 
     @ManyToMany(mappedBy = "beverages")
     private final List<Recipe> recipes = new ArrayList<>();
 
-        //Constructors
+    //Constructors
 
-        public Beverage() {
-        }
+    public Beverage() {
+    }
 
-        //Getters and Setters
+    //Getters and Setters
 
     public List<Recipe> getRecipes() {
         return recipes;
