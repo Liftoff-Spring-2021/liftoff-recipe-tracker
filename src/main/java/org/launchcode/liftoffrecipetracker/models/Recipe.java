@@ -16,7 +16,7 @@ import java.util.List;
 //@Indexed creates an index of the schema for searching purposes. Only entities with @Indexed will be indexed.
 @Entity
 @Indexed
-public class Recipe extends AbstractRecommendations {
+public class Recipe extends AbstractEntityName {
 	//properties
 	@NotBlank(message = "")
 	@NotNull

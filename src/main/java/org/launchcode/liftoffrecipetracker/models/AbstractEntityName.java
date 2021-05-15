@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @MappedSuperclass
-public abstract class AbstractRecommendations extends AbstractEntity {
+public abstract class AbstractEntityName extends AbstractEntityId {
 
     // Class Variables
     @Size(min = 4, max = 50, message = "Name is required and must be between 4 and 50 characters long")

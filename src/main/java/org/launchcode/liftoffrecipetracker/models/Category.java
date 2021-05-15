@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Category extends AbstractRecommendations{
+public class Category extends AbstractEntityName {
 
     //Class Variables
 
