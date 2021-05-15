@@ -3,12 +3,14 @@ package org.launchcode.liftoffrecipetracker.controllers;
 import org.launchcode.liftoffrecipetracker.data.CategoryRepository;
 import org.launchcode.liftoffrecipetracker.models.Category;
 import org.launchcode.liftoffrecipetracker.models.Recipe;
+import org.launchcode.liftoffrecipetracker.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +22,9 @@ public class CategoryController {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    AuthenticationController authenticationController;
 
     @GetMapping
     public String displayAllCategories(Model model) {
@@ -40,7 +45,7 @@ public class CategoryController {
 
     @PostMapping("create")
     public String processCreateCategoryForm(@Valid @ModelAttribute Category category,
-                                            Errors errors, Model model) {
+                                            Errors errors, Model model, HttpSession userSession) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Category");
@@ -48,6 +53,9 @@ public class CategoryController {
             // category/create is the file path in the project structure
             return "category/create";
         }
+
+        User user = authenticationController.getUserFromSession(userSession);
+        category.setUser(user);
 
         categoryRepository.save(category);
         // redirect: is the URL path from RequestMapping (The main mapping from the controller)
