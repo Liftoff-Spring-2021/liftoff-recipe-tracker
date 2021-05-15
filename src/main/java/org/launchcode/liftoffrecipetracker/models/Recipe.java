@@ -18,13 +18,13 @@ import java.util.List;
 @Indexed
 public class Recipe extends AbstractRecommendations {
 	//properties
-	@NotBlank
+	@NotBlank(message = "")
 	@NotNull
 	@Size(min=5, message = "Ingredients are required.")
 	private String ingredients;
 
 	@NotNull
-	@NotBlank
+	@NotBlank(message = "")
 	@Size(min=5, message = "Directions are required.")
 	private String directions;
 
@@ -37,7 +37,7 @@ public class Recipe extends AbstractRecommendations {
 	private int cookTime;
 
 	@NotNull
-	@Min(value = 1, message = "Cook time must be a positive value greater than 1.")
+	@Min(value = 1, message = "Prep time must be a positive value greater than 1.")
 	private int prepTime;
 
 	private String image;
