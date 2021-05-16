@@ -6,7 +6,7 @@ import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
 @MappedSuperclass
-public abstract class AbstractEntity {
+public abstract class AbstractEntityId {
 
 	@Id
 	@GeneratedValue
@@ -20,7 +20,7 @@ public abstract class AbstractEntity {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		AbstractEntity that = (AbstractEntity) o;
+		AbstractEntityId that = (AbstractEntityId) o;
 		return id == that.id;
 	}
 
