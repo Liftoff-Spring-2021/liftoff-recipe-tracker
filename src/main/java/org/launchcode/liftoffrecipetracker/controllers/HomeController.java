@@ -18,8 +18,9 @@ public class HomeController {
 
 	@GetMapping("/home")
 	public String displayHome(Model model, HttpSession userSession) {
+		//?? User find by ID, but where to find id?
 		model.addAttribute("title", "Liftoff Recipe Tracker");
-		//model.addAttribute("username", userSession);
+		//model.addAttribute("username", user);
 		return "index";
 	}
 
