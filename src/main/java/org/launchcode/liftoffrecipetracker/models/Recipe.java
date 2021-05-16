@@ -18,14 +18,14 @@ import java.util.List;
 @Indexed
 public class Recipe extends AbstractEntityName {
 	//properties
-	@NotBlank(message = "")
+	@NotBlank(message = "Ingredients are required and should be more than 5 characters.")
 	@NotNull
-	@Size(min=5, message = "Ingredients are required.")
+	@Size(min=5, message = "")
 	private String ingredients;
 
 	@NotNull
-	@NotBlank(message = "")
-	@Size(min=5, message = "Directions are required.")
+	@NotBlank(message = "Directions are required and should be more than 5 characters.")
+	@Size(min=5, message = "")
 	private String directions;
 
 	@NotNull
