@@ -129,7 +129,7 @@ public class CategoryController {
 
     @PostMapping("copy")
     public String processCopyCategoryForm(@Valid @ModelAttribute Category category,
-                                          Errors errors, Model model) {
+                                          Errors errors, Model model, HttpSession userSession) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Copy Category");
@@ -137,6 +137,9 @@ public class CategoryController {
             // category/copy is the file path in the project structure
             return "category/copy";
         }
+
+        User user = authenticationController.getUserFromSession(userSession);
+        category.setUser(user);
 
         categoryRepository.save(category);
         // redirect: is the URL path from RequestMapping (The main mapping from the controller)

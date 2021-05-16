@@ -129,7 +129,7 @@ import java.util.Optional;
 
     @PostMapping("copy")
     public String processCopyBeverageForm(@Valid @ModelAttribute Beverage beverage,
-                                          Errors errors, Model model) {
+                                          Errors errors, Model model, HttpSession userSession) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Copy Beverage");
@@ -137,6 +137,9 @@ import java.util.Optional;
             // beverage/edit is the file path in the project structure
             return "beverage/copy";
         }
+
+        User user = authenticationController.getUserFromSession(userSession);
+        beverage.setUser(user);
 
         beverageRepository.save(beverage);
         // redirect: is the URL path from RequestMapping (The main mapping from the controller)
