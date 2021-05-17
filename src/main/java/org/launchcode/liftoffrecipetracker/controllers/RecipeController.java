@@ -75,9 +75,10 @@ public class RecipeController {
 
 	@PostMapping("create")
 	public String processCreateRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
-										  Errors errors, Model model,
+										  Errors errors, Model model, HttpSession userSession,
 										  @RequestParam(required = false) List<Integer> categories,
-										  @RequestParam(required = false) List<Integer> beverages, HttpSession userSession) {
+										  @RequestParam(required = false) List<Integer> beverages
+										  ) {
 
 
 		if (errors.hasErrors()) {
