@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-    public class Beverage extends AbstractRecommendations{
+    public class Beverage extends AbstractEntityName {
 
     //Class Variables
 

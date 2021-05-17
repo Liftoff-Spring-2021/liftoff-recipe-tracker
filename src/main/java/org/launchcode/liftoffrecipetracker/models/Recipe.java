@@ -16,16 +16,16 @@ import java.util.List;
 //@Indexed creates an index of the schema for searching purposes. Only entities with @Indexed will be indexed.
 @Entity
 @Indexed
-public class Recipe extends AbstractRecommendations {
+public class Recipe extends AbstractEntityName {
 	//properties
-	@NotBlank
+	@NotBlank(message = "Ingredients are required and should be more than 5 characters.")
 	@NotNull
-	@Size(min=5, message = "Ingredients are required.")
+	@Size(min=5, message = "")
 	private String ingredients;
 
 	@NotNull
-	@NotBlank
-	@Size(min=5, message = "Directions are required.")
+	@NotBlank(message = "Directions are required and should be more than 5 characters.")
+	@Size(min=5, message = "")
 	private String directions;
 
 	@NotNull
@@ -37,7 +37,7 @@ public class Recipe extends AbstractRecommendations {
 	private int cookTime;
 
 	@NotNull
-	@Min(value = 1, message = "Cook time must be a positive value greater than 1.")
+	@Min(value = 1, message = "Prep time must be a positive value greater than 1.")
 	private int prepTime;
 
 	private String image;

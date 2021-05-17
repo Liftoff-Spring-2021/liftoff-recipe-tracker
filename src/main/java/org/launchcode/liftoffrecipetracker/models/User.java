@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class User extends AbstractEntity {
+public class User extends AbstractEntityId {
 
     @NotNull
     private String username;
