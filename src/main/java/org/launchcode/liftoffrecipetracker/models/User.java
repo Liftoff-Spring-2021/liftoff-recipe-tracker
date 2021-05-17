@@ -23,7 +23,13 @@ public class User extends AbstractEntityId {
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @OneToMany(mappedBy = "user")
-    private List<Recipe> recipes = new ArrayList<>();
+    private final List<Recipe> recipes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private final List<Category> categories = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private final List<Beverage> beverages = new ArrayList<>();
 
     public User(){
 
@@ -33,7 +39,6 @@ public class User extends AbstractEntityId {
         this.username = username;
         this.passwordHash = encoder.encode(password);
         this.email = email;
-//        this.recipes=recipes;
     }
 
     public String getUsername() {
@@ -60,8 +65,24 @@ public class User extends AbstractEntityId {
         return recipes;
     }
 
-    public void setRecipes(List<Recipe> recipes) {
-        this.recipes = recipes;
+    public void addRecipes(List<Recipe> recipes) {
+        this.recipes.addAll(recipes);
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void addCategories(List<Category> categories) {
+        this.categories.addAll(categories);
+    }
+
+    public List<Beverage> getBeverages() {
+        return beverages;
+    }
+
+    public void addBeverages(List<Beverage> beverages) {
+        this.beverages.addAll(beverages);
     }
 
 }
