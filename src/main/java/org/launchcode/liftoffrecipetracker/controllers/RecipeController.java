@@ -75,9 +75,10 @@ public class RecipeController {
 
 	@PostMapping("create")
 	public String processCreateRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
-										  Errors errors, Model model,
+										  Errors errors, Model model, HttpSession userSession,
 										  @RequestParam(required = false) List<Integer> categories,
-										  @RequestParam(required = false) List<Integer> beverages, HttpSession userSession) {
+										  @RequestParam(required = false) List<Integer> beverages
+										  ) {
 
 
 		if (errors.hasErrors()) {
@@ -122,9 +123,10 @@ public class RecipeController {
 	}
 
 	@GetMapping("delete")
-	public String displayDeleteRecipeForm(Model model) {
+	public String displayDeleteRecipeForm(Model model, HttpSession userSession) {
+		User user = authenticationController.getUserFromSession(userSession);
 		model.addAttribute("title", "Delete Recipe");
-		model.addAttribute("recipes", recipeRepository.findAll());
+		model.addAttribute("recipes", user.getRecipes());
 		return "recipe/delete";
 	}
 

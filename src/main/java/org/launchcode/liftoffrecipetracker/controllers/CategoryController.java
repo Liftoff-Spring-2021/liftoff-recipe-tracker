@@ -3,12 +3,14 @@ package org.launchcode.liftoffrecipetracker.controllers;
 import org.launchcode.liftoffrecipetracker.data.CategoryRepository;
 import org.launchcode.liftoffrecipetracker.models.Category;
 import org.launchcode.liftoffrecipetracker.models.Recipe;
+import org.launchcode.liftoffrecipetracker.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -21,10 +23,15 @@ public class CategoryController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    AuthenticationController authenticationController;
+
     @GetMapping
-    public String displayAllCategories(Model model) {
+    public String displayAllCategories(Model model, HttpSession userSession) {
+        User user = authenticationController.getUserFromSession(userSession);
         model.addAttribute("title", "All Categories");
         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("user", user);
         // category/index is the file path in the project structure
         return "category/index";
     }
@@ -40,7 +47,7 @@ public class CategoryController {
 
     @PostMapping("create")
     public String processCreateCategoryForm(@Valid @ModelAttribute Category category,
-                                            Errors errors, Model model) {
+                                            Errors errors, Model model, HttpSession userSession) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Category");
@@ -49,6 +56,9 @@ public class CategoryController {
             return "category/create";
         }
 
+        User user = authenticationController.getUserFromSession(userSession);
+        category.setUser(user);
+
         categoryRepository.save(category);
         // redirect: is the URL path from RequestMapping (The main mapping from the controller)
         return "redirect:/categories";
@@ -56,9 +66,10 @@ public class CategoryController {
 
     //delete category
     @GetMapping("delete")
-    public String displayDeleteCategoryForm(Model model) {
+    public String displayDeleteCategoryForm(Model model, HttpSession userSession) {
+        User user = authenticationController.getUserFromSession(userSession);
         model.addAttribute("title", "Delete Category");
-        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("categories", user.getCategories());
         return "category/delete";
     }
 
@@ -121,7 +132,7 @@ public class CategoryController {
 
     @PostMapping("copy")
     public String processCopyCategoryForm(@Valid @ModelAttribute Category category,
-                                          Errors errors, Model model) {
+                                          Errors errors, Model model, HttpSession userSession) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Copy Category");
@@ -129,6 +140,9 @@ public class CategoryController {
             // category/copy is the file path in the project structure
             return "category/copy";
         }
+
+        User user = authenticationController.getUserFromSession(userSession);
+        category.setUser(user);
 
         categoryRepository.save(category);
         // redirect: is the URL path from RequestMapping (The main mapping from the controller)

@@ -3,12 +3,14 @@ package org.launchcode.liftoffrecipetracker.controllers;
 import org.launchcode.liftoffrecipetracker.data.BeverageRepository;
 import org.launchcode.liftoffrecipetracker.models.Beverage;
 import org.launchcode.liftoffrecipetracker.models.Recipe;
+import org.launchcode.liftoffrecipetracker.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -21,10 +23,15 @@ import java.util.Optional;
         @Autowired
         private BeverageRepository beverageRepository;
 
+        @Autowired
+        AuthenticationController authenticationController;
+
         @GetMapping
-        public String displayAllBeverages(Model model) {
+        public String displayAllBeverages(Model model, HttpSession userSession) {
+            User user = authenticationController.getUserFromSession(userSession);
             model.addAttribute("title", "All Beverages");
             model.addAttribute("beverages", beverageRepository.findAll());
+            model.addAttribute("user", user);
             // beverage/index is the file path in the project structure
             return "beverage/index";
         }
@@ -40,7 +47,7 @@ import java.util.Optional;
 
         @PostMapping("create")
         public String processCreateBeverageForm(@Valid @ModelAttribute Beverage beverage,
-                                                Errors errors, Model model) {
+                                                Errors errors, Model model, HttpSession userSession) {
 
             if (errors.hasErrors()) {
                 model.addAttribute("title", "Create Beverage");
@@ -49,6 +56,9 @@ import java.util.Optional;
                 return "beverage/create";
             }
 
+            User user = authenticationController.getUserFromSession(userSession);
+            beverage.setUser(user);
+
             beverageRepository.save(beverage);
             // redirect: is the URL path from RequestMapping (The main mapping from the controller)
             return "redirect:/beverages";
@@ -56,9 +66,10 @@ import java.util.Optional;
 
     //delete beverage
     @GetMapping("delete")
-    public String displayDeleteBeverageForm(Model model) {
+    public String displayDeleteBeverageForm(Model model, HttpSession userSession) {
+        User user = authenticationController.getUserFromSession(userSession);
         model.addAttribute("title", "Delete Beverage");
-        model.addAttribute("beverages", beverageRepository.findAll());
+        model.addAttribute("beverages", user.getBeverages());
         return "beverage/delete";
     }
 
@@ -121,7 +132,7 @@ import java.util.Optional;
 
     @PostMapping("copy")
     public String processCopyBeverageForm(@Valid @ModelAttribute Beverage beverage,
-                                          Errors errors, Model model) {
+                                          Errors errors, Model model, HttpSession userSession) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Copy Beverage");
@@ -129,6 +140,9 @@ import java.util.Optional;
             // beverage/edit is the file path in the project structure
             return "beverage/copy";
         }
+
+        User user = authenticationController.getUserFromSession(userSession);
+        beverage.setUser(user);
 
         beverageRepository.save(beverage);
         // redirect: is the URL path from RequestMapping (The main mapping from the controller)

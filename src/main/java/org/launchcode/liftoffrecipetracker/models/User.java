@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class User extends AbstractEntity {
+public class User extends AbstractEntityId {
 
     @NotNull
     private String username;
@@ -22,7 +22,13 @@ public class User extends AbstractEntity {
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @OneToMany(mappedBy = "user")
-    private List<Recipe> recipes = new ArrayList<>();
+    private final List<Recipe> recipes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private final List<Category> categories = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private final List<Beverage> beverages = new ArrayList<>();
 
     public User(){
 
@@ -32,7 +38,6 @@ public class User extends AbstractEntity {
         this.username = username;
         this.passwordHash = encoder.encode(password);
         this.email = email;
-//        this.recipes=recipes;
     }
 
     public String getUsername() {
@@ -59,7 +64,23 @@ public class User extends AbstractEntity {
         return recipes;
     }
 
-    public void setRecipes(List<Recipe> recipes) {
-        this.recipes = recipes;
+    public void addRecipes(List<Recipe> recipes) {
+        this.recipes.addAll(recipes);
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void addCategories(List<Category> categories) {
+        this.categories.addAll(categories);
+    }
+
+    public List<Beverage> getBeverages() {
+        return beverages;
+    }
+
+    public void addBeverages(List<Beverage> beverages) {
+        this.beverages.addAll(beverages);
     }
 }
