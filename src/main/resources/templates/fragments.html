@@ -21,8 +21,8 @@
 					<a class="dropdown-item" th:href="@{/recipes}">View All</a>
 					<a class="dropdown-item" th:href="@{/recipes/create}">Create a Recipe</a>
 					<a class="dropdown-item" th:href="@{/recipes/delete}">Delete a Recipe</a>
-<!--					<a class="dropdown-item" th:href="@{/users}">Owners</a>-->
 				</div>
+
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" id="navbarDropdownTwo" role="button" data-toggle="dropdown">Categories</a>
@@ -78,6 +78,16 @@
 			<input th:field="${beverage.name}" class="form-control">
 		</label>
 		<span th:errors="${beverage.name}" class="error"></span>
+	</div>
+</div>
+
+<div th:fragment="recipe-form-group">
+	<div class="form-group">
+		<label>Name
+			<input th:field="${recipe.name}" class="form-control">
+			<input th:field="${recipe.ingredients}">
+		</label>
+		<span th:errors="${recipe.name}" class="error"></span>
 	</div>
 </div>
 </body>

@@ -20,6 +20,22 @@
 	        <td><a th:text="${recipe.prepTime}"></a></td>
 	        <td><a th:text="${recipe.cookTime}"></a></td>
 	        <td><a th:text="${recipe.servings}"></a></td>
+
+
+			<td>
+			    <button
+			            type="button"
+			            class="btn btn-light dropdown-toggle btn-sm"
+			            data-toggle="dropdown"
+			            aria-expanded="false"> Action
+			    </button>
+
+			    <ul class="dropdown-menu">
+			        <li><a  class="dropdown-item"  th:value = "${recipe.id}" th:href="'recipes/edit/' + ${recipe.id}"> Edit</a></li>
+			        <li><a class="dropdown-item"  th:value = "${recipe.id}" th:href="'recipes/copy/' + ${recipe.id}"> Copy</a></li>
+			    </ul>
+			</td>
+
         </tr>
     </table>
 	<footer th:replace="fragments :: footer"></footer>

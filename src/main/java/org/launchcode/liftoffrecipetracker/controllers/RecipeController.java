@@ -65,7 +65,7 @@ public class RecipeController {
 	}
 
 	@GetMapping("create")
-	public String displayCreateRecipeForm(Model model, HttpSession userSession) {
+	public String displayCreateRecipeForm(Model model) {
 		model.addAttribute("title", "Create a Recipe");
 		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("beverages", beverageRepository.findAll());
@@ -138,6 +138,53 @@ public class RecipeController {
 			}
 		}
 		return "redirect:";
+	}
+
+	@GetMapping("edit/{recipeId}")
+	public String displayEditRecipeForm(@PathVariable int recipeId, Model model){
+		Optional<Recipe> result = recipeRepository.findById(recipeId);
+		if(result.isEmpty()){
+			model.addAttribute("title", "Invalid recipe ID" + recipeId);
+		} else{
+			Recipe recipe = result.get();
+			model.addAttribute("title", "Edit Recipe" + recipe.getName());
+			model.addAttribute("recipe", recipe);
+		}
+		return "recipe/edit";
+	}
+
+	@PostMapping("edit")
+	public String processEditRecipeForm(int recipeId, String name){
+		Recipe recipe = recipeRepository.findById(recipeId).get();
+		recipe.setName(name);
+		recipeRepository.save(recipe);
+		return "redirect:/recipes";
+	}
+
+	@GetMapping("copy/{recipeId}")
+	public String displayCopyRecipeForm(@PathVariable int recipeId, Model model){
+		Optional<Recipe> result = recipeRepository.findById(recipeId);
+		if(result.isEmpty()){
+			model.addAttribute("title", "Invalid Recipe ID" + recipeId);
+		} else{
+			Recipe recipe = result.get();
+			model.addAttribute("title", "Copy Recipe" + recipeRepository.findById(recipeId));
+			model.addAttribute("title", recipe);
+		}
+		return"recipe/copy";
+	}
+
+	@PostMapping("copy")
+	public String processCopyRecipeForm(@Valid @ModelAttribute Recipe recipe,
+										Model model, Errors errors){
+		if(errors.hasErrors()){
+			model.addAttribute("title", "Copy Recipe");
+			model.addAttribute(new Recipe());
+			return "recipe/copy";
+		}
+
+		recipeRepository.save(recipe);
+		return"redirect:/recipes";
 	}
 }
 
