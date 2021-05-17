@@ -64,9 +64,10 @@ import java.util.Optional;
 
     //delete beverage
     @GetMapping("delete")
-    public String displayDeleteBeverageForm(Model model) {
+    public String displayDeleteBeverageForm(Model model, HttpSession userSession) {
+        User user = authenticationController.getUserFromSession(userSession);
         model.addAttribute("title", "Delete Beverage");
-        model.addAttribute("beverages", beverageRepository.findAll());
+        model.addAttribute("beverages", user.getBeverages());
         return "beverage/delete";
     }
 

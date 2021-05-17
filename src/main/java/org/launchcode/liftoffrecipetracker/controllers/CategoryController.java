@@ -64,9 +64,10 @@ public class CategoryController {
 
     //delete category
     @GetMapping("delete")
-    public String displayDeleteCategoryForm(Model model) {
+    public String displayDeleteCategoryForm(Model model, HttpSession userSession) {
+        User user = authenticationController.getUserFromSession(userSession);
         model.addAttribute("title", "Delete Category");
-        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("categories", user.getCategories());
         return "category/delete";
     }
 
