@@ -27,9 +27,11 @@ import java.util.Optional;
         AuthenticationController authenticationController;
 
         @GetMapping
-        public String displayAllBeverages(Model model) {
+        public String displayAllBeverages(Model model, HttpSession userSession) {
+            User user = authenticationController.getUserFromSession(userSession);
             model.addAttribute("title", "All Beverages");
             model.addAttribute("beverages", beverageRepository.findAll());
+            model.addAttribute("user", user);
             // beverage/index is the file path in the project structure
             return "beverage/index";
         }
