@@ -7,7 +7,7 @@
 
 
 	<div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vSitCz69TLK4FIwiV2yIjNVCUJVrcJiPbDvcoJXrp9SdV1oBJkx53ZBEme2plO3RJe5tOUeBOVbNm9_/pub?w=960&h=720") class="page-holder bg-cover">
-		<div class="container py-4" style="display:flex; flex-direction:column; flex:1;">
+		<div-- class="container py-4" style="display:flex; flex-direction:column; flex:1;">
 			<header class="text-left text-white py-4">
 				<h1 class="display-4 font-weight-bold mb-3">Liftoff Recipe Tracker</h1>
 				<p class="lead mb-0">Your personal recipe book</p>
@@ -18,12 +18,19 @@
 					</h2>
 			</div>
 			<div class = "text-white py=3">
-				<p class="lead mb-0"><u>Your Recipes</u></p>
+				<p class="lead mb-0"><u>Your Favorite Recipes</u></p>
 			</div>
 
 				<!--div class="d-flex align-items-sm-start" src= https://docs.google.com/drawings/d/e/2PACX-1vSbD2p5bki6zEVALeTf7UsVrZgTfyBV0tjyhsdOE-3iEMxNXCziZoO0ZKMTaZ-1R6kTlOESPXt53YBa/pub?w=183&h=180 alt="Category image"-->
 
-<div class="pt-5"></div><div class="pt-3"></div>
+			<!-- Display favorite recipes owned by user-->
+			<!--div class = "text-white py=3"-->
+				<tr th:each="recipe : ${user.recipes}" >
+					<td><a th:text="${recipe.name}" th:href="'/recipes/detail?recipeId=' + ${recipe.id}"></a></td>
+				</tr>
+			<!--/div-->
+			<!-- Description of functionality, may not keep this -->
+			<div class="pt-5"></div><div class="pt-3"></div>
 				<div class="card-group pt-5">
 					<div class="card">
 						<div class="card-body">
@@ -44,8 +51,8 @@
 						</div>
 					</div>
 				</div>
-			</div>
 		</div>
+	</div>
 
 
 
