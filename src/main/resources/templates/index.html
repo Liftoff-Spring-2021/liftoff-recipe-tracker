@@ -13,8 +13,9 @@
 				<p class="lead mb-0">Your personal recipe book</p>
 			</header>
 			<div class="text-white py-5">
-				<h2 class = "display-6 font-weight-bold mb-2">Welcome User!</h2>
-				<!--p th:text="${user.username}">Default Text</p-->
+				<h2 class = "display-6 font-weight-bold mb-2">
+				<a th:text="'Welcome '+${user.username}+'!'">Welcome!</a>
+					</h2>
 			</div>
 			<div class = "text-white py=3">
 				<p class="lead mb-0"><u>Your Recipes</u></p>
@@ -42,7 +43,7 @@
 							<p class="card-text">Keep track of your recipes.  Explore recipes from other LRT users.</p>
 						</div>
 					</div>
-				</div	>
+				</div>
 			</div>
 		</div>
 
