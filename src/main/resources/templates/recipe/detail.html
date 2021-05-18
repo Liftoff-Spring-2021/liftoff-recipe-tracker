@@ -8,6 +8,12 @@
 		<tr>
 			<th>Recipe Name:</th>
 			<td th:text="${recipe.name}">Default Text</td>
+			<!--top bar if a favorite recipe-->
+			<p th:if="${recipe.favorite}">
+				<a href="#" class="btn btn-warning btn-lg">
+					<span class="glyphicon glyphicon-star"></span> Favorite
+				</a>
+			</p>
 		</tr>
 		<tr>
 			<th>Recipe Categories:</th>
