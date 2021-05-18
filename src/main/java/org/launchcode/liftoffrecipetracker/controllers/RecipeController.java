@@ -123,9 +123,10 @@ public class RecipeController {
 	}
 
 	@GetMapping("delete")
-	public String displayDeleteRecipeForm(Model model) {
+	public String displayDeleteRecipeForm(Model model, HttpSession userSession) {
+		User user = authenticationController.getUserFromSession(userSession);
 		model.addAttribute("title", "Delete Recipe");
-		model.addAttribute("recipes", recipeRepository.findAll());
+		model.addAttribute("recipes", user.getRecipes());
 		return "recipe/delete";
 	}
 

@@ -27,9 +27,11 @@ import java.util.Optional;
         AuthenticationController authenticationController;
 
         @GetMapping
-        public String displayAllBeverages(Model model) {
+        public String displayAllBeverages(Model model, HttpSession userSession) {
+            User user = authenticationController.getUserFromSession(userSession);
             model.addAttribute("title", "All Beverages");
             model.addAttribute("beverages", beverageRepository.findAll());
+            model.addAttribute("user", user);
             // beverage/index is the file path in the project structure
             return "beverage/index";
         }
@@ -64,9 +66,10 @@ import java.util.Optional;
 
     //delete beverage
     @GetMapping("delete")
-    public String displayDeleteBeverageForm(Model model) {
+    public String displayDeleteBeverageForm(Model model, HttpSession userSession) {
+        User user = authenticationController.getUserFromSession(userSession);
         model.addAttribute("title", "Delete Beverage");
-        model.addAttribute("beverages", beverageRepository.findAll());
+        model.addAttribute("beverages", user.getBeverages());
         return "beverage/delete";
     }
 
