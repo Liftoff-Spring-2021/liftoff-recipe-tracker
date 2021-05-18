@@ -32,7 +32,6 @@
 		<tr>
 			<th>Recipe Directions:</th>
 			<td th:text="${recipe.directions}">Default Text</td>
-
 		<tr>
 			<th>Created By:</th>
 			<td th:text="${recipe.user.username}">Default Text</td>
@@ -64,7 +63,8 @@
 				</td>
 			</div>
 		</div>
-	</div></div>
+	</div>
+</div>
 <footer th:replace="fragments :: footer"></footer>
 <div th:replace="fragments :: bootstrap-javascript"></div>
 </body>

@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
 
-	<div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vSitCz69TLK4FIwiV2yIjNVCUJVrcJiPbDvcoJXrp9SdV1oBJkx53ZBEme2plO3RJe5tOUeBOVbNm9_/pub?w=960&h=720") class="page-holder bg-cover">
+	<div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vSitCz69TLK4FIwiV2yIjNVCUJVrcJiPbDvcoJXrp9SdV1oBJkx53ZBEme2plO3RJe5tOUeBOVbNm9_/pub?w=960&h=720" class="page-holder bg-cover">
 		<div class="container py-4" style="display:flex; flex-direction:column; flex:1;">
 			<header class="text-left text-white py-4">
 				<h1 class="display-4 font-weight-bold mb-3">Liftoff Recipe Tracker</h1>
@@ -21,53 +21,46 @@
 				<p class="lead mb-0"><u>Your Favorite Recipes</u></p>
 			</div>
 
-				<!--div class="d-flex align-items-sm-start" src= https://docs.google.com/drawings/d/e/2PACX-1vSbD2p5bki6zEVALeTf7UsVrZgTfyBV0tjyhsdOE-3iEMxNXCziZoO0ZKMTaZ-1R6kTlOESPXt53YBa/pub?w=183&h=180 alt="Category image"-->
-
 			<!-- Display favorite recipes owned by user-->
-			<!--div class = "text-white py=3"-->
 			<th:block>
 				<tr class = "text-white py=3"  th:each="recipe : ${user.recipes}" >
 					<span th:if="${recipe.favorite}">
 					<td><a th:text="${recipe.name}" th:href="'/recipes/detail?recipeId=' + ${recipe.id}"></a></td></span>
 				</tr></th:block>
-			<!--/div-->
+
 			<!-- Description of functionality, may not keep this -->
 			<div class="pt-5"></div><div class="pt-3"></div>
 				<div class="card-group pt-5">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Category</h5>
-							<p class="card-text">Find recipes based on categories that you select.  Entrees, desserts, Italian, Cajun, etc.</p>
+							<h5 class="card-title">Searchable</h5>
+							<p class="card-text">Find recipes by name, category, or suggested beverage.</p>
 						</div>
 					</div>
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Beverage</h5>
-							<p class="card-text">Like having your own personal sommelier.  Recipes may include a variety of beverage suggestions. </p>
+							<h5 class="card-title">Favorites</h5>
+							<p class="card-text">Tag your favorite recipes for quick reference. </p>
 						</div>
 					</div>
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Recipe</h5>
-							<p class="card-text">Keep track of your recipes.  Explore recipes from other LRT users.</p>
+							<h5 class="card-title">Customize</h5>
+							<p class="card-text">Copy a recipe to customize it and make it your own!</p>
 						</div>
 					</div>
 				</div>
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">	Upcoming Features</h5>
+					<p class="card-text"></p>
+					<p>Search by keyword, pantry items</p>
+					<p>Generate a recipe list</p>
+					<p>Scale number of servings for a recipe</p>
+				</div>
+			</div>
 		</div>
 	</div>
-
-
-
-			<!--div class="col">
-				<h4>Upcoming Features</h4>
-				<ul class="list-group">
-					<li class="list-group-item">Search by keyword, pantry items, or category</li>
-					<li class="list-group-item">Generate a recipe list</li>
-					<li class="list-group-item">Scale number of servings for a recipe</li>
-				</ul>
-			</div-->
-
-
 	</div>
 	<footer th:replace="fragments :: footer"></footer>
 
