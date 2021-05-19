@@ -4,14 +4,15 @@
 <body class="text-left">
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid">
+
 	<table class="table table-striped">
+		<!--top bar if a favorite recipe-->
+		<tr th:if="${recipe.favorite}">
+		<h1><span class="badge bg-warning">Favorite</span></h1>
+		</tr>
 		<tr>
 			<th>Recipe Name:</th>
 			<td th:text="${recipe.name}">Default Text</td>
-			<!--top bar if a favorite recipe-->
-			<p th:if="${recipe.favorite}">
-			<h1><span class="badge bg-warning">Favorite</span></h1>
-			</p>
 		</tr>
 		<tr>
 			<th>Recipe Ingredients:</th>
