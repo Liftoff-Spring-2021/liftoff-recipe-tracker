@@ -170,8 +170,8 @@ public class RecipeController {
 			model.addAttribute("title", "Invalid Recipe ID" + recipeId);
 		} else{
 			Recipe recipe = result.get();
-			model.addAttribute("title", "Copy Recipe" + recipeRepository.findById(recipeId));
-			model.addAttribute("title", recipe);
+			model.addAttribute("title", "Copy Recipe" + recipe.getName());
+			model.addAttribute("recipe", recipe);
 		}
 		return"recipe/copy";
 	}

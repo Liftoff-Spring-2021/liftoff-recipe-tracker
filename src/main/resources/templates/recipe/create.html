@@ -5,63 +5,8 @@
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid text-left">
 	<form method="post">
-		<div class="form-group">
-			<label>Name
-				<input th:field="${recipe.name}" th:value="${recipe.name}" class="form-control">
-			</label>
-			<span th:errors="${recipe.name}" class="error"></span>
-		</div>
-		<div class="form-group">
-			<label>Ingredients
-				<textarea th:field="${recipe.ingredients}" th:value="${recipe.ingredients}" class="form-control"></textarea>
-			</label>
-			<span th:errors="${recipe.ingredients}" class="error"></span>
-		</div>
-		<div class="form-group">
-			<label>Directions
-				<textarea th:field="${recipe.directions}" th:value="${recipe.directions}" class="form-control"></textarea>
-			</label>
-			<span th:errors="${recipe.directions}" class="error"></span>
-		</div>
-		<div class="form-group">
-			<label>Servings
-				<input th:field="${recipe.servings}" th:value="${recipe.servings}" class="form-control">
-			</label>
-			<span th:errors="${recipe.servings}" class="error"></span>
-		</div>
-		<div class="form-group">
-			<label>Cook Time (in minutes)
-				<input th:field="${recipe.cookTime}" th:value="${recipe.cookTime}" class="form-control">
-			</label>
-			<span th:errors="${recipe.cookTime}" class="error"></span>
-		</div>
-		<div class="form-group">
-			<label>Prep Time (in minutes)
-				<input th:field="${recipe.prepTime}" th:value="${recipe.prepTime}" class="form-control">
-			</label>
-			<span th:errors="${recipe.prepTime}" class="error"></span>
-		</div>
-		<div class="form-group">
-			<label>Image URL
-				<input th:field="${recipe.image}" th:value="${recipe.image}" class="form-control">
-			</label>
-			<span th:errors="${recipe.image}" class="error"></span>
-		</div>
-		<div class="form-group">
-			<label th:for="categories">Categories</label>
-			<th:block th:each="category : ${categories}">
-				<input type="checkbox" name="categories" th:value="${category.id}">
-				<label th:text="${category.name}"></label>
-			</th:block>
-		</div>
-		<div class="form-group">
-			<label th:for="beverages">Sommelier Suggestions</label>
-			<th:block th:each="beverage : ${beverages}">
-				<input type="checkbox" name="beverages" th:value="${beverage.id}">
-				<label th:text="${beverage.name}"></label>
-			</th:block>
-		</div>
-			<input type="submit" value="Create Recipe" class="btn btn-primary">
+		<div th:replace="fragments :: recipe-form-group"></div>
+		<input type="submit" value="Create Recipe" class="btn btn-primary">
 	</form>
 </div>
 <footer th:replace="fragments :: footer"></footer>
