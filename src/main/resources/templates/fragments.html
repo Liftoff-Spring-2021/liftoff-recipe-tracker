@@ -139,6 +139,12 @@
 					<label th:text="${beverage.name}"></label>
 				</th:block>
 			</div>
+			<div class="form-group">
+				<label>Favorite
+					<input th:field="${recipe.favorite}" th:value="${recipe.favorite}" class="form-control">
+				</label>
+				<span th:errors="${recipe.favorite}" class="error"></span>
+			</div>
 
 </div>
 </body>
