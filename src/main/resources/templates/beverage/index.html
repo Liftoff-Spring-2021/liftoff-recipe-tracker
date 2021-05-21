@@ -19,7 +19,7 @@
             <td><a th:text="${beverage.name}" th:value = "${beverage.id}"th:href="'/recipes?beverageId=' + ${beverage.id}"></a></td>
             <th:block>
 	            <td th:if="${beverage.user.equals(user)}"><a th:text="Edit" th:value = "${beverage.id}" th:href="'beverages/edit/' + ${beverage.id}"></a></td>
-	            <td th:if="${!beverage.user.equals(user)}"><a th:text="Unavailable" th:value = "${beverage.id}"></a></td>
+	            <td th:if="${!beverage.user.equals(user)}"><a th:value = "${beverage.id}"></a></td>
             </th:block>
             <td><a th:text="Copy" th:value = "${beverage.id}" th:href="'beverages/copy/' + ${beverage.id}"></a></td>
         </tr>

@@ -42,6 +42,8 @@ public class Recipe extends AbstractEntityName {
 
 	private String image;
 
+	private boolean favorite;
+
 	//@IndexedEmbedded allows for related classes to be indexed without using @Indexed on the embedded class
 	@ManyToMany
 	@IndexedEmbedded
@@ -123,6 +125,14 @@ public class Recipe extends AbstractEntityName {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public boolean isFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(boolean favorite) {
+		this.favorite = favorite;
 	}
 
 	public List<Category> getCategories() { return categories; }
