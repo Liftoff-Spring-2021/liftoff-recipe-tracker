@@ -48,11 +48,11 @@
 					</th:block>
 				</td>
 			</div>
-			<div class="col-sm">
-				<p th:if="${recipe.image != ''}">
+			<div class="col-sm" th:if="${recipe.image != ''}">
+				<div>
 					<p class="font-weight-bold">Recipe Image:</p>
 					<p><img class="img-fluid img-thumbnail" th:src="${recipe.image}"/></p>
-				</p>
+				</div>
 			</div>
 			<div class="col-sm">
 				<p class="font-weight-bold">Recipe Categories:</p>
