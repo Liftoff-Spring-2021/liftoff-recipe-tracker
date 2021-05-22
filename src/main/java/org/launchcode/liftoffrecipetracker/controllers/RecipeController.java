@@ -147,19 +147,28 @@ public class RecipeController {
 		Optional<Recipe> result = recipeRepository.findById(recipeId);
 		if(result.isEmpty()){
 			model.addAttribute("title", "Invalid recipe ID" + recipeId);
-		} else{
+		} else {
 			Recipe recipe = result.get();
 			model.addAttribute("title", "Edit Recipe" + recipe.getName());
 			model.addAttribute("recipe", recipe);
+			model.addAttribute("categories", categoryRepository.findAll());
+			model.addAttribute("beverages", beverageRepository.findAll());
+
+
 		}
 		return "recipe/edit";
 	}
 
 	@PostMapping("edit")
-	public String processEditRecipeForm(int recipeId, String name){
+	public String processEditRecipeForm(int recipeId, String name, int categoryId){
 		Recipe recipe = recipeRepository.findById(recipeId).get();
+		Category category = categoryRepository.get();
+//
+
 		recipe.setName(name);
 		recipeRepository.save(recipe);
+		categoryRepository.save(category);
+//		beverageRepository.save(baverage);
 		return "redirect:/recipes";
 	}
 
@@ -172,20 +181,25 @@ public class RecipeController {
 			Recipe recipe = result.get();
 			model.addAttribute("title", "Copy Recipe" + recipe.getName());
 			model.addAttribute("recipe", recipe);
+			model.addAttribute("categories", categoryRepository.findAll());
+			model.addAttribute("beverages", beverageRepository.findAll());
 		}
 		return"recipe/copy";
 	}
 
 	@PostMapping("copy")
 	public String processCopyRecipeForm(@Valid @ModelAttribute Recipe recipe,
-										Model model, Errors errors){
+										Model model, Errors errors, Category category, Beverage baverage){
 		if(errors.hasErrors()){
 			model.addAttribute("title", "Copy Recipe");
 			model.addAttribute(new Recipe());
 			return "recipe/copy";
 		}
 
+
 		recipeRepository.save(recipe);
+		categoryRepository.save(category);
+		beverageRepository.save(baverage);
 		return"redirect:/recipes";
 	}
 }

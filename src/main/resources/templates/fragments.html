@@ -125,21 +125,44 @@
 				</label>
 				<span th:errors="${recipe.image}" class="error"></span>
 			</div>
-			<div class="form-group">
-				<label th:for="categories">Categories</label>
-				<th:block th:each="category : ${categories}">
-					<input type="checkbox" name="categories" th:value="${category.id}">
-					<label th:text="${category.name}"></label>
-				</th:block>
-			</div>
-			<div class="form-group">
-				<label th:for="beverages">Sommelier Suggestions</label>
-				<th:block th:each="beverage : ${beverages}">
-					<input type="checkbox" name="beverages" th:value="${beverage.id}">
-					<label th:text="${beverage.name}"></label>
-				</th:block>
-			</div>
+<!--			<div class="form-group">-->
+<!--				<label th:for="categories">Categories</label>-->
+<!--				<th:block th:each="category : ${categories}">-->
+<!--					<input type="checkbox" name="categories" th:value="${category.id}">-->
+<!--					<label th:text="${category.name}"></label>-->
+<!--				</th:block>-->
+<!--			</div>-->
+<!--			<div class="form-group">-->
+<!--				<label th:for="beverages">Sommelier Suggestions</label>-->
+<!--				<th:block th:each="beverage : ${beverages}">-->
+<!--					<input type="checkbox" name="beverages" th:value="${beverage.id}">-->
+<!--					<label th:text="${beverage.name}"></label>-->
+<!--				</th:block>-->
+<!--			</div>-->
+
+	<div class="form-group">
+		<label th:for="categories">Categories</label>
+		<th:block th:each="category : ${categories}">
+                <span th:if="${recipe.categories.contains(category)}">
+                <input type="checkbox" name="categories" th:checked="${recipe.categories}"></span>
+			<span th:unless="${recipe.categories.contains(category)}">
+                <input type="checkbox" name="categories" th:value="${category.id}"></span>
+			<label th:text="${category.name}"></label>
+		</th:block>
+	</div>
+	<div class="form-group">
+		<label th:for="beverages">Beverages</label>
+		<th:block th:each="beverage : ${beverages}">
+                <span th:if="${recipe.beverages.contains(beverage)}">
+                <input type="checkbox" name="beverages" th:checked="${recipe.beverages}"></span>
+			<span th:unless="${recipe.beverages.contains(beverage)}">
+                <input type="checkbox" name="beverages" th:value="${beverage.id}"></span>
+			<label th:text="${beverage.name}"></label>
+		</th:block>
+	</div>
 
 </div>
+
+
 </body>
 </html>
