@@ -5,6 +5,36 @@
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid">
 
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="panel panel-blue"th:text="${recipe.name}">Default Text</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="panel panel-purple" >
+					<div class="font-weight-bold">Recipe Servings: <p th:text="${recipe.servings}"></p></div></div>
+			</div>
+			<div class="col">
+				<div class="panel panel-purple">This is the second column.</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="panel panel-pink">This is the first column.</div>
+			</div>
+			<div class="col">
+				<div class="panel panel-pink">This is the second column.</div>
+			</div>
+			<div class="col">
+				<div class="panel panel-pink">This is the third column.</div>
+			</div>
+			<div class="col">
+				<div class="panel panel-pink">This is the fourth column.</div>
+			</div>
+		</div>
+	</div>
 	<table class="table table-striped">
 		<!--top bar if a favorite recipe-->
 		<tr th:if="${recipe.favorite}">
@@ -14,22 +44,40 @@
 			<th>Recipe Name:</th>
 			<td th:text="${recipe.name}">Default Text</td>
 		</tr>
+		<div class = "row">
+			<div class="col-4 offset-sm-3">
+				<th></th>
+				<td></td>
+			</div>
+			<div class="col-4 offset-sm-3">
+				<th>Recipe Servings: </th>
+				<td th:text="${recipe.servings}">Default Text</td>
+			</div>
+			<div class="col-4 offset-sm-3">
+				<th>Recipe Prep Time (in minutes):</th>
+				<td th:text="${recipe.prepTime}">Default Text</td>
+			</div>
+			<div class="col-4 offset-sm-3">
+				<th>Recipe Cook Time (in minutes):</th>
+				<td th:text="${recipe.cookTime}">Default Text</td>
+			</div>
+		</div>
 		<tr>
 			<th>Recipe Ingredients:</th>
 			<td th:text="${recipe.ingredients}">Default Text</td>
 		</tr>
 		<tr>
-			<th>Recipe Servings:</th>
-			<td th:text="${recipe.servings}">Default Text</td>
+			<!--th>Recipe Servings:</th>
+			<td th:text="${recipe.servings}">Default Text</td-->
 		</tr>
 		<tr>
-			<th>Recipe Prep Time (in minutes):</th>
-			<td th:text="${recipe.prepTime}">Default Text</td>
+			<!--th>Recipe Prep Time (in minutes):</th>
+			<td th:text="${recipe.prepTime}">Default Text</td-->
 		</tr>
-		<tr>
+		<!--tr>
 			<th>Recipe Cook Time (in minutes):</th>
 			<td th:text="${recipe.cookTime}">Default Text</td>
-		</tr>
+		</tr-->
 		<tr>
 			<th>Recipe Directions:</th>
 			<td th:text="${recipe.directions}">Default Text</td>
