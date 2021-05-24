@@ -37,3 +37,51 @@ body, html {
   opacity:1!important;
 }
 
+$blue: #3333ff;
+$dark-blue: #00080;
+
+$yellow: #FEF0B2;
+$dark-yellow: yellow;
+
+$pink: #FAD2E1;
+$dark-pink: #F84F7F;
+
+$purple: #cc80FF;
+$dark-purple: #7F51F4;
+
+@mixin color-panel($color1, $color2){
+    border: 1px solid $color2;
+    background-color: $color1;
+    color: $color2;
+}
+
+body {
+  margin: 4rem 0;
+}
+
+h4 {
+  margin-bottom:2rem;
+  margin-top: 3rem;
+}
+
+.panel {
+  border-radius: 0.3rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  &.panel-blue {
+    @include color-panel($blue, $dark-blue);
+  }
+
+  &.panel-yellow{
+    @include color-panel($yellow, $dark-yellow);
+  }
+
+  &.panel-pink{
+    @include color-panel($pink, $dark-pink);
+  }
+
+  &.panel-purple {
+    @include color-panel($purple, $dark-purple);
+  }
+}

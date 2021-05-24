@@ -5,112 +5,85 @@
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid">
 
+	<div style="background: url(https://pixabay.com/get/g1726e93585f1555c91195874dd136e77b46acf9cf4c640fd3db41ba636347b48f37491eef97b08680e5a9be1e1ceaba9_640.jpg)" class="page-holder bg-cover">
+
 	<div class="container">
-		<div class="row">
-			<div class="col">
-				<div class="panel panel-blue"th:text="${recipe.name}">Default Text</div>
+			<div class="row">
+				<div class="col text-left">
+						<div class="font-weight-bold" th:if="${recipe.favorite}">
+							<h1><span class="badge bg-warning">Favorite</span></h1>
+						</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center">
+					<H1 class="font-weight-bold" th:text="${recipe.name}">Default Text</H1>
+				</div>
+			</div>
+
+	<div class="container">
+			<div class="row">
+				<div class="col-md-3 offset-1 text-center" style="background-color:lightcyan">
+					<div class="font-weight-bold">Recipe Prep Time: <span th:text="${recipe.prepTime}"></span> minutes</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3 offset-1 text-center">
+					<div class="font-weight-bold">Recipe Cook Time: <span th:text="${recipe.cookTime}"></span> minutes</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3 offset-1 text-center" style="background-color:lightcyan">
+					<div class="font-weight-bold">Recipe Servings: <span th:text="${recipe.servings}"></span></div>
+				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col">
-				<div class="panel panel-purple" >
-					<div class="font-weight-bold">Recipe Servings: <p th:text="${recipe.servings}"></p></div></div>
-			</div>
-			<div class="col">
-				<div class="panel panel-purple">This is the second column.</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<div class="panel panel-pink">This is the first column.</div>
-			</div>
-			<div class="col">
-				<div class="panel panel-pink">This is the second column.</div>
-			</div>
-			<div class="col">
-				<div class="panel panel-pink">This is the third column.</div>
-			</div>
-			<div class="col">
-				<div class="panel panel-pink">This is the fourth column.</div>
-			</div>
+		<div class = "container col text-right">Created By: <span th:text="${recipe.user.username}"></span>
 		</div>
 	</div>
-	<table class="table table-striped">
-		<!--top bar if a favorite recipe-->
-		<tr th:if="${recipe.favorite}">
-		<h1><span class="badge bg-warning">Favorite</span></h1>
-		</tr>
-		<tr>
-			<th>Recipe Name:</th>
-			<td th:text="${recipe.name}">Default Text</td>
-		</tr>
-		<div class = "row">
-			<div class="col-4 offset-sm-3">
-				<th></th>
-				<td></td>
+
+		<div class = "container-sm">
+			<div class="row justify-content-around">
+				<div class="col-4 text-left h-50 p-3 my-3 border border-success">
+					<div class="font-weight-bold">Recipe Ingredients: </div>
+					<span th:text="${recipe.ingredients}"></span>
+				</div>
+
+				<div class="col-6.offset-md-2 text-left p-3 my-3 border border-success">
+					<div class="font-weight-bold">Recipe Directions: </div>
+					<span th:text="${recipe.directions}"></span>
+				</div>
 			</div>
-			<div class="col-4 offset-sm-3">
-				<th>Recipe Servings: </th>
-				<td th:text="${recipe.servings}">Default Text</td>
-			</div>
-			<div class="col-4 offset-sm-3">
-				<th>Recipe Prep Time (in minutes):</th>
-				<td th:text="${recipe.prepTime}">Default Text</td>
-			</div>
-			<div class="col-4 offset-sm-3">
-				<th>Recipe Cook Time (in minutes):</th>
-				<td th:text="${recipe.cookTime}">Default Text</td>
+
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm">
+					<p class="font-weight-bold">Sommelier Suggestions:</p>
+					<td>
+						<th:block th:each="beverage : ${recipe.beverages}">
+							<p th:text="${beverage.name}"></p>
+						</th:block>
+					</td>
+				</div>
+				<div class="col-sm">
+						<p class="font-weight-bold">Recipe Image:</p>
+						<img class="img-fluid img-thumbnail" th:src="${recipe.image}" onerror="this.src='https://docs.google.com/drawings/d/e/2PACX-1vRRKeSRG7GN6DYsnEN6QEnHXtDnMNoTipb3GnS1myMZi-U070HVz_ku-LAQJAHybTPUOFSHcLoMaZZZ/pub?w=319&h=320';" alt="Missing Image">
+				</div>
+				<div class="col-sm">
+					<p class="font-weight-bold">Recipe Categories:</p>
+					<td>
+						<th:block th:if="${recipe.categories.size() > 0}" th:each="category : ${recipe.categories}">
+							<p th:text="${category.name}"></p>
+						</th:block>
+						<p th:unless="${recipe.categories.size()}">No Categories</p>
+					</td>
+				</div>
 			</div>
 		</div>
-		<tr>
-			<th>Recipe Ingredients:</th>
-			<td th:text="${recipe.ingredients}">Default Text</td>
-		</tr>
-		<tr>
-			<!--th>Recipe Servings:</th>
-			<td th:text="${recipe.servings}">Default Text</td-->
-		</tr>
-		<tr>
-			<!--th>Recipe Prep Time (in minutes):</th>
-			<td th:text="${recipe.prepTime}">Default Text</td-->
-		</tr>
-		<!--tr>
-			<th>Recipe Cook Time (in minutes):</th>
-			<td th:text="${recipe.cookTime}">Default Text</td>
-		</tr-->
-		<tr>
-			<th>Recipe Directions:</th>
-			<td th:text="${recipe.directions}">Default Text</td>
-		<tr>
-			<th>Created By:</th>
-			<td th:text="${recipe.user.username}">Default Text</td>
-		<tr>
-	</table>
-	<div class="container">
-		<div class="row">
-			<div class="col-sm">
-				<p class="font-weight-bold">Sommelier Suggestions:</p>
-				<td>
-					<th:block th:each="beverage : ${recipe.beverages}">
-						<p th:text="${beverage.name}"></p>
-					</th:block>
-				</td>
-			</div>
-			<div class="col-sm">
-					<p class="font-weight-bold">Recipe Image:</p>
-					<p><img class="img-fluid img-thumbnail" th:src="${recipe.image}" onerror="this.src='https://pixabay.com/get/g2e8ae26783e4a46c6ad7e1c00caa6e7dfb77cd0e70c8c68619b208306b36e1855a12637cf9474b0c22132bc6ba668210_640.jpg'"/></p>
-			</div>
-			<div class="col-sm">
-				<p class="font-weight-bold">Recipe Categories:</p>
-				<td>
-					<th:block th:if="${recipe.categories.size() > 0}" th:each="category : ${recipe.categories}">
-						<p th:text="${category.name}"></p>
-					</th:block>
-					<p th:unless="${recipe.categories.size()}">No Categories</p>
-				</td>
-			</div>
-		</div>
-	</div>
+
+</div>
 </div>
 <footer th:replace="fragments :: footer"></footer>
 <div th:replace="fragments :: bootstrap-javascript"></div>
