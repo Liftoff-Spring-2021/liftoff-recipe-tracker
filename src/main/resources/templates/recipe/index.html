@@ -6,7 +6,7 @@
 <div class="container-fluid">
 	<h2 th:unless="${recipes} and ${recipes.size()}">We're sorry, there are currently no recipes! Feel free to
 		<a th:href="@{/recipes/create}">create a recipe now</a></h2>
-	<table class="table table-striped" th:if="${recipes} and ${recipes.size()} > 0">
+	<table class="table table-striped table-hover" th:if="${recipes} and ${recipes.size()} > 0">
         <thead>
         <tr>
             <th>Recipe Name</th>
@@ -23,6 +23,12 @@
 	        <td><a th:text="${recipe.cookTime}"></a></td>
 	        <td><a th:text="${recipe.servings}"></a></td>
 
+<!--		<tr th:each="category : ${categories}">-->
+<!--			<td><a th:text="${category.name}" th:value = "${category.id}" th:href="'/recipes?categoryId=' + ${category.id}"></a></td>-->
+<!--			<th:block>-->
+<!--				<td th:if="${category.user.equals(user)}"><a th:text="Edit" th:value = "${category.id}" th:href="'categories/edit/' + ${category.id}"></a></td>-->
+<!--				<td th:if="${!category.user.equals(user)}"><a th:value = "${category.id}"></a></td>-->
+<!--			</th:block>-->
 
 			<td>
 			    <button
@@ -32,16 +38,24 @@
 			            aria-expanded="false"> Action
 			    </button>
 
-			    <ul class="dropdown-menu">
-			        <li><a  class="dropdown-item"  th:value = "${recipe.id}" th:href="'recipes/edit/' + ${recipe.id}"> Edit</a></li>
-			        <li><a class="dropdown-item"  th:value = "${recipe.id}" th:href="'recipes/copy/' + ${recipe.id}"> Copy</a></li>
+			    <ul class="dropdown-menu" >
+<!--					<li><a th:text="${recipe.name}" th:value="${recipe.id}" th:href="'/recipes?recipeId=' ${recipe.id}"></a></li>-->
+<!--					th:each="recipe : ${recipes}"-->
+<!--					<th:block>-->
+<!--			            <li th:if="${recipe.user.equals(user)]"><a  class="dropdown-item" th:text="Edit" th:value = "${recipe.id}" th:href="'recipes/edit/' + ${recipe.id}"></a></li>-->
+<!--						<li th:if="${!recipe.user.equals(user)]"><a  class="dropdown-item" th:value = "${recipe.id}" ></a></li>-->
+<!--					</th:block>-->
+
+					<li><a class="dropdown-item"  th:value = "${recipe.id}" th:href="'/recipes/edit/' + ${recipe.id}"> Edit</a></li>
+					<li><a class="dropdown-item"  th:value = "${recipe.id}" th:href="'/recipes/copy/' + ${recipe.id}"> Copy</a></li>
 			    </ul>
 			</td>
 
         </tr>
     </table>
-	<footer th:replace="fragments :: footer"></footer>
+
 </div>
+<footer th:replace="fragments :: footer"></footer>
 <div th:replace="fragments :: bootstrap-javascript"></div>
 </body>
 </html>
