@@ -110,9 +110,12 @@ public class CategoryController {
 
     @PostMapping("edit")
     public String processEditCategoryForm(int categoryId, String name) {
-        Category category = categoryRepository.findById(categoryId).get();
-        category.setName(name);
-        categoryRepository.save(category);
+        Optional<Category> optCategory = categoryRepository.findById(categoryId);
+        if (optCategory.isPresent()) {
+            Category category = optCategory.get();
+            category.setName(name);
+            categoryRepository.save(category);
+        }
         return "redirect:/categories";
     }
 
