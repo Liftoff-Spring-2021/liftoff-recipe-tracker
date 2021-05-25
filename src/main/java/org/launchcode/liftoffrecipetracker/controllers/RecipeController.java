@@ -116,8 +116,7 @@ public class RecipeController {
 			Recipe recipe = result.get();
 			model.addAttribute("title", "Recipe Details: " + recipe.getName());
 			model.addAttribute("recipe", recipe);
-			User user = authenticationController.getUserFromSession(userSession);
-			//recipe.setUser(user);
+
 		}
 		return "recipe/detail";
 	}
