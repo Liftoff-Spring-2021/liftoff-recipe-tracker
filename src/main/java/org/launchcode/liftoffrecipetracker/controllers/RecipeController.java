@@ -107,7 +107,7 @@ public class RecipeController {
 
 	@GetMapping("detail")
 	public String displayRecipeDetails(@RequestParam int recipeId,
-									   Model model, HttpSession userSession) {
+									   Model model) {
 		Optional<Recipe> result = recipeRepository.findById(recipeId);
 
 		if (result.isEmpty()) {
@@ -116,8 +116,6 @@ public class RecipeController {
 			Recipe recipe = result.get();
 			model.addAttribute("title", "Recipe Details: " + recipe.getName());
 			model.addAttribute("recipe", recipe);
-			User user = authenticationController.getUserFromSession(userSession);
-			recipe.setUser(user);
 		}
 		return "recipe/detail";
 	}
@@ -163,24 +161,40 @@ public class RecipeController {
 										@RequestParam(required = false) List<Integer> categories,
 										@RequestParam(required = false) List<Integer> beverages){
 
-		Recipe recipe = recipeRepository.findById(recipeId).get();
+		Optional<Recipe> optRecipe = recipeRepository.findById(recipeId);
 
-			List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
-			recipe.removeAllCategories(recipe.getCategories());
-			recipe.addCategories(categoryObjects);
-			List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
-			recipe.removeAllBeverages(recipe.getBeverages());
-			recipe.addBeverages(beverageObjects);
+		if (optRecipe.isPresent()) {
 
-		recipe.setName(name);
-		recipe.setIngredients(ingredients);
-		recipe.setDirections(directions);
-		recipe.setServings(servings);
-		recipe.setCookTime(cookTime);
-		recipe.setPrepTime(prepTime);
-		recipe.setImage(image);
-		recipe.setFavorite(favorite);
-		recipeRepository.save(recipe);
+			Recipe recipe = optRecipe.get();
+
+			if (categories == null) {
+				recipe.removeAllCategories(recipe.getCategories());
+			} else {
+				List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
+				recipe.removeAllCategories(recipe.getCategories());
+				recipe.addCategories(categoryObjects);
+			}
+
+			if (beverages == null) {
+				recipe.removeAllBeverages(recipe.getBeverages());
+			} else {
+				List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
+				recipe.removeAllBeverages(recipe.getBeverages());
+				recipe.addBeverages(beverageObjects);
+			}
+
+			recipe.setName(name);
+			recipe.setIngredients(ingredients);
+			recipe.setDirections(directions);
+			recipe.setServings(servings);
+			recipe.setCookTime(cookTime);
+			recipe.setPrepTime(prepTime);
+			recipe.setImage(image);
+			recipe.setFavorite(favorite);
+
+			recipeRepository.save(recipe);
+		}
+
 		return "redirect:/recipes";
 	}
 
@@ -203,19 +217,32 @@ public class RecipeController {
 	public String processCopyRecipeForm( @Valid @ModelAttribute Recipe recipe,
 										Model model, Errors errors,
 										 @RequestParam(required = false) List<Integer> categories,
-										 @RequestParam(required = false) List<Integer> beverages){
+										 @RequestParam(required = false) List<Integer> beverages,
+	                                     HttpSession userSession){
 		if(errors.hasErrors()){
 			model.addAttribute("title", "Copy Recipe");
 			model.addAttribute(new Recipe());
 			return "recipe/copy";
 		}
 
-		List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
-		recipe.removeAllCategories(recipe.getCategories());
-		recipe.addCategories(categoryObjects);
-		List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
-		recipe.removeAllBeverages(recipe.getBeverages());
-		recipe.addBeverages(beverageObjects);
+		if (categories == null) {
+			recipe.removeAllCategories(recipe.getCategories());
+		} else {
+			List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
+			recipe.removeAllCategories(recipe.getCategories());
+			recipe.addCategories(categoryObjects);
+		}
+
+		if (beverages == null) {
+			recipe.removeAllBeverages(recipe.getBeverages());
+		} else {
+			List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
+			recipe.removeAllBeverages(recipe.getBeverages());
+			recipe.addBeverages(beverageObjects);
+		}
+
+		User user = authenticationController.getUserFromSession(userSession);
+		recipe.setUser(user);
 
 		recipeRepository.save(recipe);
 		return"redirect:/recipes";
