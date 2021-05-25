@@ -113,7 +113,6 @@ import java.util.Optional;
         Optional<Beverage> optBeverage = beverageRepository.findById(beverageId);
         if (optBeverage.isPresent()) {
             Beverage beverage = optBeverage.get();
-
             beverage.setName(name);
             beverageRepository.save(beverage);
         }
