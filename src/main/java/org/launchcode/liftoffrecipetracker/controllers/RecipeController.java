@@ -161,33 +161,40 @@ public class RecipeController {
 										@RequestParam(required = false) List<Integer> categories,
 										@RequestParam(required = false) List<Integer> beverages){
 
-		Recipe recipe = recipeRepository.findById(recipeId).get();
+		Optional<Recipe> optRecipe = recipeRepository.findById(recipeId);
 
-		if (categories == null) {
-			recipe.removeAllCategories(recipe.getCategories());
-		} else {
-			List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
-			recipe.removeAllCategories(recipe.getCategories());
-			recipe.addCategories(categoryObjects);
+		if (optRecipe.isPresent()) {
+
+			Recipe recipe = optRecipe.get();
+
+			if (categories == null) {
+				recipe.removeAllCategories(recipe.getCategories());
+			} else {
+				List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
+				recipe.removeAllCategories(recipe.getCategories());
+				recipe.addCategories(categoryObjects);
+			}
+
+			if (beverages == null) {
+				recipe.removeAllBeverages(recipe.getBeverages());
+			} else {
+				List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
+				recipe.removeAllBeverages(recipe.getBeverages());
+				recipe.addBeverages(beverageObjects);
+			}
+
+			recipe.setName(name);
+			recipe.setIngredients(ingredients);
+			recipe.setDirections(directions);
+			recipe.setServings(servings);
+			recipe.setCookTime(cookTime);
+			recipe.setPrepTime(prepTime);
+			recipe.setImage(image);
+			recipe.setFavorite(favorite);
+
+			recipeRepository.save(recipe);
 		}
 
-		if (beverages == null) {
-			recipe.removeAllBeverages(recipe.getBeverages());
-		} else {
-			List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
-			recipe.removeAllBeverages(recipe.getBeverages());
-			recipe.addBeverages(beverageObjects);
-		}
-
-		recipe.setName(name);
-		recipe.setIngredients(ingredients);
-		recipe.setDirections(directions);
-		recipe.setServings(servings);
-		recipe.setCookTime(cookTime);
-		recipe.setPrepTime(prepTime);
-		recipe.setImage(image);
-		recipe.setFavorite(favorite);
-		recipeRepository.save(recipe);
 		return "redirect:/recipes";
 	}
 
