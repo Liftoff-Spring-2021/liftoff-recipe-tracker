@@ -48,11 +48,9 @@
 					</th:block>
 				</td>
 			</div>
-			<div class="col-sm" th:if="${recipe.image != ''}">
-				<div>
+			<div class="col-sm">
 					<p class="font-weight-bold">Recipe Image:</p>
-					<p><img class="img-fluid img-thumbnail" th:src="${recipe.image}"/></p>
-				</div>
+					<p><img class="img-fluid img-thumbnail" th:src="${recipe.image}" onerror="this.src='https://pixabay.com/get/g2e8ae26783e4a46c6ad7e1c00caa6e7dfb77cd0e70c8c68619b208306b36e1855a12637cf9474b0c22132bc6ba668210_640.jpg'"/></p>
 			</div>
 			<div class="col-sm">
 				<p class="font-weight-bold">Recipe Categories:</p>
