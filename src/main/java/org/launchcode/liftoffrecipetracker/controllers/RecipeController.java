@@ -165,22 +165,12 @@ public class RecipeController {
 
 		Recipe recipe = recipeRepository.findById(recipeId).get();
 
-//		if ((categories != null) && (beverages != null)) {
 			List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
 			recipe.removeAllCategories(recipe.getCategories());
 			recipe.addCategories(categoryObjects);
 			List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
 			recipe.removeAllBeverages(recipe.getBeverages());
 			recipe.addBeverages(beverageObjects);
-
-//		}
-//		else if (categories != null) {
-//			List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
-//			recipe.addCategories(categoryObjects);
-//		} else if (beverages != null) {
-//			List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
-//			recipe.addBeverages(beverageObjects);
-//		}
 
 		recipe.setName(name);
 		recipe.setIngredients(ingredients);
@@ -193,8 +183,6 @@ public class RecipeController {
 		recipeRepository.save(recipe);
 		return "redirect:/recipes";
 	}
-
-
 
 	@GetMapping("copy/{recipeId}")
 	public String displayCopyRecipeForm(@PathVariable int recipeId, Model model){
