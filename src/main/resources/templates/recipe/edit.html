@@ -3,13 +3,17 @@
 <head th:replace="fragments :: head"></head>
 <body class="text-center">
 <nav th:replace="fragments :: navigation"></nav>
-<div class="container-fluid text-left">
-	<form method="post">
-		<div th:replace="fragments :: recipe-form-group"></div>
-		<input type="submit" value="Create Recipe" class="btn btn-primary">
-	</form>
+<div class="container-fluid">
+
+    <form method="post" th:action="@{/recipes/edit}">
+        <input type="hidden" th:value="${recipe.id}" name="recipeId">
+        <div th:replace="fragments :: recipe-form-group"></div>
+        <input type="submit" value="Edit" class="btn btn-primary">
+    </form>
+
 </div>
 <footer th:replace="fragments :: footer"></footer>
 <div th:replace="fragments :: bootstrap-javascript"></div>
 </body>
 </html>
+

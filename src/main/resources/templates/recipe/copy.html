@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="text-center">
+<nav th:replace="fragments :: navigation"></nav>
+<div class="container-fluid">
+    <form method ="post" th:action="@{/recipes/copy}">
+        <input type="hidden" th:value="${recipe.id}" name="recipeId">
+        <div th:replace="fragments :: recipe-form-group"></div>
+        <input type="submit" value="Copy" th:formaction="@{/recipes/copy}" class="btn btn-info">
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+<div th:replace="fragments :: bootstrap-javascript"></div>
+</body>
+</html>

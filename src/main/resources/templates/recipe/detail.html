@@ -4,23 +4,6 @@
 <body class="text-left">
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid">
-
-	<div style="background: url(https://pixabay.com/get/g1726e93585f1555c91195874dd136e77b46acf9cf4c640fd3db41ba636347b48f37491eef97b08680e5a9be1e1ceaba9_640.jpg)" class="page-holder bg-cover">
-
-	<div class="container">
-			<div class="row">
-				<div class="col text-left">
-						<div class="font-weight-bold" th:if="${recipe.favorite}">
-							<h1><span class="badge bg-warning">Favorite</span></h1>
-						</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col text-center">
-					<H1 class="font-weight-bold" th:text="${recipe.name}">Default Text</H1>
-				</div>
-			</div>
-
 	<div class="container">
 			<div class="row">
 				<div class="col-md-3 offset-1 text-center" style="background-color:lightcyan">
@@ -82,7 +65,6 @@
 				</div>
 			</div>
 		</div>
-
 </div>
 </div>
 <div class="container text-center">

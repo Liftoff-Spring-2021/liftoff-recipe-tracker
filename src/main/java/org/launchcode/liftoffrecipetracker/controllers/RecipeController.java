@@ -36,7 +36,7 @@ public class RecipeController {
 
 	@GetMapping
 	public String displayRecipes(@RequestParam(required = false) Integer categoryId,
-								 @RequestParam(required = false) Integer beverageId, HttpSession userSession,
+								 @RequestParam(required = false) Integer beverageId,
 								 Model model) {
 		if ((categoryId == null) && (beverageId == null)) {
 			model.addAttribute("title", "All Recipes");
@@ -65,7 +65,7 @@ public class RecipeController {
 	}
 
 	@GetMapping("create")
-	public String displayCreateRecipeForm(Model model, HttpSession userSession) {
+	public String displayCreateRecipeForm(Model model) {
 		model.addAttribute("title", "Create a Recipe");
 		model.addAttribute("categories", categoryRepository.findAll());
 		model.addAttribute("beverages", beverageRepository.findAll());
@@ -79,7 +79,6 @@ public class RecipeController {
 										  @RequestParam(required = false) List<Integer> categories,
 										  @RequestParam(required = false) List<Integer> beverages
 										  ) {
-
 
 		if (errors.hasErrors()) {
 			model.addAttribute("title", "Create a Recipe");
@@ -106,7 +105,6 @@ public class RecipeController {
 		return "redirect:";
 	}
 
-
 	@GetMapping("detail")
 	public String displayRecipeDetails(@RequestParam int recipeId,
 									   Model model, HttpSession userSession) {
@@ -118,6 +116,8 @@ public class RecipeController {
 			Recipe recipe = result.get();
 			model.addAttribute("title", "Recipe Details: " + recipe.getName());
 			model.addAttribute("recipe", recipe);
+			User user = authenticationController.getUserFromSession(userSession);
+			recipe.setUser(user);
 		}
 		return "recipe/detail";
 	}
@@ -140,6 +140,85 @@ public class RecipeController {
 			}
 		}
 		return "redirect:";
+	}
+
+	@GetMapping("edit/{recipeId}")
+	public String displayEditRecipeForm(@PathVariable int recipeId, Model model){
+		Optional<Recipe> result = recipeRepository.findById(recipeId);
+		if(result.isEmpty()){
+			model.addAttribute("title", "Invalid recipe ID" + recipeId);
+		} else {
+			Recipe recipe = result.get();
+			model.addAttribute("title", "Edit Recipe" + recipe.getName());
+			model.addAttribute("recipe", recipe);
+			model.addAttribute("categories", categoryRepository.findAll());
+			model.addAttribute("beverages", beverageRepository.findAll());
+		}
+		return "recipe/edit";
+	}
+
+	@PostMapping("edit")
+	public String processEditRecipeForm(int recipeId, String name, String ingredients, String directions,
+										int servings, int cookTime, int prepTime, String image, Boolean favorite,
+										@RequestParam(required = false) List<Integer> categories,
+										@RequestParam(required = false) List<Integer> beverages){
+
+		Recipe recipe = recipeRepository.findById(recipeId).get();
+
+			List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
+			recipe.removeAllCategories(recipe.getCategories());
+			recipe.addCategories(categoryObjects);
+			List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
+			recipe.removeAllBeverages(recipe.getBeverages());
+			recipe.addBeverages(beverageObjects);
+
+		recipe.setName(name);
+		recipe.setIngredients(ingredients);
+		recipe.setDirections(directions);
+		recipe.setServings(servings);
+		recipe.setCookTime(cookTime);
+		recipe.setPrepTime(prepTime);
+		recipe.setImage(image);
+		recipe.setFavorite(favorite);
+		recipeRepository.save(recipe);
+		return "redirect:/recipes";
+	}
+
+	@GetMapping("copy/{recipeId}")
+	public String displayCopyRecipeForm(@PathVariable int recipeId, Model model){
+		Optional<Recipe> result = recipeRepository.findById(recipeId);
+		if(result.isEmpty()){
+			model.addAttribute("title", "Invalid Recipe ID" + recipeId);
+		} else{
+			Recipe recipe = result.get();
+			model.addAttribute("title", "Copy Recipe" + recipe.getName());
+			model.addAttribute("recipe", recipe);
+			model.addAttribute("categories", categoryRepository.findAll());
+			model.addAttribute("beverages", beverageRepository.findAll());
+		}
+		return"recipe/copy";
+	}
+
+	@PostMapping("copy")
+	public String processCopyRecipeForm( @Valid @ModelAttribute Recipe recipe,
+										Model model, Errors errors,
+										 @RequestParam(required = false) List<Integer> categories,
+										 @RequestParam(required = false) List<Integer> beverages){
+		if(errors.hasErrors()){
+			model.addAttribute("title", "Copy Recipe");
+			model.addAttribute(new Recipe());
+			return "recipe/copy";
+		}
+
+		List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
+		recipe.removeAllCategories(recipe.getCategories());
+		recipe.addCategories(categoryObjects);
+		List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
+		recipe.removeAllBeverages(recipe.getBeverages());
+		recipe.addBeverages(beverageObjects);
+
+		recipeRepository.save(recipe);
+		return"redirect:/recipes";
 	}
 }
 
