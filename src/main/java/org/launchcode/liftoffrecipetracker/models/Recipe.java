@@ -156,6 +156,14 @@ public class Recipe extends AbstractEntityName {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public void removeAllBeverages(List<Beverage> beverages) {
+		this.beverages.removeAll(beverages);
+	}
+
+	public void removeAllCategories(List<Category> categories) {
+		this.categories.removeAll(categories);
+	}
 }
 
 
