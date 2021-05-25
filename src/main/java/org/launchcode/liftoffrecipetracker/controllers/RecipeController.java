@@ -225,12 +225,21 @@ public class RecipeController {
 			return "recipe/copy";
 		}
 
-		List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
-		recipe.removeAllCategories(recipe.getCategories());
-		recipe.addCategories(categoryObjects);
-		List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
-		recipe.removeAllBeverages(recipe.getBeverages());
-		recipe.addBeverages(beverageObjects);
+		if (categories == null) {
+			recipe.removeAllCategories(recipe.getCategories());
+		} else {
+			List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
+			recipe.removeAllCategories(recipe.getCategories());
+			recipe.addCategories(categoryObjects);
+		}
+
+		if (beverages == null) {
+			recipe.removeAllBeverages(recipe.getBeverages());
+		} else {
+			List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
+			recipe.removeAllBeverages(recipe.getBeverages());
+			recipe.addBeverages(beverageObjects);
+		}
 
 		User user = authenticationController.getUserFromSession(userSession);
 		recipe.setUser(user);
