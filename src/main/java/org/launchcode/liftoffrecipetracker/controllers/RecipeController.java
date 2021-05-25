@@ -201,12 +201,21 @@ public class RecipeController {
 
 	@PostMapping("copy")
 	public String processCopyRecipeForm( @Valid @ModelAttribute Recipe recipe,
-										Model model, Errors errors, HttpSession userSession){
+										Model model, Errors errors,
+										 @RequestParam(required = false) List<Integer> categories,
+										 @RequestParam(required = false) List<Integer> beverages){
 		if(errors.hasErrors()){
 			model.addAttribute("title", "Copy Recipe");
 			model.addAttribute(new Recipe());
 			return "recipe/copy";
 		}
+
+		List<Category> categoryObjects = (List<Category>) categoryRepository.findAllById(categories);
+		recipe.removeAllCategories(recipe.getCategories());
+		recipe.addCategories(categoryObjects);
+		List<Beverage> beverageObjects = (List<Beverage>) beverageRepository.findAllById(beverages);
+		recipe.removeAllBeverages(recipe.getBeverages());
+		recipe.addBeverages(beverageObjects);
 
 		recipeRepository.save(recipe);
 		return"redirect:/recipes";
