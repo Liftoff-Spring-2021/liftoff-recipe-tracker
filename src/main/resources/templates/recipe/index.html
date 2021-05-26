@@ -21,7 +21,7 @@
 			</td>
 	        <td>
 		        <a th:if="${recipe.description}" th:text="${recipe.description}"></a>
-		        <a th:unless="${recipe.description == null}">No Description Available</a>
+		        <a th:unless="${recipe.description != ''}">No Description Available</a>
 	        </td>
 	        <td>
 		        <a th:text="${'Prep Time: ' + recipe.prepTime}"></a><br>
