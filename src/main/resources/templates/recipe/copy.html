@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="text-center">
+<body>
 <nav th:replace="fragments :: navigation"></nav>
-<div class="container-fluid">
-    <form method ="post" th:action="@{/recipes/copy}">
-        <input type="hidden" th:value="${recipe.id}" name="recipeId">
-        <div th:replace="fragments :: recipe-form-group"></div>
-        <input type="submit" value="Copy" th:formaction="@{/recipes/copy}" class="btn btn-info">
-    </form>
+<div class="container-fluid" style="margin-left">
+    <div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vSlM7lQ0lyffdEL2iECXmaXSS1c5ZkMa1p_YJbksmpNnpfZ_zmtO7UtauKSqYoHL8KDTxw648rISmPb/pub?w=954&h=631)" class="page-holder bg-cover">
+        <div class="container">
+            <div class="row text-black pt-4">>
+                <form method ="post" th:action="@{/recipes/copy}">
+                  <input type="hidden" th:value="${recipe.id}" name="recipeId">
+                 <div th:replace="fragments :: recipe-form-group"></div>
+                    <div class="row">
+                        <div class="col-md-5 offset-5">
+                   <input type="submit" value="Copy Recipe" th:formaction="@{/recipes/copy}" class="btn btn-info">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+<div class="container text-center">
 <footer th:replace="fragments :: footer"></footer>
 <div th:replace="fragments :: bootstrap-javascript"></div>
+</div>
 </body>
 </html>
