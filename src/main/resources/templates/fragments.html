@@ -65,7 +65,7 @@
 
 <div th:fragment="category-form-group">
 	<div class="form-group">
-		<label>Category Name
+		<label class="font-weight-bold">Category Name
 			<input th:field="${category.name}" class="form-control">
 		</label>
 		<span th:errors="${category.name}" class="error"></span>
@@ -74,7 +74,7 @@
 
 <div th:fragment="beverage-form-group">
 	<div class="form-group">
-		<label>Beverage Name
+		<label class="font-weight-bold">Beverage Name
 			<input th:field="${beverage.name}" class="form-control">
 		</label>
 		<span th:errors="${beverage.name}" class="error"></span>

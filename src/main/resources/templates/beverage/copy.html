@@ -3,15 +3,23 @@
 <head th:replace="fragments :: head"></head>
 <body class="text-center">
 <nav th:replace="fragments :: navigation"></nav>
-<div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vTiSQuGS6mXaJ51zop8MKfvZZKIpsTeaZH3phkTnVs7AhO-hZGglgpN15oodcooDaq2mWGXGmlXoFe9/pub?w=953&h=569)" class="page-holder bg-cover">
+<div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vQDf1bXsOUKfQFu6Jws3sFdN9YsMSvroyoBeUzBruB_O3Hx1sbp4SHeuzdNAjLAr8i1PNZTFFWGAb4a/pub?w=954&h=631)" class="page-holder bg-cover">
     <div class = "row pt-5"></div>
-<img class = "sam" src = "https://docs.google.com/drawings/d/e/2PACX-1vRn_7yHWBEvtlOdRRo_qu2kcUVZoXeRpWpd1B2fBwq9NdHbjOq64m902PXtDWkBbaqqXkeuYL-FTQdi/pub?w=960&h=720">
-<div class="container-fluid">
+<div class="container-fluid pt-4">
     <form method="post" th:action="@{/beverages/copy}">
-        <input type="hidden" th:value="${beverage.id}" name="beverageId">
-        <div th:replace="fragments :: beverage-form-group"></div>
+
+             <input type="hidden" th:value="${beverage.id}" name="beverageId">
+        <div class = "row pt-5 md-4 offset-md-7">
+                 <div th:replace="fragments :: beverage-form-group"></div>
+        </div> <div class="container-fluid" style="margin-right">
+        <div class = "row pt-4 offset-md-8"></div>
+        <img class = "sam offset-md-7" src = "https://docs.google.com/drawings/d/e/2PACX-1vRn_7yHWBEvtlOdRRo_qu2kcUVZoXeRpWpd1B2fBwq9NdHbjOq64m902PXtDWkBbaqqXkeuYL-FTQdi/pub?w=960&h=720">
+    </div>
+        <div class = "row md-4 offset-md-8">
         <input type="submit" value="Copy" th:formaction="@{/beverages/copy}" class="btn btn-info">
+        </div>
     </form>
+
 </div>
 </div>
     <div class="container text-center">
