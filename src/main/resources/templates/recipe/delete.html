@@ -1,20 +1,34 @@
 <!DOCTYPE html>
     <html lang="en" xmlns:th="https://thymeleaf.org/">
     <head th:replace="fragments :: head"></head>
-<body class="text-center">
+<body class="text-left">
     <nav th:replace="fragments :: navigation"></nav>
-        <form method="post">
-            <th:block th:each="recipe : ${recipes}">
-                <div class="form-group">
-                    <lable>
-                        <span th:text="${recipe.name}"></span>
-                        <input type="checkbox" name="recipeId" th:value="${recipe.id}" class="form-control">
-                    </lable>
-                </div>
-            </th:block>
-            <input type="submit" value="Delete" class="btn btn-danger">
-        </form>
-    <footer th:replace="fragments :: footer"></footer>
-    <div th:replace="fragments :: bootstrap-javascript"></div>
+    <div class="container-fluid">
+        <div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vTQVZZ2zWGGdODwfY-CyOAHb2sAlsjSZw9eX8TE8noE8TcCAKjxxrgTjMfWbGgysgmumB5qnK-0WeMj/pub?w=954&h=631)" class="page-holder bg-cover">
+            <div class="container">
+                <form method="post">
+                    <div class="row pt-5">
+                        <div class="col-md-5 offset-md-3 pt-3 pb-3 border border-success">
+                            <th:block th:each="recipe : ${recipes}">
+                            <div class = "pl-2 pt-1 border border-success">
+                                   <input type="checkbox" name="recipeId" th:value="${recipe.id}">
+                                        <label th:text="${recipe.name}"></label>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col-md-5 offset-7">
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center">
+        <footer th:replace="fragments :: footer"></footer>
+        <div th:replace="fragments :: bootstrap-javascript"></div>
+    </div>
 </body>
 </html>
