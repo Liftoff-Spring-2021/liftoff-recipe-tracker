@@ -3,14 +3,37 @@
 <head th:replace="fragments :: head"></head>
 <body class="text-center ">
 <nav th:replace="fragments :: navigation"></nav>
-<img class = "sam" src = "https://docs.google.com/drawings/d/e/2PACX-1vRn_7yHWBEvtlOdRRo_qu2kcUVZoXeRpWpd1B2fBwq9NdHbjOq64m902PXtDWkBbaqqXkeuYL-FTQdi/pub?w=960&h=720">
-<div class="container-fluid">
-    <form method="post">
-        <div th:replace="fragments :: beverage-form-group"></div>
-        <input type="submit" value="Create" class="btn btn-primary">
-    </form>
-  </div>
-<footer th:replace="fragments :: footer"></footer>
-<div th:replace="fragments :: bootstrap-javascript"></div>
-</body>
+
+<div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vSrAgCbBRxzoxUszQPTvNM_UxPSBTmk7thg2BdTZEJnt5h5jGA71B1kYj_XqAbEHVmTXF9GYsf5eV5n/pub?w=954&h=631)" class="page-holder bg-cover">
+
+
+     <div class="container-fluid" style="margin-left">
+         <div class = "row pt-5"></div>
+         <div class="row offset-md-5 text-white">
+            <form method="post">
+                <div th:replace="fragments :: beverage-form-group"></div>
+                <input type="submit" value="Create" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+    <div class="container-fluid" style="margin-left">
+        <div class = "row pt-5"></div>
+        <div class = "row pt-5"></div>
+        <div class = "row pt-5"></div>
+        <div class = "row pt-5"></div>
+        <div class = "row pt-5"></div>
+        <div class = "row pt-5"></div>
+        <div class = "row pt-5"></div>
+        <div class = "row pt-5"></div>
+        <div class = "row pt-5"></div>
+        <div class = "row pt-5"></div>
+        <div class = "row offset-md-1 pt-5">
+        <img class = "sam" src = "https://docs.google.com/drawings/d/e/2PACX-1vRn_7yHWBEvtlOdRRo_qu2kcUVZoXeRpWpd1B2fBwq9NdHbjOq64m902PXtDWkBbaqqXkeuYL-FTQdi/pub?w=960&h=720">
+    </div>
+</div>
+</div>
+</body> <div class="container text-center">
+    <footer th:replace="fragments :: footer"></footer>
+    <div th:replace="fragments :: bootstrap-javascript"></div>
+</div>
 </html>

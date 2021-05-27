@@ -3,6 +3,8 @@
 <head th:replace="fragments :: head"></head>
 <body class="text-center">
 <nav th:replace="fragments :: navigation"></nav>
+<div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vTiSQuGS6mXaJ51zop8MKfvZZKIpsTeaZH3phkTnVs7AhO-hZGglgpN15oodcooDaq2mWGXGmlXoFe9/pub?w=953&h=569)" class="page-holder bg-cover">
+    <div class = "row pt-5"></div>
 <img class = "sam" src = "https://docs.google.com/drawings/d/e/2PACX-1vRn_7yHWBEvtlOdRRo_qu2kcUVZoXeRpWpd1B2fBwq9NdHbjOq64m902PXtDWkBbaqqXkeuYL-FTQdi/pub?w=960&h=720">
 <div class="container-fluid">
     <form method="post" th:action="@{/beverages/copy}">
@@ -11,7 +13,10 @@
         <input type="submit" value="Copy" th:formaction="@{/beverages/copy}" class="btn btn-info">
     </form>
 </div>
+</div>
+    <div class="container text-center">
 <footer th:replace="fragments :: footer"></footer>
-<div th:replace="fragments :: bootstrap-javascript"></div>
+        <div th:replace="fragments :: bootstrap-javascript"></div>
+    </div>
 </body>
 </html>

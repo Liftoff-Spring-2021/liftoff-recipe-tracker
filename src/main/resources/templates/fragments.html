@@ -65,7 +65,7 @@
 
 <div th:fragment="category-form-group">
 	<div class="form-group">
-		<label>Name
+		<label>Category Name
 			<input th:field="${category.name}" class="form-control">
 		</label>
 		<span th:errors="${category.name}" class="error"></span>
@@ -74,7 +74,7 @@
 
 <div th:fragment="beverage-form-group">
 	<div class="form-group">
-		<label>Name
+		<label>Beverage Name
 			<input th:field="${beverage.name}" class="form-control">
 		</label>
 		<span th:errors="${beverage.name}" class="error"></span>
@@ -85,26 +85,26 @@
 	<div class="row">
 		<div class="col-md-3">
 			<div class="form-group">
-				<label>Name
+				<label class="font-weight-bold">Recipe Name
 					<input th:field="${recipe.name}"  class="form-control">
 				</label>
 				<span th:errors="${recipe.name}" class="error"></span>
 			</div>
 		</div>
 
-			<!--div class="form-group"-->
+	>
 				<div class="col-md-3 offset-md-2">
-				<label>Favorite
+				<label class="font-weight-bold">Favorite
 					<input th:field="${recipe.favorite}" th:value="${recipe.favorite}" class="form-control">
 				</label>
 				<span th:errors="${recipe.favorite}" class="error"></span>
 			</div>
 	</div>
-	<!--/div-->
+
 	<div class="row">
 		<div class="col-md-3">
 			<div class="form-group">
-				<label>Ingredients
+				<label class="font-weight-bold">Ingredients
 					<textarea th:field="${recipe.ingredients}" th:value="${recipe.ingredients}" class="form-control"></textarea>
 				</label>
 				<span th:errors="${recipe.ingredients}" class="error"></span>
@@ -112,7 +112,7 @@
 		</div>
 		<div class="col-md-3 offset-md-2">
 			<div class="form-group">
-				<label>Directions
+				<label class="font-weight-bold">Directions
 					<textarea th:field="${recipe.directions}" th:value="${recipe.directions}" class="form-control"></textarea>
 				</label>
 				<span th:errors="${recipe.directions}" class="error"></span>
@@ -123,7 +123,7 @@
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
-					<label>Cook Time (in minutes)
+					<label class="font-weight-bold">Cook Time (in minutes)
 						<input th:field="${recipe.cookTime}" th:value="${recipe.cookTime}" class="form-control">
 					</label>
 					<span th:errors="${recipe.cookTime}" class="error"></span>
@@ -132,7 +132,7 @@
 
 			<div class="col-md-3 offset-md-2">
 				<div class="form-group">
-					<label>Prep Time (in minutes)
+					<label class="font-weight-bold">Prep Time (in minutes)
 						<input th:field="${recipe.prepTime}" th:value="${recipe.prepTime}" class="form-control">
 					</label>
 					<span th:errors="${recipe.prepTime}" class="error"></span>
@@ -143,7 +143,7 @@
 	<div class="row">
 		<div class="col-md-3">
 	<div class="form-group">
-		<label>Servings
+		<label class="font-weight-bold">Servings
 			<input th:field="${recipe.servings}" th:value="${recipe.servings}" class="form-control">
 		</label>
 		<span th:errors="${recipe.servings}" class="error"></span>
@@ -151,7 +151,7 @@
 		</div>
 		<div class="col-md-3 offset-md-2">
 			<div class="form-group">
-				<label>Image URL
+				<label class="font-weight-bold">Image URL
 					<input th:field="${recipe.image}" th:value="${recipe.image}" class="form-control">
 				</label>
 				<span th:errors="${recipe.image}" class="error"></span>
