@@ -157,9 +157,9 @@ public class RecipeController {
 	}
 
 	@PostMapping("edit")
-	public String processEditRecipeForm(int recipeId, String name, String ingredients, String directions,
-										int servings, int cookTime, int prepTime, String image,
-										Boolean favorite,
+	public String processEditRecipeForm(int recipeId, String name, String description,
+	                                    String ingredients, String directions, int servings,
+	                                    int cookTime, int prepTime, String image, Boolean favorite,
 										@RequestParam(required = false) List<Integer> categories,
 										@RequestParam(required = false) List<Integer> beverages){
 
@@ -186,6 +186,7 @@ public class RecipeController {
 			}
 
 			recipe.setName(name);
+			recipe.setDescription(description);
 			recipe.setIngredients(ingredients);
 			recipe.setDirections(directions);
 			recipe.setServings(servings);
