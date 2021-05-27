@@ -10,18 +10,24 @@
         <thead>
         <tr>
             <th>Recipe Name</th>
-	        <th>Prep Time (in minutes)</th>
-	        <th>Cook Time (in minutes)</th>
-	        <th>Servings</th>
+	        <th>Recipe Description</th>
+	        <th>Recipe Details</th>
         </tr>
         </thead>
         <tr th:each="recipe : ${recipes}">
-			<td><a th:if="${recipe.favorite}">
+			<td><span th:if="${recipe.favorite}">
 				<a class="badge badge-warning">Favorite</a>
-				</a><a th:text="${recipe.name}" th:href="'/recipes/detail?recipeId=' + ${recipe.id}"></a></td>
-	        <td><a th:text="${recipe.prepTime}"></a></td>
-	        <td><a th:text="${recipe.cookTime}"></a></td>
-	        <td><a th:text="${recipe.servings}"></a></td>
+				</span><a th:text="${recipe.name}" th:href="'/recipes/detail?recipeId=' + ${recipe.id}"></a>
+			</td>
+	        <td>
+		        <a th:if="${recipe.description}" th:text="${recipe.description}"></a>
+		        <a th:unless="${recipe.description != ''}">No Description Available</a>
+	        </td>
+	        <td>
+		        <a th:text="${'Prep Time: ' + recipe.prepTime}"></a><br>
+		        <a th:text="${'Cook Time: ' + recipe.cookTime}"></a><br>
+		        <a th:text="${'Servings: ' + recipe.servings}"></a>
+	        </td>
 			<td>
 			    <button
 			            type="button"
