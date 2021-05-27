@@ -18,7 +18,7 @@ import java.util.List;
 @Indexed
 public class Recipe extends AbstractEntityName {
 	//properties
-	@NotBlank
+	@NotBlank(message = "Please include a description of your recipe.")
 	@NotNull
 	@Size(max=500)
 	private String description;
