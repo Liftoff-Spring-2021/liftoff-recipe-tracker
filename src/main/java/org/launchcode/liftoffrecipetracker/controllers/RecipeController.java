@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -158,7 +159,7 @@ public class RecipeController {
 	@PostMapping("edit")
 	public String processEditRecipeForm(int recipeId, String name, String ingredients, String directions,
 										int servings, int cookTime, int prepTime, String image,
-										@RequestParam(defaultValue = "false") Boolean favorite,
+										Boolean favorite,
 										@RequestParam(required = false) List<Integer> categories,
 										@RequestParam(required = false) List<Integer> beverages){
 
@@ -191,7 +192,8 @@ public class RecipeController {
 			recipe.setCookTime(cookTime);
 			recipe.setPrepTime(prepTime);
 			recipe.setImage(image);
-			recipe.setFavorite(favorite);
+			recipe.setFavorite(Objects.requireNonNullElse(favorite, false));
+
 
 			recipeRepository.save(recipe);
 		}
