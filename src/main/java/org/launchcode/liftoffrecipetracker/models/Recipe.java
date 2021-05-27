@@ -18,6 +18,11 @@ import java.util.List;
 @Indexed
 public class Recipe extends AbstractEntityName {
 	//properties
+	@NotBlank
+	@NotNull
+	@Size(max=500)
+	private String description;
+
 	@NotBlank(message = "Ingredients are required and should be more than 5 characters.")
 	@NotNull
 	@Size(min=5, message = "")
@@ -33,11 +38,11 @@ public class Recipe extends AbstractEntityName {
 	private int servings;
 
 	@NotNull
-	@Min(value = 1, message = "Cook time must be a positive value greater than 1.")
+	@Min(value = 0, message = "Cook time must be a positive value.")
 	private int cookTime;
 
 	@NotNull
-	@Min(value = 1, message = "Prep time must be a positive value greater than 1.")
+	@Min(value = 0, message = "Prep time must be a positive value.")
 	private int prepTime;
 
 	private String image;
@@ -58,7 +63,7 @@ public class Recipe extends AbstractEntityName {
 
 	//constructors
 	public Recipe(String ingredients, String directions,int servings, int cookTime, int prepTime,
-	              List<Category> categories, List<Beverage> beverages, User user){
+	              List<Category> categories, List<Beverage> beverages, User user, String description){
 		this.ingredients = ingredients;
 		this.directions = directions;
 		this.servings = servings;
@@ -67,16 +72,34 @@ public class Recipe extends AbstractEntityName {
 		this.categories = categories;
 		this.beverages = beverages;
 		this.user = user;
+		this.description = description;
 	}
 
 	public Recipe() {
 	}
+
 	public void removeCategory(Category category) {
 		this.categories.remove(category);
 	}
 
+	public void removeAllCategories(List<Category> categories) {
+		this.categories.removeAll(categories);
+	}
+
+	public void addCategories(List<Category> categories) {
+		this.categories.addAll(categories);
+	}
+
 	public void removeBeverage(Beverage beverage) {
 		this.beverages.remove(beverage);
+	}
+
+	public void removeAllBeverages(List<Beverage> beverages) {
+		this.beverages.removeAll(beverages);
+	}
+
+	public void addBeverages(List<Beverage> beverages) {
+		this.beverages.addAll(beverages);
 	}
 
 	public String getIngredients() {
@@ -141,12 +164,12 @@ public class Recipe extends AbstractEntityName {
 		return beverages;
 	}
 
-	public void addBeverages(List<Beverage> beverages) {
-		this.beverages.addAll(beverages);
+	public String getDescription() {
+		return description;
 	}
 
-	public void addCategories(List<Category> categories) {
-		this.categories.addAll(categories);
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public User getUser() {
@@ -157,13 +180,6 @@ public class Recipe extends AbstractEntityName {
 		this.user = user;
 	}
 
-	public void removeAllBeverages(List<Beverage> beverages) {
-		this.beverages.removeAll(beverages);
-	}
-
-	public void removeAllCategories(List<Category> categories) {
-		this.categories.removeAll(categories);
-	}
 }
 
 

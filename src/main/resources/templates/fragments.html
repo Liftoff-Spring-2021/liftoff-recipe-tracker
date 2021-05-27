@@ -89,6 +89,12 @@
 				<span th:errors="${recipe.name}" class="error"></span>
 			</div>
 			<div class="form-group">
+				<label>Description
+					<textarea th:field="${recipe.description}" th:value="${recipe.description}" class="form-control"></textarea>
+				</label>
+				<span th:errors="${recipe.description}" class="error"></span>
+			</div>
+			<div class="form-group">
 				<label>Ingredients
 					<textarea th:field="${recipe.ingredients}" th:value="${recipe.ingredients}" class="form-control"></textarea>
 				</label>
