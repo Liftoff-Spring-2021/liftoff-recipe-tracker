@@ -117,7 +117,7 @@ public class RecipeController {
 			Recipe recipe = result.get();
 			model.addAttribute("title", "Recipe Details: " + recipe.getName());
 			model.addAttribute("recipe", recipe);
-		}
+			}
 		return "recipe/detail";
 	}
 
@@ -148,7 +148,7 @@ public class RecipeController {
 			model.addAttribute("title", "Invalid recipe ID" + recipeId);
 		} else {
 			Recipe recipe = result.get();
-			model.addAttribute("title", "Edit Recipe" + recipe.getName());
+			model.addAttribute("title", "Edit Recipe: " + recipe.getName());
 			model.addAttribute("recipe", recipe);
 			model.addAttribute("categories", categoryRepository.findAll());
 			model.addAttribute("beverages", beverageRepository.findAll());
