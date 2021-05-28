@@ -102,7 +102,7 @@ public class CategoryController {
             model.addAttribute("title", "Invalid Category ID: " + categoryId);
         } else {
             Category category = result.get();
-            model.addAttribute("title", "Edit Category" + category.getName());
+            model.addAttribute("title", "Edit Category: " + category.getName());
             model.addAttribute("category", category);
         }
         return "category/edit";
@@ -127,7 +127,7 @@ public class CategoryController {
             model.addAttribute("title", "Invalid Category ID: " + categoryId);
         } else {
             Category category = result.get();
-            model.addAttribute("title", "Copy Category" + category.getName());
+            model.addAttribute("title", "Copy Category: " + category.getName());
             model.addAttribute("category", category);
         }
         return "category/copy";
