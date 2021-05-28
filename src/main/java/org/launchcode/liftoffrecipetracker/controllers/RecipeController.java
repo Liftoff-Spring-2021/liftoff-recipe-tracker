@@ -38,7 +38,9 @@ public class RecipeController {
 	@GetMapping
 	public String displayRecipes(@RequestParam(required = false) Integer categoryId,
 								 @RequestParam(required = false) Integer beverageId,
-								 Model model) {
+								 Model model, HttpSession userSession) {
+		User user = authenticationController.getUserFromSession(userSession);
+
 		if ((categoryId == null) && (beverageId == null)) {
 			model.addAttribute("title", "All Recipes");
 			model.addAttribute("recipes", recipeRepository.findAll());
@@ -62,6 +64,7 @@ public class RecipeController {
 			}
 		}
 
+		model.addAttribute("user", user);
 		return "recipe/index";
 	}
 

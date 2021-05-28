@@ -170,25 +170,31 @@
 	<div class="row">
 		<div class="col-md-5 border border-success">
 			<div class="form-group">
-				<label class="font-weight-bold" th:for="categories">Categories: </label>
+				<label class="font-weight-bold" th:for="categories">Categories: </label><br>
 				<th:block th:each="category : ${categories}">
-				   <span th:if="${recipe.categories.contains(category)}">
-						 <input type="checkbox" name="categories" th:checked="${recipe.categories}"  th:value="${category.id}" ></span>
-					<span th:unless="${recipe.categories.contains(category)}">
-						 <input type="checkbox" name="categories" th:value="${category.id}"></span>
-					<label th:text="${category.name}"></label>
+					<div>
+						<span th:if="${recipe.categories.contains(category)}">
+							<input type="checkbox" name="categories" th:checked="${recipe.categories}"  th:value="${category.id}">
+						</span>
+						<span th:unless="${recipe.categories.contains(category)}">
+							<input type="checkbox" name="categories" th:value="${category.id}">
+						</span>
+						<label th:text="${category.name}"></label>
+					</div>
 				</th:block>
 			</div>
 		</div>
 		<div class="col-md-5 offset-md-2 border border-success">
 			<div class="form-group">
-				<label class="font-weight-bold" th:for="beverages">Beverages: </label>
+				<label class="font-weight-bold" th:for="beverages">Beverages: </label><br>
 				<th:block th:each="beverage : ${beverages}">
 					<div>
 					  <span th:if="${recipe.beverages.contains(beverage)}">
-							 <input type="checkbox" name="beverages"  th:checked="${recipe.beverages}" th:value="${beverage.id}"></span>
+							 <input type="checkbox" name="beverages"  th:checked="${recipe.beverages}" th:value="${beverage.id}">
+					  </span>
 						<span th:unless="${recipe.beverages.contains(beverage)}">
-							<input type="checkbox" name="beverages" th:value="${beverage.id}"></span>
+							<input type="checkbox" name="beverages" th:value="${beverage.id}">
+						</span>
 						<label th:text="${beverage.name}"></label>
 					</div>
 				</th:block>
