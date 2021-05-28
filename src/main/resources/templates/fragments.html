@@ -125,6 +125,14 @@
 				<span th:errors="${recipe.ingredients}" class="error"></span>
 			</div>
 		</div>
+		<div class="col-md-3 offset-md-2">
+			<div class="form-group">
+				<label class="font-weight-bold">Directions
+					<textarea th:field="${recipe.directions}" th:value="${recipe.directions}" class="form-control"></textarea>
+				</label>
+				<span th:errors="${recipe.directions}" class="error"></span>
+			</div>
+	</div>
 	</div>
 
 	<div class="row">
@@ -150,17 +158,17 @@
 	<div class="row">
 		<div class="col-md-3">
 			<div class="form-group">
-				<label>Favorite
-					<input type="checkbox" data-toggle="toggle" data-size="sm" th:field="${recipe.favorite}" th:value="${recipe.favorite}" class="form-control">
-				</label>
-			</div>
-		</div>
-		<div class="col-md-3 offset-md-2">
-			<div class="form-group">
 				<label class="font-weight-bold">Image URL
 					<input th:field="${recipe.image}" th:value="${recipe.image}" class="form-control">
 				</label>
 				<span th:errors="${recipe.image}" class="error"></span>
+			</div>
+		</div>
+		<div class="col-md-3 offset-md-2">
+			<div class="form-group">
+				<label>Favorite
+					<input type="checkbox" data-toggle="toggle" data-size="sm" th:field="${recipe.favorite}" th:value="${recipe.favorite}" class="form-control">
+				</label>
 			</div>
 		</div>
 	</div>
