@@ -130,18 +130,19 @@
 	<div class="row">
 		<div class="col-md-3">
 			<div class="form-group">
-				<label class="font-weight-bold">Cook Time (in minutes)
-					<input th:field="${recipe.cookTime}" th:value="${recipe.cookTime}" class="form-control">
-				</label>
-				<span th:errors="${recipe.cookTime}" class="error"></span>
-			</div>
-		</div>
-		<div class="col-md-3 offset-md-2">
-			<div class="form-group">
 				<label class="font-weight-bold">Prep Time (in minutes)
 					<input th:field="${recipe.prepTime}" th:value="${recipe.prepTime}" class="form-control">
 				</label>
 				<span th:errors="${recipe.prepTime}" class="error"></span>
+			</div>
+
+		</div>
+		<div class="col-md-3 offset-md-2">
+			<div class="form-group">
+				<label class="font-weight-bold">Cook Time (in minutes)
+					<input th:field="${recipe.cookTime}" th:value="${recipe.cookTime}" class="form-control">
+				</label>
+				<span th:errors="${recipe.cookTime}" class="error"></span>
 			</div>
 		</div>
 	</div>
@@ -153,7 +154,6 @@
 					<input type="checkbox" data-toggle="toggle" data-size="sm" th:field="${recipe.favorite}" th:value="${recipe.favorite}" class="form-control">
 				</label>
 			</div>
-
 		</div>
 		<div class="col-md-3 offset-md-2">
 			<div class="form-group">
@@ -164,8 +164,6 @@
 			</div>
 		</div>
 	</div>
-
-
 
 	<div class="row">
 		<div class="col-md-5 border border-success">
