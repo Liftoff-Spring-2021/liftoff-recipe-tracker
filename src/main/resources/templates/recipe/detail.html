@@ -4,8 +4,9 @@
 <body class="text-left">
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid">
-	<div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vQBjDKIpq88lBqAxd6he6dE6leytcgj7AEwuLZdqB8mferJmIZPCEBLuGqtONwg3IieZ047_0ymJdCG/pub?w=954&h=631)" class="page-holder bg-cover">
-	<div class="container">
+
+	<div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vSitCz69TLK4FIwiV2yIjNVCUJVrcJiPbDvcoJXrp9SdV1oBJkx53ZBEme2plO3RJe5tOUeBOVbNm9_/pub?w=960&h=720" class="page-holder bg-cover">
+	<div class="container text-white">
 		<div class="row">
 			<div class="col text-left">
 				<div class="font-weight-bold" th:if="${recipe.favorite}">
@@ -20,38 +21,49 @@
 				</div>
 			</div>
 		</div>
-			<div class="row">
-				<div class="col-md-3 offset-1 text-center" style="background-color:lightcyan">
+
+		<div class="row">
+			<div class="col-md-6 offset-md-1 text-center mt-2 p-3 border border-success">
+				<div class="font-weight-bold">Description: </div>
+				<span th:if="${recipe.description}" th:text="${recipe.description}"></span>
+				<span th:unless="${recipe.description != ''}">No Description Available</span>
+			</div>
+		</div>
+
+			<div class="row pt-3">
+				<div class="col-md-3 text-center" style="background-color:green">
 					<div class="font-weight-bold">Recipe Prep Time: <span th:text="${recipe.prepTime}"></span> minutes</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-3 offset-1 text-center">
+				<div class="col-md-3 text-center">
 					<div class="font-weight-bold">Recipe Cook Time: <span th:text="${recipe.cookTime}"></span> minutes</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-3 offset-1 text-center" style="background-color:lightcyan">
+				<div class="col-md-3 text-center" style="background-color:green">
 					<div class="font-weight-bold">Recipe Servings: <span th:text="${recipe.servings}"></span></div>
 				</div>
 			</div>
 		</div>
-		<div class = "container-sm">
-			<div class="row justify-content-around">
+		<div class = "container-sm text-white">
+			<div class="row justify-content-start">
 				<div class="col-4 text-left h-50 p-3 my-3 border border-success">
 					<div class="font-weight-bold">Recipe Ingredients: </div>
 					<span th:text="${recipe.ingredients}"></span>
 				</div>
 
-				<div class="col-6.offset-md-2 text-left p-3 my-3 border border-success">
+				<div class="col-3 offset-md-1 text-left p-3 my-3 border border-success">
 					<div class="font-weight-bold">Recipe Directions: </div>
 					<span th:text="${recipe.directions}"></span>
 				</div>
+				<div class="col-1 offset-md-3"></div>
 			</div>
+
 
 		</div>
 
-		<div class="container">
+		<div class="container text-white">
 			<div class="row">
 				<div class="col-sm">
 					<p class="font-weight-bold">Sommelier Suggestions:</p>
