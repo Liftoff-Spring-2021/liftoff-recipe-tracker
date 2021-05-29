@@ -24,5 +24,15 @@ body, html {
   width: 1.55rem;
   height: 1.55rem;
 }
+/*.checkboxes {
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+   flex-align: left;
+}
+
+.checkboxes>* {
+  flex: 1 1 50%;
+}/*
 
 
