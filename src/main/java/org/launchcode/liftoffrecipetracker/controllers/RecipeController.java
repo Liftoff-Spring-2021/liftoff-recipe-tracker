@@ -2,6 +2,7 @@ package org.launchcode.liftoffrecipetracker.controllers;
 
 import org.launchcode.liftoffrecipetracker.data.BeverageRepository;
 import org.launchcode.liftoffrecipetracker.data.CategoryRepository;
+import org.launchcode.liftoffrecipetracker.data.UserRepository;
 import org.launchcode.liftoffrecipetracker.models.Beverage;
 import org.launchcode.liftoffrecipetracker.models.Category;
 import org.launchcode.liftoffrecipetracker.models.Recipe;
@@ -33,34 +34,52 @@ public class RecipeController {
 	BeverageRepository beverageRepository;
 
 	@Autowired
+	UserRepository userRepository;
+
+	@Autowired
 	AuthenticationController authenticationController;
 
 	@GetMapping
 	public String displayRecipes(@RequestParam(required = false) Integer categoryId,
 								 @RequestParam(required = false) Integer beverageId,
+								 @RequestParam(required = false) Integer userId,
 								 Model model, HttpSession userSession) {
 		User user = authenticationController.getUserFromSession(userSession);
 
-		if ((categoryId == null) && (beverageId == null)) {
+		if ((categoryId == null) && (beverageId == null) && (userId == null)) {
 			model.addAttribute("title", "All Recipes");
 			model.addAttribute("recipes", recipeRepository.findAll());
-		} else if (beverageId == null) {
-			Optional<Category> result = categoryRepository.findById(categoryId);
-			if (result.isEmpty()) {
+		}
+
+		if (categoryId != null) {
+			Optional<Category> categoryResult = categoryRepository.findById(categoryId);
+
+			if (categoryResult.isEmpty()) {
 				model.addAttribute("title", "Invalid Category ID: " + categoryId);
 			} else {
-				Category category = result.get();
+				Category category = categoryResult.get();
 				model.addAttribute("title", "Recipes in Category: " + category.getName());
 				model.addAttribute("recipes", category.getRecipes());
 			}
-		} else if (categoryId == null) {
-			Optional<Beverage> result = beverageRepository.findById(beverageId);
-			if (result.isEmpty()) {
+		}
+
+		if (beverageId != null) {
+			Optional<Beverage> beverageResult = beverageRepository.findById(beverageId);
+			if (beverageResult.isEmpty()) {
 				model.addAttribute("title", "Invalid Beverage ID: " + beverageId);
 			} else {
-				Beverage beverage = result.get();
+				Beverage beverage = beverageResult.get();
 				model.addAttribute("title", "Recipes with Beverage: " + beverage.getName());
 				model.addAttribute("recipes", beverage.getRecipes());
+			}
+		}
+
+		if (userId != null) {
+			Optional<User> userResult = userRepository.findById(userId);
+			if (userResult.isPresent()) {
+				User searchedUser = userResult.get();
+				model.addAttribute("title", "Recipes by User: " + searchedUser.getUsername());
+				model.addAttribute("recipes", searchedUser.getRecipes());
 			}
 		}
 

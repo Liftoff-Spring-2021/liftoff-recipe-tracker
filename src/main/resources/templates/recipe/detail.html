@@ -17,7 +17,7 @@
 		<div class="row">
 			<div class="col text-center">
 				<H1 class="font-weight-bold" th:text="${recipe.name}">Default Text</H1>
-				<div class = "container col text-center">Created By: <span th:text="${recipe.user.username}"></span>
+				<div class = "container col text-center">Created By: <span><a th:text="${recipe.user.username}" th:value="${recipe.user.id}" th:href="'/recipes?userId=' + ${recipe.user.id}"></a></span>
 				</div>
 			</div>
 		</div>
