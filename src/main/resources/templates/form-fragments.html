@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org/">
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+</head>
+<body>
+<!-- category form group -->
+<div th:fragment="category-form-group">
+	<div class="form-group">
+		<label class="font-weight-bold">Category Name
+			<input th:field="${category.name}" class="form-control">
+		</label>
+		<span th:errors="${category.name}" class="error"></span>
+	</div>
+</div>
+
+<!-- beverage form group -->
+<div th:fragment="beverage-form-group">
+	<div class="form-group">
+		<label class="font-weight-bold">Beverage Name
+			<input th:field="${beverage.name}" class="form-control">
+		</label>
+		<span th:errors="${beverage.name}" class="error"></span>
+	</div>
+</div>
+
+<!-- recipe form group -->
+<div th:fragment="recipe-form-group">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="form-group">
+				<label class="font-weight-bold">Recipe Name
+					<input th:field="${recipe.name}"  class="form-control">
+				</label>
+				<span th:errors="${recipe.name}" class="error"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3">
+			<div class="form-group">
+				<label class="font-weight-bold">Description
+					<textarea th:field="${recipe.description}" th:value="${recipe.description}" class="form-control"></textarea>
+				</label>
+				<span th:errors="${recipe.description}" class="error"></span>
+			</div>
+		</div>
+
+		<div class="col-md-3 offset-md-2">
+			<div class="form-group">
+				<label class="font-weight-bold">Servings
+					<input th:field="${recipe.servings}" th:value="${recipe.servings}" class="form-control">
+				</label>
+				<span th:errors="${recipe.servings}" class="error"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3">
+			<div class="form-group">
+				<label class="font-weight-bold">Ingredients
+					<textarea th:field="${recipe.ingredients}" th:value="${recipe.ingredients}" class="form-control"></textarea>
+				</label>
+				<span th:errors="${recipe.ingredients}" class="error"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3">
+			<div class="form-group">
+				<label class="font-weight-bold">Cook Time (in minutes)
+					<input th:field="${recipe.cookTime}" th:value="${recipe.cookTime}" class="form-control">
+				</label>
+				<span th:errors="${recipe.cookTime}" class="error"></span>
+			</div>
+		</div>
+		<div class="col-md-3 offset-md-2">
+			<div class="form-group">
+				<label class="font-weight-bold">Prep Time (in minutes)
+					<input th:field="${recipe.prepTime}" th:value="${recipe.prepTime}" class="form-control">
+				</label>
+				<span th:errors="${recipe.prepTime}" class="error"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3">
+			<div class="form-group">
+				<label>Favorite
+					<input type="checkbox" data-toggle="toggle" data-size="sm" th:field="${recipe.favorite}" th:value="${recipe.favorite}" class="form-control">
+				</label>
+			</div>
+		</div>
+
+		<div class="col-md-3 offset-md-2">
+			<div class="form-group">
+				<label class="font-weight-bold">Image URL
+					<input th:field="${recipe.image}" th:value="${recipe.image}" class="form-control">
+				</label>
+				<span th:errors="${recipe.image}" class="error"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-5 border border-success">
+			<div class="form-group">
+				<label class="font-weight-bold" th:for="categories">Categories: </label>
+				<th:block th:each="category : ${categories}">
+					<div>
+						<span th:if="${recipe.categories.contains(category)}">
+							<input type="checkbox" name="categories" th:checked="${recipe.categories}"  th:value="${category.id}" ></span>
+						<span th:unless="${recipe.categories.contains(category)}">
+							<input type="checkbox" name="categories" th:value="${category.id}"></span>
+						<label th:text="${category.name}"></label>
+					</div>
+				</th:block>
+			</div>
+		</div>
+
+		<div class="col-md-5 offset-md-2 border border-success">
+			<div class="form-group">
+				<label class="font-weight-bold" th:for="beverages">Beverages: </label>
+				<th:block th:each="beverage : ${beverages}">
+					<div>
+						<span th:if="${recipe.beverages.contains(beverage)}">
+						  <input type="checkbox" name="beverages"  th:checked="${recipe.beverages}" th:value="${beverage.id}"></span>
+						<span th:unless="${recipe.beverages.contains(beverage)}">
+							<input type="checkbox" name="beverages" th:value="${beverage.id}"></span>
+						<label th:text="${beverage.name}"></label>
+					</div>
+				</th:block>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
