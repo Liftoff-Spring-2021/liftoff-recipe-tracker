@@ -3,14 +3,12 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <nav th:replace="fragments :: navigation"></nav>
-<!--div class="container-fluid text-left"-->
 	<div class="container-fluid" style="margin-left">
-		<div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vQeuSN8ZQ95AKr20JUaHTCPSEtyTv5c3iInqkjU6IGrdR6quN-0wSC2I5ZbYkxIB4UMSvg3ZwsRj8jW/pub?w=954&h=631)" class="page-holder bg-cover">
+		<div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vSitCz69TLK4FIwiV2yIjNVCUJVrcJiPbDvcoJXrp9SdV1oBJkx53ZBEme2plO3RJe5tOUeBOVbNm9_/pub?w=960&h=720" class="page-holder bg-cover">
 			<div class="container">
-
 				<div class="row text-white pt-4">
 					<form method="post">
-						<div th:replace="fragments :: recipe-form-group"></div>
+						<div th:replace="form-fragments :: recipe-form-group"></div>
 							<div class="row">
 								<div class="col-md-5 offset-5">
 									<input type="submit" value="Create Recipe" class="btn btn-primary">

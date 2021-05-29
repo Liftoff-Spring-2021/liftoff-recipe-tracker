@@ -102,7 +102,7 @@ import java.util.Optional;
             model.addAttribute("title", "Invalid Beverage ID: " + beverageId);
         } else {
             Beverage beverage = result.get();
-            model.addAttribute("title", "Edit Beverage" + beverage.getName());
+            model.addAttribute("title", "Edit Beverage: " + beverage.getName());
             model.addAttribute("beverage", beverage);
         }
         return "beverage/edit";
@@ -127,7 +127,7 @@ import java.util.Optional;
             model.addAttribute("title", "Invalid Beverage ID: " + beverageId);
         } else {
             Beverage beverage = result.get();
-            model.addAttribute("title", "Copy Beverage" + beverage.getName());
+            model.addAttribute("title", "Copy Beverage: " + beverage.getName());
             model.addAttribute("beverage", beverage);
         }
         return "beverage/copy";
