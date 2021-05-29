@@ -1,5 +1,6 @@
 package org.launchcode.liftoffrecipetracker.models;
 
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 
@@ -21,6 +22,7 @@ public class Recipe extends AbstractEntityName {
 	@NotBlank(message = "Please include a description of your recipe.")
 	@NotNull
 	@Size(max=500)
+	@FullTextField
 	private String description;
 
 	@NotBlank(message = "Ingredients are required and should be more than 5 characters.")
