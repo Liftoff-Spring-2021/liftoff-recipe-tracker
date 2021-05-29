@@ -11,7 +11,7 @@
         <thead>
         <tr>
             <th>Category Name</th>
-	        <th>Copy and Edit</th>
+	        <th>Copy/Edit</th>
         </tr>
         </thead>
         <tr th:each="category : ${categories}">
@@ -23,7 +23,7 @@
 				        type="button"
 				        class="btn btn-light dropdown-toggle btn-sm"
 				        data-toggle="dropdown"
-				        aria-expanded="false"> Options
+				        aria-expanded="false"> Action
 		        </button>
 		        <ul class="dropdown-menu">
 			        <li th:if="${category.user.equals(user)}"><a class="dropdown-item" th:text="Edit" th:value = "${category.id}" th:href="'categories/edit/' + ${category.id}"></a></li>

@@ -11,7 +11,7 @@
         <thead>
         <tr>
 	        <th>Beverage Name</th>
-	        <th>Copy and Edit</th>
+	        <th>Copy/Edit</th>
         </tr>
         </thead>
         <tr th:each="beverage : ${beverages}">
@@ -23,7 +23,7 @@
 				        type="button"
 				        class="btn btn-light dropdown-toggle btn-sm"
 				        data-toggle="dropdown"
-				        aria-expanded="false"> Options
+				        aria-expanded="false"> Action
 		        </button>
 		        <ul class="dropdown-menu">
 			        <li th:if="${beverage.user.equals(user)}"><a class="dropdown-item" th:text="Edit" th:value = "${beverage.id}" th:href="'beverages/edit/' + ${beverage.id}"></a></li>

@@ -12,6 +12,7 @@
             <th>Recipe Name</th>
 	        <th>Recipe Description</th>
 	        <th>Recipe Details</th>
+	        <th>Copy/Edit</th>
         </tr>
         </thead>
         <tr th:each="recipe : ${recipes}">
@@ -33,7 +34,7 @@
 			            type="button"
 			            class="btn btn-light dropdown-toggle btn-sm"
 			            data-toggle="dropdown"
-			            aria-expanded="false"> Options
+			            aria-expanded="false"> Action
 			    </button>
 			    <ul class="dropdown-menu" >
 					<li th:if="${recipe.user.equals(user)}"><a class="dropdown-item"  th:value = "${recipe.id}" th:href="'/recipes/edit/' + ${recipe.id}">Edit</a></li>
