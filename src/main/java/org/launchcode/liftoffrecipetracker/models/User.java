@@ -1,5 +1,6 @@
 package org.launchcode.liftoffrecipetracker.models;
 
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import java.util.List;
 public class User extends AbstractEntityId {
 
     @NotNull
+    @FullTextField
     private String username;
 
     private String email;

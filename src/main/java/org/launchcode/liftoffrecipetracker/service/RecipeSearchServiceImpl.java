@@ -39,7 +39,8 @@ public class RecipeSearchServiceImpl implements RecipeSearchService {
 	public List<Recipe> recipeSearchByNameOrCategory(String searchTerm) {
 		return Search.session(entityManager)
 				.search(Recipe.class)
-				.where(f -> f.match().fields("name", "description", "categories.name", "beverages.name")
+				.where(f -> f.match().fields("name", "description", "categories.name", "beverages.name",
+						"user.username")
 						.matching(searchTerm).fuzzy(1))
 				.fetchAllHits();
 	}

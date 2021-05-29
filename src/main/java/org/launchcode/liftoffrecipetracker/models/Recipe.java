@@ -61,6 +61,7 @@ public class Recipe extends AbstractEntityName {
 	private List<Beverage> beverages = new ArrayList<>();
 
 	@ManyToOne
+	@IndexedEmbedded
 	private User user;
 
 	//constructors
