@@ -179,8 +179,8 @@
 			<div class="form-group">
 				<label class="font-weight-bold" th:for="categories">Categories: </label>
 				<th:block th:each="category : ${categories}">
-				   <span th:if="${recipe.categories.contains(category)}">
-						 <input type="checkbox" name="categories" th:checked="${recipe.categories}"  th:value="${category.id}" ></span>
+				    <span th:if="${recipe.categories.contains(category)}">
+						 <input type="checkbox" name="categories" th:checked="${recipe.categories}" th:value="${category.id}" ></span>
 					<span th:unless="${recipe.categories.contains(category)}">
 						 <input type="checkbox" name="categories" th:value="${category.id}"></span>
 					<label th:text="${category.name}"></label>
