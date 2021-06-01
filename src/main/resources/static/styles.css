@@ -25,4 +25,12 @@ body, html {
   height: 1.55rem;
 }
 
+.checkboxes {
+height: 25%;
+  columns: 10em;
+  column-fill: auto;
+}
+
+
+
 
