@@ -1,8 +1,13 @@
 package org.launchcode.liftoffrecipetracker.models;
 
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +21,12 @@ import java.util.List;
 
     @ManyToOne
     private User user;
+
+    @NotBlank(message = "Please include a description of your recipe.")
+    @NotNull
+    @Size(max=500)
+    @FullTextField
+    private String description;
 
     //Constructors
 
@@ -34,6 +45,14 @@ import java.util.List;
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 

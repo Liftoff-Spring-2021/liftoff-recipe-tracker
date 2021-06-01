@@ -17,6 +17,10 @@
         <tr th:each="beverage : ${beverages}">
             <td>
 	            <a th:text="${beverage.name}" th:value = "${beverage.id}"th:href="'/recipes?beverageId=' + ${beverage.id}"></a>
+			<td>
+				<a th:if="${beverage.description}" th:text="${beverage.description}"></a>
+				<a th:unless="${beverage.description != ''}">No Description Available</a>
+			</td>
             </td>
 	        <td>
 		        <button

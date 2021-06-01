@@ -23,6 +23,12 @@
 		</label>
 		<span th:errors="${beverage.name}" class="error"></span>
 	</div>
+	<div class="form-group md-4">
+	<label class="font-weight-bold">Beverage Description
+		<input th:field="${beverage.description}" class="form-control">
+	</label>
+	<span th:errors="${beverage.description}" class="error"></span>
+	</div>
 </div>
 
 <!-- recipe form group -->
