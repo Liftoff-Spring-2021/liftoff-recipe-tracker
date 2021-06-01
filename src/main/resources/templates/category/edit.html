@@ -10,7 +10,7 @@
                 <div class="row offset-md-4 text-white pt-4">
                     <form method="post" th:action="@{/categories/edit}">
                         <input type="hidden" th:value="${category.id}" name="categoryId">
-                             <div th:replace="fragments :: category-form-group"></div>
+                             <div th:replace="form-fragments :: category-form-group"></div>
                         <input type="submit" value="Edit Category" class="btn btn-primary">
                     </form>
                 </div>

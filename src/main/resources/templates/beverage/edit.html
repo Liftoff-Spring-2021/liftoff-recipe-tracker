@@ -10,7 +10,7 @@
                 <div class = "row offset-md-4 text-white pt-4">
                     <form method="post" th:action="@{/beverages/edit}">
                         <input type="hidden" th:value="${beverage.id}" name="beverageId">
-                                <div th:replace="fragments :: beverage-form-group"></div>
+                                <div th:replace="form-fragments :: beverage-form-group"></div>
                         <input type="submit" value="Edit Beverage" class="btn btn-primary">
                     </form>
                 </div>

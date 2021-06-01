@@ -10,7 +10,7 @@
                 <div class="row offset-md-4 pt-4 text-white">
                     <form method="post" th:action="@{/categories/copy}">
                         <input type="hidden" th:value="${category.id}" name="categoryId">
-                            <div th:replace="fragments :: category-form-group"></div>
+                            <div th:replace="form-fragments :: category-form-group"></div>
                         <input type="submit" value="Copy Category" th:formaction="@{/categories/copy}" class="btn btn-info">
                  </form>
             </div>

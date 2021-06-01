@@ -10,7 +10,7 @@
             <div class="row offset-md-4 pt-4 text-white">
                 <form method="post" th:action="@{/beverages/copy}">
                     <input type="hidden" th:value="${beverage.id}" name="beverageId">
-                        <div th:replace="fragments :: beverage-form-group"></div>
+                        <div th:replace="form-fragments :: beverage-form-group"></div>
                         <input type="submit" value="Copy Beverage" th:formaction="@{/beverages/copy}" class="btn btn-info">
                 </form>
             </div>
