@@ -109,11 +109,12 @@ import java.util.Optional;
     }
 
     @PostMapping("edit")
-    public String processEditBeverageForm(int beverageId, String name) {
+    public String processEditBeverageForm(int beverageId, String name, String description) {
         Optional<Beverage> optBeverage = beverageRepository.findById(beverageId);
         if (optBeverage.isPresent()) {
             Beverage beverage = optBeverage.get();
             beverage.setName(name);
+            beverage.setDescription(description);
             beverageRepository.save(beverage);
         }
         return "redirect:/beverages";
