@@ -4,6 +4,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextFi
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -28,11 +29,13 @@ public class Recipe extends AbstractEntityName {
 	@NotBlank(message = "Ingredients are required and should be more than 5 characters.")
 	@NotNull
 	@Size(min=5, message = "")
+	@Column(length = 65535, columnDefinition = "text")
 	private String ingredients;
 
 	@NotNull
 	@NotBlank(message = "Directions are required and should be more than 5 characters.")
 	@Size(min=5, message = "")
+	@Column(length = 65535, columnDefinition = "text")
 	private String directions;
 
 	@NotNull
