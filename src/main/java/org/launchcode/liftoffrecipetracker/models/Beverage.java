@@ -22,7 +22,7 @@ import java.util.List;
     @ManyToOne
     private User user;
 
-    @NotBlank(message = "Please include a description of your recipe.")
+    @NotBlank(message = "Please include a description of your beverage.")
     @NotNull
     @Size(max=500)
     @FullTextField

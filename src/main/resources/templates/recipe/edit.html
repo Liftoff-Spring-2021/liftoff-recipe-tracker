@@ -11,7 +11,7 @@
                 <div class="row text-white pt-4">
                     <form method="post" th:action="@{/recipes/edit}">
                       <input type="hidden" th:value="${recipe.id}" name="recipeId">
-                         <div th:replace="fragments :: recipe-form-group"></div>
+                         <div th:replace="form-fragments :: recipe-form-group"></div>
                              <div class="row">
                                 <div class="col-md-5 offset-3">
                                     <input type="submit" value="Edit Recipe" class="btn btn-primary">

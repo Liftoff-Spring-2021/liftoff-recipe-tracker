@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 public abstract class AbstractEntityName extends AbstractEntityId {
 
     // Class Variables
-    @Size(min = 4, max = 50, message="")
+    @Size(min = 3, max = 50, message="")
     @NotBlank(message = "Name is required and must be between 4 and 50 characters long")
     @NotNull
     //@FullTextField annotation creates an index of this property that is full-text searchable
