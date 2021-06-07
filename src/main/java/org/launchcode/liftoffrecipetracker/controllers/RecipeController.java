@@ -231,7 +231,7 @@ public class RecipeController {
 			model.addAttribute("title", "Invalid Recipe ID" + recipeId);
 		} else{
 			Recipe recipe = result.get();
-			model.addAttribute("title", "Copy Recipe" + recipe.getName());
+			model.addAttribute("title", "Copy Recipe: " + recipe.getName());
 			model.addAttribute("recipe", recipe);
 			model.addAttribute("categories", categoryRepository.findAll());
 			model.addAttribute("beverages", beverageRepository.findAll());
