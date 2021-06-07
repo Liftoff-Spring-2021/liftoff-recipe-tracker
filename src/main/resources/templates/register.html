@@ -5,38 +5,39 @@
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container-fluid text-white">
 	<div style="background: url(https://docs.google.com/drawings/d/e/2PACX-1vSitCz69TLK4FIwiV2yIjNVCUJVrcJiPbDvcoJXrp9SdV1oBJkx53ZBEme2plO3RJe5tOUeBOVbNm9_/pub?w=960&h=720" class="page-holder bg-cover">
-	<form method="post">
-		<div class="form-group">
-			<label>Username
-				<input class="form-control" th:field="${registerFormDTO.username}" />
-			</label>
-			<p class="error" th:errors="${registerFormDTO.username}"></p>
-		</div>
-		<div class="form-group">
-			<label>Email
-				<input class="form-control" th:field="${registerFormDTO.email}" />
-			</label>
-			<p class="error" th:errors="${registerFormDTO.email}"></p>
-		</div>
-		<div class="form-group">
-			<label>Verify Email
-				<input class="form-control" th:field="${registerFormDTO.verifyEmail}"/>
-			</label>
-		</div>
-		<div class="form-group">
-			<label>Password
-				<input class="form-control" th:field="${registerFormDTO.password}" type="password" />
-			</label>
-			<p class="error" th:errors="${registerFormDTO.password}"></p>
-		</div>
-		<div class="form-group">
-			<label>Verify Password
-				<input class="form-control" th:field="${registerFormDTO.verifyPassword}" type="password" />
-			</label>
-		</div>
+		<form method="post">
+			<div class="form-group">
+				<label>Username
+					<input class="form-control" th:field="${registerFormDTO.username}" />
+				</label>
+				<p class="error" th:errors="${registerFormDTO.username}"></p>
+			</div>
+			<div class="form-group">
+				<label>Email
+					<input class="form-control" th:field="${registerFormDTO.email}" />
+				</label>
+				<p class="error" th:errors="${registerFormDTO.email}"></p>
+			</div>
+			<div class="form-group">
+				<label>Verify Email
+					<input class="form-control" th:field="${registerFormDTO.verifyEmail}"/>
+				</label>
+			</div>
+			<div class="form-group">
+				<label>Password
+					<input class="form-control" th:field="${registerFormDTO.password}" type="password" />
+				</label>
+				<p class="error" th:errors="${registerFormDTO.password}"></p>
+			</div>
+			<div class="form-group">
+				<label>Verify Password
+					<input class="form-control" th:field="${registerFormDTO.verifyPassword}" type="password" />
+				</label>
+			</div>
 
-		<input type="submit" class="btn btn-primary" value="Register" />
-	</form>
+			<input type="submit" class="btn btn-primary" value="Register" />
+		</form>
+	</div>
 </div>
 <footer th:replace="fragments :: footer"></footer>
 <div th:replace="fragments :: bootstrap-javascript"></div>
